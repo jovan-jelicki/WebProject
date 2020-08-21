@@ -1,0 +1,44 @@
+<html>
+    
+<head>
+    <title>Početna strana</title>
+    <link href="cssOsnove.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <style type="text/css">
+        .naslov {
+            text-align: center;
+            vertical-align: middle;
+            margin: 90 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form style="float: right;">
+        <input type="text" id="username" name="login" placeholder="Username">
+        <input type="password" id='password' name="login" placeholder="Password">
+        <input type="submit" id="logIn" value="Log in">
+    </form> 
+</br>
+</br>
+
+    <h1 class="naslov"> Dobrodošli na AIRBNB!</h1>
+   
+    <form class="naslov" action="http://www.google.com">
+        <input type="text" id="city" name="search" placeholder="Unesite grad ili državu">
+        <input type="date" id="date" name="search"  placeholder="Odaberite datum">
+        <script>
+            var today = new Date().toISOString.split('T')[0];
+            document.getElementByName('Minimum')[0].setAttribute('min', today);
+        </script>
+        <input type='text' id="guests" name="search" placeholder="Broj gostiju">
+        <input type="number" id="price" name="search" placeholder="Cena">
+        <input type="text" id="rooms" name="search" placeholder="Broj soba">
+        <input type="submit" id="search" value="Pretraži">
+    </form>
+   
+    <h5 >Nemate nalog?<a href="Registration.html">Registrujte se.</a></h5>
+    
+    
+</body>
+</html>

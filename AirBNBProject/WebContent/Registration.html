@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <title>Registracija</title>
+        <link href="cssOsnove.css" rel="stylesheet" type="text/css">
+        <style  type="text/css">
+
+        input[type=text]:focus, input[type=password]:focus{
+            background-color: #ddd;
+            outline: none;
+            width: 90%;
+        }
+        
+        input[type=text], input[type=password] {
+            width: 30%;
+        }
+
+        input[type=submit]{
+            width: 30%;
+        }
+
+        * {
+            box-sizing: border-box;
+          }
+
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
+     
+        </style>
+    </head>
+
+    <body>  
+
+            <script>
+                function checkPw(){
+                    if(document.getElementById("password").value === document.getElementById("ConfirmPassword").value){
+                        document.getElementById("Registration").disabled = false;
+                    }else {
+                        document.getElementById("Registration").disabled = true;
+                              
+                    }
+                };
+            </script>
+            <form action="http://www.google.com">
+                <div class="container">
+                    <h1>Registracija</h1>
+                    <p style="font-size: 130%;">Molim Vas popunite sva polja:</p>
+                    <hr>
+
+                    <label>Ime</label><br>
+                    <input type="text" id="name" placeholder="Enter name"><br><br>
+                    <label>Prezime</label><br>
+                    <input type="text" id="surname" placeholder="Enter surname"><br><br>
+                    <label>Pol</label><br>
+                    <input type="radio" id="male" name="gender" value="muski">
+                    <label for="male">Muski</label><br>
+                    <input type="radio" id="female" name="gender" value="zenski">
+                    <label for="female">Ženski</label><br><br><br>
+                    <label>Korisniško ime</label><br>
+                    <input type="text" id="username" placeholder="Enter username"><br><br>
+                    <label>Šifra</label><br>
+                    <input type="password" id="password" placeholder="Enter password"><br><br>
+                    <label>Potvrda šifre</label><br>
+                    <input type="password" id="ConfirmPassword" placeholder="Repeat password" onchange="checkPw();">
+                    <hr>
+
+                    <input type="submit" id="Registration" value="Registracija" onclick="" >
+
+
+                </div>
+            </form>
+    </body>
+
+</html>
