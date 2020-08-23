@@ -4,41 +4,98 @@
     <title>Početna strana</title>
     <link href="cssOsnove.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <style type="text/css">
-        .naslov {
-            text-align: center;
-            vertical-align: middle;
-            margin: 90 auto;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <form style="float: right;">
-        <input type="text" id="username" name="login" placeholder="Username">
-        <input type="password" id='password' name="login" placeholder="Password">
-        <input type="submit" id="logIn" value="Log in">
-    </form> 
+    <div style="float: right; margin-right: 10; margin: 10"> 
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogIn"> Log In </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal"> Registracija </button>
+    </div>
+   
+    
+    <!--Modalni prozor za log in-->
+    <div class="modal" id="modalLogIn">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Log in</h1>
+                </div>
+                <div class="modal-body">
+                    <form >
+                        <input type="text" id="username" name="login" placeholder="Username">
+                        <input type="password" id='password' name="login" placeholder="Password">
+                        <input type="submit" value="Potvrdi" >
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+         <!--Modalni prozor za registraciju-->
+         <div class="modal" id="registrationModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>{{header}}</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form >
+                            <div class="container">
+                                <p style="font-size: 100%;">Molim Vas popunite sva polja:</p>
+                                <hr>
+            
+                                <label>Ime</label><br>
+                                <input type="text" id="name" v-model="user.name"  placeholder="Enter name"><br><br>
+                                <label>Prezime</label><br>
+                                <input type="text" id="surname" v-model="user.surname" placeholder="Enter surname"><br><br>
+                                <label>Pol</label><br>
+                                <select id="cars" v-model="user.gender">
+                                    <option value="male">Muski</option>
+                                    <option value="female">Zenski</option>
+                                    <option value="other">Drugo</option>
+                                </select>
+                                </br>
+                                </br>
+                                <label>Korisniško ime</label><br>
+                                <input type="text" id="username" v-model="user.username" placeholder="Enter username"><br><br>
+                                <label>Šifra</label><br>
+                                <input type="password" id="password" v-model="user.password" placeholder="Enter password"><br><br>
+                                <label>Potvrda šifre</label><br>
+                                <input type="password" id="ConfirmPassword" placeholder="Repeat password">
+                                <br>
+                                <label style="color:red" >{{message}}</label>
+                                <input type="submit" id="Registration" value="Potvrda" v-on:click="register()" >
+            
+                            </div>
+                        </form>
+                     </div>
+                </div>
+            </div>
+        </div>
+    
 </br>
 </br>
-
     <h1 class="naslov"> Dobrodošli na AIRBNB!</h1>
    
     <form class="naslov" action="http://www.google.com">
         <input type="text" id="city" name="search" placeholder="Unesite grad ili državu">
         <input type="date" id="date" name="search"  placeholder="Odaberite datum">
-        <script>
-            var today = new Date().toISOString.split('T')[0];
-            document.getElementByName('Minimum')[0].setAttribute('min', today);
-        </script>
-        <input type='text' id="guests" name="search" placeholder="Broj gostiju">
-        <input type="number" id="price" name="search" placeholder="Cena">
-        <input type="text" id="rooms" name="search" placeholder="Broj soba">
+        <input type='number' min="0" id="guests" name="search" placeholder="Broj gostiju">
+        <input type="number" min="0" id="price" name="search" placeholder="Cena">
+        <input type="number" min="0" id="rooms" name="search" placeholder="Broj soba">
         <input type="submit" id="search" value="Pretraži">
     </form>
-   
-    <h5 >Nemate nalog?<a href="Registration.html">Registrujte se.</a></h5>
     
+
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="app/registration.js"></script>
+
+
     
 </body>
 </html>

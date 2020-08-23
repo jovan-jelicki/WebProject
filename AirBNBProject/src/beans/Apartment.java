@@ -12,7 +12,7 @@ public class Apartment {
 	public Location location;
 	public ArrayList<Date> datesForRenting = new ArrayList<Date>();
 	public ArrayList<Date> freePeriods = new ArrayList<Date>();
-	public Host host;
+	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	//pikcure
 	public double pricePerNight;
@@ -24,7 +24,7 @@ public class Apartment {
 	public Boolean deleted;
 	
 	public Apartment(int id, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
-			ArrayList<Date> datesForRenting, ArrayList<Date> freePeriods, Host host, ArrayList<Comment> comments,
+			ArrayList<Date> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
 			ArrayList<Reservation> reservations) {
 		super();
@@ -102,11 +102,11 @@ public class Apartment {
 		this.freePeriods = freePeriods;
 	}
 
-	public Host getHost() {
+	public User getHost() {
 		return host;
 	}
 
-	public void setHost(Host host) {
+	public void setHost(User host) {
 		this.host = host;
 	}
 

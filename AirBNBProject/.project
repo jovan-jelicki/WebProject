@@ -28,4 +28,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/bootstrap-4.5.2-dist</name>
+			<type>2</type>
+			<location>C:/Users/jovan/Desktop/bootstrap-4.5.2-dist</location>
+		</link>
+	</linkedResources>
 </projectDescription>

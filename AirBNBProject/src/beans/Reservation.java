@@ -10,11 +10,11 @@ public class Reservation {
 	public int numberOfNights;
 	public double fullPrice;
 	public String message;
-	public Guest guest;
+	public User guest;
 	public ReservationStatus status;
 
 	public Reservation(int id, Apartment apartment, Date startDate, int numberOfNights, double fullPrice,
-			String message, Guest guest, ReservationStatus status) {
+			String message, User guest, ReservationStatus status) {
 		super();
 		this.id = id;
 		this.apartment = apartment;
@@ -78,11 +78,11 @@ public class Reservation {
 		this.message = message;
 	}
 
-	public Guest getGuest() {
+	public User getGuest() {
 		return guest;
 	}
 
-	public void setGuest(Guest guest) {
+	public void setGuest(User guest) {
 		this.guest = guest;
 	}
 

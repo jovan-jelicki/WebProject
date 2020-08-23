@@ -1,8 +1,11 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public abstract class User {
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 7785755074278264666L;
 	
 	public String username;
 	public String password;
@@ -10,6 +13,53 @@ public abstract class User {
 	public String surname;
 	public Gender gender;
 	public UserType role;
+	public ArrayList<Apartment> rentedApartment = new ArrayList<Apartment>();
+	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	public ArrayList<Apartment> apartements = new ArrayList<Apartment>();
+	public Boolean blocked;
+	
+	public User () {}
+	
+	public User(String username, String password, String name, String surname, Gender gender, UserType role,
+			ArrayList<Apartment> rentedApartment, ArrayList<Reservation> reservations, ArrayList<Apartment> apartements,
+			Boolean blocked) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.role = role;
+		this.rentedApartment = rentedApartment;
+		this.reservations = reservations;
+		this.apartements = apartements;
+		this.blocked = blocked;
+	}
+
+	public ArrayList<Apartment> getRentedApartment() {
+		return rentedApartment;
+	}
+	public void setRentedApartment(ArrayList<Apartment> rentedApartment) {
+		this.rentedApartment = rentedApartment;
+	}
+	public ArrayList<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(ArrayList<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	public ArrayList<Apartment> getApartements() {
+		return apartements;
+	}
+	public void setApartements(ArrayList<Apartment> apartements) {
+		this.apartements = apartements;
+	}
+	public Boolean getBlocked() {
+		return blocked;
+	}
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
+	}
 	
 	public String getUsername() {
 		return username;
