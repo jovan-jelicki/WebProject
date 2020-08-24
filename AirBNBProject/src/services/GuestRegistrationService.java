@@ -1,6 +1,7 @@
 package services;
 
 import java.io.Console;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -39,11 +40,11 @@ public class GuestRegistrationService {
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String saveUser(User user) {
+	public String saveUser(User user) throws IOException {
 		UserDAO dao = (UserDAO) sc.getAttribute("guestDAO");
 		user.setRole(UserType.Guest);
-		System.out.println(user);
-		
+		user.setBlocked(false);
+		dao.Create(user);
 		return "";
 	}
 }
