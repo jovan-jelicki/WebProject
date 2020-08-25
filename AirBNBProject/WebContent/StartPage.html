@@ -26,8 +26,8 @@
                 </div>
                 <div class="modal-body">
                     <form >
-                        <input type="text" id="username" name="login" placeholder="Username">
-                        <input type="password" id='password' name="login" placeholder="Password">
+                        <input type="text" id="usernameLogIn" placeholder="Username">
+                        <input type="password" id='passwordLogIn' placeholder="Password">
                         <input type="submit" value="Potvrdi" >
                     </form> 
                 </div>
@@ -48,26 +48,26 @@
                                 <hr>
             
                                 <label>Ime</label><br>
-                                <input type="text" id="name" v-model="user.name"  placeholder="Enter name"><br><br>
+                                <input type="text" id="name" v-model="user.name" v-on:change="validation" placeholder="Enter name"><br><br>
                                 <label>Prezime</label><br>
-                                <input type="text" id="surname" v-model="user.surname" placeholder="Enter surname"><br><br>
+                                <input type="text" id="surname" v-model="user.surname" v-on:change="validation" placeholder="Enter surname"><br><br>
                                 <label>Pol</label><br>
-                                <select id="cars" v-model="user.gender">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Other</option>
+                                <select id="gender" v-model="user.gender">
+                                    <option selected>Muski</option>
+                                    <option>Zenski</option>
+                                    <option>Drugo</option>
                                 </select>
                                 </br>
                                 </br>
                                 <label>Korisniško ime</label><br>
-                                <input type="text" id="username" v-model="user.username" placeholder="Enter username"><br><br>
+                                <input type="text" id="username" v-model="user.username" v-on:change="validation" placeholder="Enter username"><br><br>
                                 <label>Šifra</label><br>
-                                <input type="password" id="password" v-model="user.password" placeholder="Enter password"><br><br>
+                                <input type="password" id="password" v-model="user.password" v-on:change="validation" placeholder="Enter password"><br><br>
                                 <label>Potvrda šifre</label><br>
-                                <input type="password" id="ConfirmPassword" placeholder="Repeat password">
+                                <input type="password" id="ConfirmPassword" ref="ConfirmPassword" v-on:change="validation" placeholder="Repeat password">
                                 <br>
                                 <label style="color:red" >{{message}}</label>
-                                <input type="submit" id="Registration" value="Potvrda" v-on:click="register()" >
+                                <input type="submit" id="Registration" v-bind:disabled="disabled=='yes'" value="Potvrda" v-on:click="register()" >
             
                             </div>
                         </form>

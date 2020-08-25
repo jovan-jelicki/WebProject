@@ -1,6 +1,8 @@
 package services;
 
 import java.io.Console;
+import java.io.FileNotFoundException;
+import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +17,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import beans.User;
 import beans.UserType;
@@ -40,11 +44,20 @@ public class GuestRegistrationService {
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String saveUser(User user) throws IOException {
+	public String saveUser(User user) throws JsonIOException, JsonSyntaxException, IOException  {
 		UserDAO dao = (UserDAO) sc.getAttribute("guestDAO");
+		List<User> users;
+		users = dao.GetAll();
+		for (User u : users) {
+			System.out.println(u.name);
+			System.out.println(user.name);
+			if (u.getUsername().equals(user.getUsername()))
+				return "Bad";
+		}
 		user.setRole(UserType.Guest);
 		user.setBlocked(false);
 		dao.Create(user);
-		return "";
+		return "Good";
 	}
 }
+

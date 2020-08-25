@@ -1,31 +1,34 @@
 [
   {
-    "name": "Tamara Kovacevic",
-    "role": "Guest",
+    "username": "jovan.jelicki",
+    "password": "jovanjovan",
+    "name": "Jovan",
+    "surname": "Jelicki",
+    "gender": "Muski",
+    "role": "Admin",
     "rentedApartment": [],
     "reservations": [],
     "apartements": [],
     "blocked": false
   },
   {
-    "name": "ssss",
-    "role": "Guest",
-    "rentedApartment": [],
-    "reservations": [],
-    "apartements": [],
-    "blocked": false
-  },
-  {
-    "surname": "sdd",
-    "role": "Guest",
-    "rentedApartment": [],
-    "reservations": [],
-    "apartements": [],
-    "blocked": false
-  },
-  {
-    "name": "ssss",
+    "username": "k.tamara",
+    "password": "sneki",
+    "name": "Tamara",
     "surname": "Kovacevic",
+    "gender": "Zenski",
+    "role": "Admin",
+    "rentedApartment": [],
+    "reservations": [],
+    "apartements": [],
+    "blocked": false
+  },
+  {
+    "username": "pera.pera",
+    "password": "perapera",
+    "name": "Petar",
+    "surname": "Peric",
+    "gender": "Muski",
     "role": "Guest",
     "rentedApartment": [],
     "reservations": [],
@@ -34,27 +37,9 @@
   },
   {
     "username": "pera",
-    "password": "f",
-    "name": "Tamara ",
-    "surname": "Kovacevic",
-    "role": "Guest",
-    "rentedApartment": [],
-    "reservations": [],
-    "apartements": [],
-    "blocked": false
-  },
-  {
-    "name": "Tamara Kovacevic",
-    "role": "Guest",
-    "rentedApartment": [],
-    "reservations": [],
-    "apartements": [],
-    "blocked": false
-  },
-  {
-    "username": "tamara.kovacevic@uns.ac.rs",
-    "name": "ssss",
-    "gender": "Male",
+    "password": "s",
+    "name": "Jovan",
+    "surname": "Jelicki",
     "role": "Guest",
     "rentedApartment": [],
     "reservations": [],
