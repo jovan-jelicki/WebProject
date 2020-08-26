@@ -64,5 +64,14 @@ public class UserDAO {
 		users.add(user);
 		Save(users);	
 	}
+	
+	public User LogIn(String username, String password) throws JsonIOException, JsonSyntaxException, FileNotFoundException {
+		for(User user : GetAll()) { 
+			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				return user;
+			}
+		}
+		return null;
+	}
 }
 

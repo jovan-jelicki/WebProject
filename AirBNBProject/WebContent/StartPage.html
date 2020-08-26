@@ -25,8 +25,9 @@
                 </div>
                 <div class="modal-body">
                     <form >
-                        <input type="text" id="usernameLogIn" placeholder="Username" v-model="user.uername">
+                        <input type="text" id="usernameLogIn" placeholder="Username" v-model="user.username">
                         <input type="password" id='passwordLogIn' placeholder="Password" v-model="user.password">
+                        <label style="color:red" >{{message}}</label>
                         <input type="submit" value="Potvrdi" v-on:click="logIn(user, $event)" >
                     </form> 
                 </div>
@@ -74,27 +75,20 @@
                      </div>
                 </div>
             </div>
+            <router-view></router-view>
         </div>
+        
     
 </br>
 </br>
-    <h1 class="naslov"> Dobrodošli na AIRBNB!</h1>
    
-    <form class="naslov" action="http://www.google.com">
-        <input type="text" id="city" name="search" placeholder="Unesite grad ili državu">
-        <input type="date" id="date" name="search"  placeholder="Odaberite datum">
-        <input type='number' min="0" id="guests" name="search" placeholder="Broj gostiju">
-        <input type="number" min="0" id="price" name="search" placeholder="Cena">
-        <input type="number" min="0" id="rooms" name="search" placeholder="Broj soba">
-        <input type="submit" id="search" value="Pretraži">
-    </form>
     
 
     <script src="js/vue.js"></script>
     <script src="js/vue-router.js"></script>
     <script src="js/axios.js"></script>
     <script src="app/registration.js"></script>
-    <script src="app/logIn.js"></script> 
+    <script src="app/app.js"></script> 
 
 
     
