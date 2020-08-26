@@ -11,30 +11,34 @@
 </head>
 
 <body>
-    <div style="float: right; margin-right: 10; margin: 10" id="authorized"> 
-        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized" data-target="#modalLogIn"> Log In </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized" data-target="#registrationModal"> Registracija </button>
-        <button type="button" class="btn btn-primary" v-if="isAuthorized" v-on:click="logOut" >LogOut</button>
+    <div style="margin-left: 15; margin: 15;" id="authorized"> 
+        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized()" data-target="#modalLogIn"> Log In </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized()" data-target="#registrationModal"> Registracija </button>
+        <button type="button" class="btn btn-primary" v-if="isAuthorized()" v-on:click="logOut" >LogOut</button>
  
-    <!--Modalni prozor za log in-->
-    <div class="modal" id="modalLogIn">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1>Log in</h1>
-                </div>
-                <div class="modal-body">
-                    <form >
-                        <input type="text" id="usernameLogIn" placeholder="Username" v-model="user.username">
-                        <input type="password" id='passwordLogIn' placeholder="Password" v-model="user.password">
-                        <label style="color:red" >{{message}}</label>
-                        <input type="submit" value="Potvrdi" v-on:click="logIn(user, $event)" >
-                    </form> 
+
+        <!--Modalni prozor za log in-->
+        <div class="modal" id="modalLogIn">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Log in</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form >
+                            <input type="text" id="usernameLogIn" placeholder="Username" v-model="user.username">
+                            <input type="password" id='passwordLogIn' placeholder="Password" v-model="user.password">
+                            <label style="color:red" >{{message}}</label>
+                            <input type="submit" value="Potvrdi" v-on:click="logIn(user, $event)" >
+                        </form> 
+                    </div>
                 </div>
             </div>
         </div>
+    
+        <router-view></router-view>
     </div>
-    </div>
+    
          <!--Modalni prozor za registraciju-->
          <div class="modal" id="registrationModal">
             <div class="modal-dialog">
@@ -75,12 +79,8 @@
                      </div>
                 </div>
             </div>
-            <router-view></router-view>
+          
         </div>
-        
-    
-</br>
-</br>
    
     
 
@@ -88,7 +88,8 @@
     <script src="js/vue-router.js"></script>
     <script src="js/axios.js"></script>
     <script src="app/registration.js"></script>
-    <script src="app/app.js"></script> 
+    <script src="app/search.js"></script> 
+    <script src="app/app.js"></script>
 
 
     

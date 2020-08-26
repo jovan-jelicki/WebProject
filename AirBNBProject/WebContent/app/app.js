@@ -1,16 +1,17 @@
-const search={template:'<search></search>'}
+const search = {template : '<search></search>'}
 
-const router=new VueRouter({
+const router = new VueRouter({
         mode:'hash',
-        routes: [ {path:'/', component: Search} ]
+        routes: [ 
+            {path:'/', component: search}
+        ]
 });
  
 var logInJs = new Vue ({
 	router,
     el : '#authorized',
     data : {
-        isAuthorized : false,
-        user : {},
+        user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
 		message:""
     },
     methods : {
@@ -22,15 +23,21 @@ var logInJs = new Vue ({
    		 	    event.preventDefault();
     			this.message="Molimo ponovite unos.";
     	     }else{ 
+                 localStorage.setItem("user", JSON.stringify(this.user));
     		 	 event.preventDefault();
     	            $('#modalLogIn').modal('hide');
-    	            this.isAuthorized = true;
     	            this.message="";
     		 }
         },
         
         logOut : function(){
+            localStorage.removeItem("user");
             location.reload();
+        },
+
+        isAuthorized : function(){
+            //console.log("aaaaaaa" +localStorage.getItem("user"));
+            return !!localStorage.getItem("user");
         }
 
     }
