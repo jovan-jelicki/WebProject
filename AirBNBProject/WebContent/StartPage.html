@@ -11,12 +11,11 @@
 </head>
 
 <body>
-    <div style="float: right; margin-right: 10; margin: 10"> 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogIn"> Log In </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal"> Registracija </button>
-    </div>
-   
-    
+    <div style="float: right; margin-right: 10; margin: 10" id="authorized"> 
+        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized" data-target="#modalLogIn"> Log In </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" v-if="!isAuthorized" data-target="#registrationModal"> Registracija </button>
+        <button type="button" class="btn btn-primary" v-if="isAuthorized" v-on:click="logOut" >LogOut</button>
+ 
     <!--Modalni prozor za log in-->
     <div class="modal" id="modalLogIn">
         <div class="modal-dialog">
@@ -26,13 +25,14 @@
                 </div>
                 <div class="modal-body">
                     <form >
-                        <input type="text" id="usernameLogIn" placeholder="Username">
-                        <input type="password" id='passwordLogIn' placeholder="Password">
-                        <input type="submit" value="Potvrdi" >
+                        <input type="text" id="usernameLogIn" placeholder="Username" v-model="user.uername">
+                        <input type="password" id='passwordLogIn' placeholder="Password" v-model="user.password">
+                        <input type="submit" value="Potvrdi" v-on:click="logIn(user, $event)" >
                     </form> 
                 </div>
             </div>
         </div>
+    </div>
     </div>
          <!--Modalni prozor za registraciju-->
          <div class="modal" id="registrationModal">
@@ -94,6 +94,7 @@
     <script src="js/vue-router.js"></script>
     <script src="js/axios.js"></script>
     <script src="app/registration.js"></script>
+    <script src="app/logIn.js"></script> 
 
 
     

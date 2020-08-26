@@ -7,8 +7,7 @@ var userJS = new Vue ({
         disabled : "yes"
     },
     methods : {
-        register: function(){
-            
+        register: function(){    
             axios
                 .post('rest/guestRegistration/save', this.user)
                 .then(response => {if(response.data == "Good")
