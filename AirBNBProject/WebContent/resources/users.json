@@ -34,16 +34,5 @@
     "reservations": [],
     "apartements": [],
     "blocked": false
-  },
-  {
-    "username": "pera",
-    "password": "s",
-    "name": "Jovan",
-    "surname": "Jelicki",
-    "role": "Guest",
-    "rentedApartment": [],
-    "reservations": [],
-    "apartements": [],
-    "blocked": false
   }
 ]

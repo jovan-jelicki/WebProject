@@ -1,6 +1,7 @@
 package services;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -39,14 +40,16 @@ public class UserService {
 	@Path("/logIn")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User logIn(User user) throws JsonIOException, JsonSyntaxException, FileNotFoundException {
-		
+	public User logIn(User user) throws IOException{
+		User retVal = new User();
 		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
 		User findUser=dao.LogIn(user.getUsername(), user.getPassword());
 		if(findUser==null) {
+			System.out.println("Usao sam ovde jer sam glup 1");
 			return null;
 		}
-		return user;
+		System.out.println("Usao sam ovde jer sam glup 2" + findUser.getName()); 
+		return findUser;
 	}
 	
 }

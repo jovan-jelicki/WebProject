@@ -5,7 +5,6 @@ Vue.component('search', {
             apartements : {}
         }
     },
-
     template: 
 `
 <div>
