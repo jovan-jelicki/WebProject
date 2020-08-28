@@ -59,5 +59,26 @@ public class GuestRegistrationService {
 		dao.Create(user);
 		return "Good";
 	}
+	
+	@POST
+	@Path("/save-host")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String saveHost(User user) throws JsonIOException, JsonSyntaxException, IOException {
+		UserDAO dao = (UserDAO) sc.getAttribute("guestDAO");
+		List<User> users;
+		users = dao.GetAll();
+		for (User u : users) {
+			System.out.println(u.name);
+			System.out.println(user.name);
+			if (u.getUsername().equals(user.getUsername()))
+				return "Bad";
+		}
+		user.setRole(UserType.Host);
+		user.setBlocked(false);
+		dao.Create(user);
+		return "Good";
+	}
+	
 }
 

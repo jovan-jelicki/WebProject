@@ -1,11 +1,13 @@
 const search = {template : '<search></search>'}
 const userSettings = {template : '<user-settings></user-settings>'}
+const showUsers = {template : '<show-users></show-users>'}
 
 const router = new VueRouter({
         mode:'hash',
         routes: [ 
             {path:'/', component: search},
-            {path:'/us', component : userSettings}
+            {path:'/us', component : userSettings},
+            {path:'/su', component : showUsers}
         ]
 });
  
@@ -16,7 +18,7 @@ var logInJs = new Vue ({
         user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
         parameters : {},
         message:"",
-        isAuthorizedPar : false
+        isAuthorizedPar : !!localStorage.getItem("user") ? true :  false
     },
 
     methods : {
@@ -33,6 +35,7 @@ var logInJs = new Vue ({
                         console.log(this.user);
                         localStorage.setItem("user", JSON.stringify(this.user));
                         $('#modalLogIn').modal('hide');
+                       // console.log(this.user.role);
                         this.message="";
                         this.isAuthorized();
                      } 

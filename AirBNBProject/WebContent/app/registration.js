@@ -8,14 +8,24 @@ var userJS = new Vue ({
     },
     methods : {
         register: function(){    
+            var registeredUser = JSON.parse(localStorage.getItem("user"));
+            if(registeredUser == undefined || registeredUser == null || registeredUser == ""){
             axios
                 .post('rest/guestRegistration/save', this.user)
-                .then(response => {if(response.data == "Good")
-                    alert('Uspesno ste registrovali korisnika ' + user.name + ' ' + user.surname);
-                })
-                .catch(function (error) {
-                    return error.response.data;
-                  });
+                .then(response => {
+                    if(response.data == "Good"){
+                        alert('Uspesno ste registrovali korisnika ' + user.name + ' ' + user.surname);
+                    }
+                });
+            }else if(registeredUser.role == "Admin") {
+                axios
+                .post('rest/guestRegistration/save-host', this.user)
+                .then(response => {
+                    if(response.data == "Good"){
+                        alert('Uspesno ste registrovali korisnika ' + user.name + ' ' + user.surname);
+                    }
+                });
+            }
         },
         validation : function(){
             if(this.user.name == undefined ||
