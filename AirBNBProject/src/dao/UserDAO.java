@@ -42,7 +42,6 @@ public class UserDAO {
 		this.path=f.getAbsolutePath();		
 	}
 	public void Save(ArrayList<User> users) throws IOException {
-		System.out.println(users);
 		Writer out=new FileWriter(path);
 		gson.toJson(users, out); 
 		out.flush();
@@ -55,7 +54,6 @@ public class UserDAO {
 	
 	public void Create(User user) throws IOException {
 		ArrayList<User> users=new ArrayList<User>();
-		System.out.println(path+"***********************");
 
 		users=(ArrayList<User>) GetAll();
 		if(users==null) {
@@ -72,6 +70,21 @@ public class UserDAO {
 			}
 		}
 		return null;
+	}
+	
+	public User Edit(User user) throws JsonIOException, JsonSyntaxException, IOException {
+		ArrayList<User> users = (ArrayList<User>) GetAll();
+		for(User u : users) {
+			if(u.getUsername().equals(user.getUsername())) {
+				u.setName(user.getName());
+				u.setSurname(user.getSurname());
+				u.setGender(user.getGender());
+				u.setPassword(user.getPassword());
+				break;
+			}
+		}
+		Save(users);
+		return user;
 	}
 }
 

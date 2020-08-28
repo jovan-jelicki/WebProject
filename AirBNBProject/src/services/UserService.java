@@ -45,11 +45,18 @@ public class UserService {
 		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
 		User findUser=dao.LogIn(user.getUsername(), user.getPassword());
 		if(findUser==null) {
-			System.out.println("Usao sam ovde jer sam glup 1");
 			return null;
 		}
-		System.out.println("Usao sam ovde jer sam glup 2" + findUser.getName()); 
 		return findUser;
 	}
 	
+	@POST
+	@Path("/edit")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User edit(User user) throws JsonIOException, JsonSyntaxException, IOException {
+		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
+		User editUser=dao.Edit(user);
+		return editUser;
+	}
 }
