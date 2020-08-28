@@ -34,5 +34,17 @@
     "reservations": [],
     "apartements": [],
     "blocked": false
+  },
+  {
+    "username": "dane",
+    "password": "d",
+    "name": "Dane",
+    "surname": "Danic",
+    "gender": "Muski",
+    "role": "Host",
+    "rentedApartment": [],
+    "reservations": [],
+    "apartements": [],
+    "blocked": false
   }
 ]

@@ -2,10 +2,13 @@ package services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -49,7 +52,7 @@ public class UserService {
 		}
 		return findUser;
 	}
-	
+
 	@POST
 	@Path("/edit")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -59,4 +62,13 @@ public class UserService {
 		User editUser=dao.Edit(user);
 		return editUser;
 	}
+
+	@GET
+	@Path("/getUsers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAllUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
+		return dao.GetAll();
+	}
+	
 }
