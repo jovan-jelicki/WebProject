@@ -14,8 +14,7 @@ Vue.component('show-users', {
     },
     template : 
     `
-    </br>
-    </br>
+    
     <div>
     <table class="table">
         <thead>
