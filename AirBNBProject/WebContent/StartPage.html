@@ -24,15 +24,15 @@
         <!--JA sam stavio jedno, nekako mi to ima smisla-->
         <!--Dugmici za admina-->
         <button type="button" class="btn btn-primary" onclick="location.href='#/su';" v-if="isAuthorizedPar && user.role == 'Admin'" >Prikaz korisnika</button>
-        <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Admin'" >Sadrzaji apartmana</button>
+        <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Admin'" onclick="location.href='#/sa';">Sadrzaji apartmana</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal" v-if="isAuthorizedPar && user.role == 'Admin'">Registracija domacina</button>
+       
+        <!--Dugmici za hosta i admina-->
+        <button type="button" class="btn btn-primary"   onclick="location.href='#/na';" v-if="isAuthorizedPar && user.role != 'Guest'">Pregled apartmana</button>
 
         <!--Dugmici za hosta-->
         <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Host'" >Pregled gostiju</button>
-        
-        <!--Dugmici za hosta i admina-->
-        <button type="button" class="btn btn-primary"   v-if="isAuthorizedPar && user.role != 'Guest'">Pregled apartmana</button>
-
+        <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Host'" onclick="location.href='#/na';" >Dodaj apartman</button>
 
         <!--Modalni prozor za log in-->
         <div class="modal" id="modalLogIn">
@@ -106,6 +106,8 @@
     <script src="js/axios.js"></script>
     <script src="app/registration.js"></script>
     <script src="app/userSettings.js"></script>
+    <script src="app/newApartment.js"></script>
+    <script src="app/amenities.js"></script> 
     <script src="app/search.js"></script> 
     <script src="app/showUsers.js"></script>
     <script src="app/app.js"></script>

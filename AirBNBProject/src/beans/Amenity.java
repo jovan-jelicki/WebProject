@@ -3,7 +3,7 @@ package beans;
 public class Amenity {
 	public int id;
 	public String name;
-	public Boolean deleted;
+	public Boolean deleted=false;
 	
 	public Amenity() {}
 	

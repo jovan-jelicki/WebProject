@@ -47,6 +47,8 @@ Vue.component('user-settings', {
             </div>
             <br>
             <div id="success" class="alert alert-success" role="alert" style = "display: none" > Informacije su uspesno promenjene!</div>
+            <div id="infoErr" class="alert alert-success" role="alert" style = "display: none" > Molimo ponovite unos. Uneti podaci nisu validni!</div>
+
     		<br>
             <button id="potvrdi" type="button" class="btn  btn-primary" style = "display: none" v-on:click="edit"  >Potvrdi izmene</button>
     		<button id="otkazi" type="button" class="btn  btn-secondary" style = "display: none" v-on:click="cancel" >Ponisti izmene</button>  
@@ -70,11 +72,10 @@ Vue.component('user-settings', {
                 </div>
             </div>
             <div id="oldAlert" class="alert alert-dark" role="alert"  style = "display: none" >Molimo pokusajte ponovo. Neophodno je uneti tacnu trenutnu lozinku!</div>
-            <br>
+            
             <div id="newAlert" class="alert alert-dark" role="alert"  style = "display: none" >Morate uneti i potvrditi novu lozinku. Unosti moraju da se poklapaju!</div>
-    		<br>
+    		
     		<div id="successPass" class="alert alert-success" role="alert" style = "display: none" > Lozinka je uspesno promenjena!</div>
-            <br>
             <br>
             <button id="editButton" type="button" class="btn btn-primary"  v-on:click="dissapearButton()">Izmena naloga</button>
     		 <button id="potvrdiPas" type="button" class="btn  btn-primary" style = "display: none" v-on:click="editPas"  >Potvrdi izmenu lozinke</button>
@@ -108,11 +109,14 @@ methods:{
 	},
 	
 	edit:   function() {
-		success.style.display="inline";
-		potvrdi.style.display="none";
-	   	otkazi.style.display="none";
-	   	start.style.display="none";
-	   	
+		if(this.user.name=="" || this.user.surname=="" ){
+			infoErr.style.display="inline";
+		}else{
+			infoErr.style.display="none";
+			success.style.display="inline";
+			potvrdi.style.display="none";
+			otkazi.style.display="none";
+		}
         axios
 		.post('rest/userService/edit', this.user)
         .then((response) => this.user=response.data );

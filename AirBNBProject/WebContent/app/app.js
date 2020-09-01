@@ -1,13 +1,17 @@
 const search = {template : '<search></search>'}
 const userSettings = {template : '<user-settings></user-settings>'}
 const showUsers = {template : '<show-users></show-users>'}
+const newApartment={template: '<new-apartment></new-apartment>'}
+const editAmenity={template:'<edit-amenity></edit-amenity>'}
 
 const router = new VueRouter({
         mode:'hash',
         routes: [ 
             {path:'/', component: search},
             {path:'/us', component : userSettings},
-            {path:'/su', component : showUsers}
+            {path:'/su', component : showUsers},
+            {path:'/na', component: newApartment},
+            {path:'/sa', component: editAmenity}
         ]
 });
  

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 0,
+    "name": "PArlp",
+    "deleted": true
+  },
+  {
+    "id": 1,
+    "name": "Wi-FI",
+    "deleted": false
+  },
+  {
+    "id": 2,
+    "name": "Parking",
+    "deleted": false
+  },
+  {
+    "id": 3,
+    "name": "Mikrotalasna",
+    "deleted": false
+  },
+  {
+    "id": 4,
+    "name": "Topla voda",
+    "deleted": false
+  },
+  {
+    "id": 5,
+    "name": "Frizider",
+    "deleted": false
+  },
+  {
+    "id": 6,
+    "name": "TV",
+    "deleted": false
+  },
+  {
+    "id": 7,
+    "name": "Kafe aparat",
+    "deleted": true
+  },
+  {
+    "id": 8,
+    "name": "Zamrzivac",
+    "deleted": false
+  },
+  {
+    "id": 9,
+    "name": "Kuhinja",
+    "deleted": false
+  }
+]
