@@ -36,6 +36,13 @@ Vue.component('new-apartment', {
 	  </div>
 	  
 	  <div class="form-group row">
+	    <label for="inputPassword" class="col-sm-2 col-form-label">Ime apartmana:</label>
+	    <div class="col-sm-10">
+              <input class="form-control" id="name" type="text" v-model="apartment.name">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
 	    <label for="staticEmail" class="col-sm-2 col-form-label">Tip apartmana</label>
 	    <div class="col-sm-10">
 	        <div class="form-check form-check-inline">
@@ -52,14 +59,14 @@ Vue.component('new-apartment', {
 	  <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label">Broj soba</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="roomNum" type="text">
+              <input class="form-control" id="roomNum" type="text" v-model="apartment.numberOfRooms">
 	    </div>
 	  </div>
 	  
 	  <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Broj gostiju</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="guestNum" type="text">
+              <input class="form-control" id="guestNum" type="text" v-model="apartment.numberOfGuests" >
 	    </div>
 	  </div>
 	    
@@ -91,31 +98,24 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	  
-	   <div class="form-group row">
-	    <label for="inputPassword" class="col-sm-2 col-form-label ">Postanski broj:</label>
-	    <div class="col-sm-10">
-              <input class="form-control" id="postNum" type="text">
-	    </div>
-	  </div>
-	  
 	    <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Cena po noci:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="price" type="text">
+              <input class="form-control" id="price" type="text" v-model="apartment.numberOfRooms">
 	    </div>
 	  </div>
 	  
 	    <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Vreme za prijavu:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="time1" type="text">
+              <input class="form-control" id="time1" type="text" v-model="apartment.checkIn">
 	    </div>
 	  </div>
 	  
 	  <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Vreme za odjavu:</label>
 	    <div class="col-sm-10">
-         <input class="form-control" id="time2" type="text">
+         <input class="form-control" id="time2" type="text"  v-model="apartmentcheckOut">
 	    </div>
 	  </div>
 

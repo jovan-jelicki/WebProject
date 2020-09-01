@@ -22,8 +22,10 @@ public class AmenityDAO {
  
 	private Gson gson;
 	private String path="";
-
-	public AmenityDAO() {
+	private static ApartmentDAO apartmentDao;
+	
+	public AmenityDAO(ApartmentDAO apartmentDao) {
+		this.apartmentDao = apartmentDao;
 		this.gson=new GsonBuilder()
 				.setPrettyPrinting()
 				.create();
@@ -86,6 +88,7 @@ public class AmenityDAO {
 			}
 		}
 		Save(amenities);
+		apartmentDao.EditAmenity(amenity);
 		return amenity;
 	}
 	
@@ -98,8 +101,7 @@ public class AmenityDAO {
 			}
 		}
 		Save(amenities);
+		apartmentDao.DeleteAmenity(amenity);
 		return amenity;
-		//TODO obrisati iz apartma
-		//apartmanDAo.DeleteAMenities bla bla
 	}
 }

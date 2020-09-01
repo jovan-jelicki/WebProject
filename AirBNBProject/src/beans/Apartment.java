@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Apartment {
 	
 	public int id;
+	public String name;
 	public ApartmentType type;
 	public int numberOfRooms;
 	public int numberOfGuests;
@@ -23,12 +24,13 @@ public class Apartment {
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public Boolean deleted;
 	
-	public Apartment(int id, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
+	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
 			ArrayList<Date> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
 			ArrayList<Reservation> reservations) {
 		super();
 		this.id = id;
+		this.name=name;
 		this.type = type;
 		this.numberOfRooms = numberOfRooms;
 		this.numberOfGuests = numberOfGuests;
@@ -45,6 +47,20 @@ public class Apartment {
 		this.reservations = reservations;
 		this.deleted = false;
 	}
+
+	
+	
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 
 	public int getId() {
 		return id;
