@@ -16,8 +16,8 @@ public class Apartment {
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	//pikcure
 	public double pricePerNight;
-	public String checkIn;
-	public String checkOut;
+	public String checkIn ="2PM";
+	public String checkOut = "10PM";
 	public ApartmentStatus status;
 	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();

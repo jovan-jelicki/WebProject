@@ -30,7 +30,7 @@ Vue.component('edit-amenity', {
           Unesite novi sasdrzaj ili zaberite sadrzaj, a zatim i akciju koju zelite da izvrsite!
         </div>
     	</div>
-     <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span> Dodvanje novog sadrzaja apartmana</h1>
+     <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span> Dodavanje novog sadrzaja apartmana</h1>
     	<hr>
      <div class="col-md-12 personal-info">
 
@@ -49,39 +49,38 @@ Vue.component('edit-amenity', {
       <button id="potvrdi" type="button" class="btn  btn-primary"  v-on:click="addNewAmenity"  >Potvrdi</button>
     	<br>
     	<br>
-	  <div class="form-group">
-     <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span> Izmena sadrzaja apartmana</h1>
-         
-    	
+	 <div class="form-group">
+       <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span> Izmena sadrzaja apartmana</h1>
     	<select id="selected" v-model="selected">   		
         	<option v-for="a in amenities" v-if="a.deleted == false" :value="a" >
 	        	  {{a.name}}
         	</option>
        	</select>
        	
-       	  <div class="form-group row">
-            <label class="col-lg-3 control-label"  id="labelEditName" style = "display: none" >Izmenite naziv:</label>
-            <div class="col-lg-5">
-              <input class="form-control" style = "display: none" id="editName" type="text" v-model="selected.name">
-            </div>
-          	</div>	
+    	<div class="form-group row">
+           <label class="col-lg-3 control-label"  id="labelEditName" style = "display: none" >Izmenite naziv:</label>
+           <div class="col-lg-5">
+             <input class="form-control" style = "display: none" id="editName" type="text" v-model="selected.name">
+           </div>
+       	</div>	
        	        	    	
-        	<br>
-            <div id="infoSuccessEdit" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste izvrsili izmenu!!</div>
-            <div id="infoSuccessDelete" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste obrisali sadrzaj!!</div>
+       	<br>
+        <div id="infoSuccessEdit" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste izvrsili izmenu!!</div>
+        <div id="infoSuccessDelete" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste obrisali sadrzaj!!</div>
 
-        	<br>
-         	<button id="editButton" type="button" class="btn btn-primary"  v-on:click="disappear">Izmeni</button>
-         	<button id="deleteButton" type="button" class="btn btn-primary"  v-on:click="deleteAmenity">Obrisi </button> 
-         	<br>
-            <button id="editAccButton" type="button" class="btn btn-primary"  v-on:click="editAmenity" style = "display: none">Potvrdi izmene</button>
-            <button id="cancelButton" type="button" class="btn btn-primary"  v-on:click="cancelEdit" style = "display: none">Povratak</button>
+       	<br>
+      	<button id="editButton" type="button" class="btn btn-primary"  v-on:click="disappear">Izmeni</button>
+       	<button id="deleteButton" type="button" class="btn btn-primary"  v-on:click="deleteAmenity">Obrisi </button> 
+      	<br>
+    
+        <button id="editAccButton" type="button" class="btn btn-primary"  v-on:click="editAmenity" style = "display: none">Potvrdi izmene</button>
+        <button id="cancelButton" type="button" class="btn btn-primary"  v-on:click="cancelEdit" style = "display: none">Povratak</button>
 
 	  </div>
 	</div>
 	</div>
 	
-    `,
+    `, 
     
    	methods:{
    		addNewAmenity:  function(){
