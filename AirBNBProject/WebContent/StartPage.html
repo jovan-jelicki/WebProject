@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCBTXbj21-afltSBT5158Cs1ARNmesv7c&libraries=places"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         <button type="button" class="btn btn-primary" v-if="isAuthorizedPar">Pregled rezervacija</button>
 
         <!--Dugmici gosta-->
-        <button type="button" class="btn btn-primary" onclick="location.href='#/us';" v-if="isAuthorizedPar && user.role == 'Guest'"> Pretrazi apartmane</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='#/';" v-if="isAuthorizedPar && user.role == 'Guest'"> Pretrazi apartmane</button>
         <!--Da li cemo koristiti iste dugmice za tipa admina i hosta za pretragu apartmana pa unutar njih resiti sta ko ima da vidi-->
         <!--JA sam stavio jedno, nekako mi to ima smisla-->
         <!--Dugmici za admina-->

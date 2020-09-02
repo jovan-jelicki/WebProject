@@ -24,6 +24,10 @@ var logInJs = new Vue ({
         message:"",
         isAuthorizedPar : !!localStorage.getItem("user") ? true :  false
     },
+    mounted()  {
+    	 var input = document.getElementById('city');
+    	  new google.maps.places.Autocomplete(input);
+    },
 
     methods : {
         logIn :  function(event) {
@@ -42,6 +46,9 @@ var logInJs = new Vue ({
                        // console.log(this.user.role);
                         this.message="";
                         this.isAuthorized();
+                        if(this.user.role != "Guest"){
+                        	 location.replace('#/us');
+                        }
                      } 
                 }
                  );
