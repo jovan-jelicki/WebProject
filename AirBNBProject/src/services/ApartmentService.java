@@ -2,6 +2,7 @@ package services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import com.google.gson.JsonSyntaxException;
 
 import beans.Apartment;
 import dao.ApartmentDAO;
+import dao.SearchDAO;
 
 @Path("/apartmentService")
 
@@ -72,8 +74,26 @@ public class ApartmentService {
 	@Path("/getAmpartments")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
-		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("ApartmentDAO");
+		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		return dao.GetAll();
+	}
+	
+	
+	@POST
+	@Path("/searchApartments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Apartment> getFilteredApartments(SearchDAO parameters) throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
+		List<Apartment> retVal = dao.GetAll();
+		ArrayList<Apartment> help = new ArrayList<Apartment>();
+		//prvo adresa
+		for(Apartment aparment : retVal) {
+			if(parameters.location.contains(aparment.location.adress.city) || parameters.location.contains(aparment.location.adress.street)) {
+				help.add(aparment);
+			}
+		}
+		return retVal;
 	}
 	
 }
