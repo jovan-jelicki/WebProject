@@ -2,6 +2,7 @@
   {
     "id": 0,
     "name": "Adice",
+    "type": "Apartment",
     "numberOfRooms": 7,
     "numberOfGuests": 7,
     "location": {
@@ -20,6 +21,7 @@
     "pricePerNight": 65.0,
     "checkIn": "4",
     "checkOut": "12",
+    "status": "Active",
     "amenities": [
       {
         "id": 1,
@@ -37,11 +39,13 @@
         "deleted": false
       }
     ],
-    "reservations": []
+    "reservations": [],
+    "deleted": false
   },
   {
     "id": 0,
     "name": "Adice",
+    "type": "Apartment",
     "numberOfRooms": 2,
     "numberOfGuests": 6,
     "location": {
@@ -60,6 +64,7 @@
     "pricePerNight": 10.0,
     "checkIn": "6",
     "checkOut": "12",
+    "status": "Active",
     "amenities": [
       {
         "id": 1,
@@ -87,6 +92,7 @@
         "deleted": false
       }
     ],
-    "reservations": []
+    "reservations": [],
+    "deleted": false
   }
 ]
