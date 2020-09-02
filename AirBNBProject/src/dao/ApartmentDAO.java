@@ -48,6 +48,21 @@ public class ApartmentDAO {
 	public List<Apartment> GetAll() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		return gson.fromJson( new JsonReader(new FileReader(path)), new TypeToken<List<Apartment>>(){}.getType());
 	}
+	
+	public int getMaxId() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
+		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
+		int maxId=-1;
+		apartments=(ArrayList<Apartment>) GetAll();
+		if(apartments!=null) {
+			for(Apartment apartment : apartments) {
+				if(apartment.getId()>maxId) {
+					maxId=apartment.getId();
+				}
+			}
+		}
+		return ++maxId;
+		
+	}
 
 	public void Create(Apartment apartment) throws IOException {
 		System.out.println(apartment.getCheckIn()+"*************************"+"\n");
@@ -57,6 +72,7 @@ public class ApartmentDAO {
 		if(apartments==null) {
 			apartments=new ArrayList<Apartment>();
 		}
+		apartment.setId(getMaxId());
 		apartments.add(apartment);
 
 		Save(apartments);	

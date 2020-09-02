@@ -72,8 +72,9 @@ public class ApartmentService {
 	@Path("/getAmpartments")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
-		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("ApartmentDAO");
+		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		return dao.GetAll();
 	}
 	
+
 }

@@ -7,6 +7,10 @@ Vue.component('new-apartment', {
             amenities:{},
             selectedAmenities:[],
             country:"",
+            period:[],
+	        dateTo:'',
+	        dateFrom:'',
+
         }
     },  
    
@@ -24,11 +28,11 @@ Vue.component('new-apartment', {
       <br>
       <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Dodavanje novog apartmana</h1>
       <hr>
-   <div class="col-md-9 personal-info">
+   <div class="col-md-12 personal-info">
 
       <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Domacin</label>
-	    <div class="col-sm-9">
+	    <div class="col-sm-10">
               <input class="form-control" id="name" type="text" v-model="user.name" disabled>
 	    </div>
 	  </div>
@@ -43,15 +47,8 @@ Vue.component('new-apartment', {
 	  <div class="form-group row">
 	    <label for="staticEmail" class="col-sm-2 col-form-label">Tip apartmana</label>
 	    <div class="col-sm-10">
-	        <div class="form-check form-check-inline">
-        		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="apartment.type">
-        		<label class="form-check-label" for="inlineCheckbox1">apartman</label>
-        	</div>
-      
-        	<div class="form-check form-check-inline">
-        		<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="apartment.type">
-        		<label class="form-check-label" for="inlineCheckbox2">soba</label>
-        	</div>
+  				<div class="tip"><input type="radio" name="apartmentType" v-model="apartment.type" value="apartman"> apartman<br></div>
+  				<div class="tip"><input type="radio" name="apartmentType" v-model="apartment.type" value="room"> soba<br></div>
 
 	    </div>
 	  </div>
@@ -124,14 +121,30 @@ Vue.component('new-apartment', {
          <input class="form-control" id="time2" type="text"  v-model="apartment.checkOut">
 	    </div>
 	  </div>
+	
+	  <div class="form-group row">
+	    <label for="inputPassword" class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
+	    <div class="col-sm-10">
+			<vuejs-datepicker placeholder="Unesite pocetni datum" format="dd.MM.yyyy" v-model="dateFrom" ></vuejs-datepicker>
+	    </div>
+	  </div>
+
+	  <div class="form-group row">
+	    <label for="inputPassword" class="col-sm-2 col-form-label ">Datum za izdavanje do:</label>
+	    <div class="col-sm-10">
+	    <div id="app">
+			<vuejs-datepicker placeholder="Unesite pocetni datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
+	   </div>
+	    </div>
+	  </div>
+
 
   	  <div class="form-check" >
   	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
-  	       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
+  	       <input class="form-check-input"  type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
     	   <label class="form-check-label"> {{a.name}} </label>
       </div>
 	  </div>
-	  
 	  
 	  <button id="editAccButton" type="button" class="btn btn-primary"  v-on:click="geocodeAddress" >Potvrdi izmene</button>
 
@@ -157,6 +170,15 @@ Vue.component('new-apartment', {
     					adress: this.adress};
     			this.apartment.location=this.location;
     			this.apartment.amenities=this.selectedAmenities;
+
+    			
+    			let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
+				let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
+				this.period.dateFrom=this.dateFrom;
+				this.period.dateTo=this.dateTo;
+				this.apartment.datesForRenting=this.period;
+
+    			
     			this.addApartment();
     			
     		});
@@ -171,6 +193,13 @@ Vue.component('new-apartment', {
     	}
     
     
-    }
+    },
+    components : { vuejsDatepicker },
+    filters: {
+    	dateFormat: function (value, format) {
+    		var parsed = moment(value);
+    		return parsed.format(format);
+    	}
+   	},
 
     })
