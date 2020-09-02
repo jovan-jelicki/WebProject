@@ -50,6 +50,7 @@ public class ApartmentDAO {
 	}
 
 	public void Create(Apartment apartment) throws IOException {
+		System.out.println(apartment.getCheckIn()+"*************************"+"\n");
 		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
 
 		apartments=(ArrayList<Apartment>) GetAll();

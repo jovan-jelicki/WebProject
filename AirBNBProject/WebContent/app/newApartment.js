@@ -3,15 +3,13 @@ Vue.component('new-apartment', {
         return {
             user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
             apartment: {},
+            adress:{},
             amenities:{},
-            selectedAmenities: [],
+            selectedAmenities:[],
             country:"",
-           city:"",
-           street:"", 
-           streetNum:"",
         }
     },  
-    
+   
     mounted() {
         axios
         .get('rest/amenityService/getAmenities')
@@ -46,14 +44,15 @@ Vue.component('new-apartment', {
 	    <label for="staticEmail" class="col-sm-2 col-form-label">Tip apartmana</label>
 	    <div class="col-sm-10">
 	        <div class="form-check form-check-inline">
-        		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="apartment.type">
         		<label class="form-check-label" for="inlineCheckbox1">apartman</label>
         	</div>
       
         	<div class="form-check form-check-inline">
-        		<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+        		<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="apartment.type">
         		<label class="form-check-label" for="inlineCheckbox2">soba</label>
         	</div>
+
 	    </div>
 	  </div>
 	  <div class="form-group row">
@@ -80,28 +79,35 @@ Vue.component('new-apartment', {
 	   <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label " >Grad:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="city" type="text" v-model="city">
+              <input class="form-control" id="city" type="text" v-model="adress.city">
 	    </div>
 	  </div>
 	  
 	   <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label"  >Ulica:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="street" type="text" v-model="street">
+              <input class="form-control" id="street" type="text" v-model="adress.street">
 	    </div>
 	  </div>
 	  
 	   <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label" >Broj:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="city" type="text" v-model="streetNum">
+              <input class="form-control" id="city" type="number" v-model="adress.numberOfStreet">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="inputPassword" class="col-sm-2 col-form-label" >Postanski broj:</label>
+	    <div class="col-sm-10">
+              <input class="form-control" id="city" type="number" v-model="adress.postNumber">
 	    </div>
 	  </div>
 	  
 	    <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Cena po noci:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="price" type="text" v-model="apartment.numberOfRooms">
+              <input class="form-control" id="price" type="text" v-model="apartment.pricePerNight">
 	    </div>
 	  </div>
 	  
@@ -115,7 +121,7 @@ Vue.component('new-apartment', {
 	  <div class="form-group row">
 	    <label for="inputPassword" class="col-sm-2 col-form-label ">Vreme za odjavu:</label>
 	    <div class="col-sm-10">
-         <input class="form-control" id="time2" type="text"  v-model="apartmentcheckOut">
+         <input class="form-control" id="time2" type="text"  v-model="apartment.checkOut">
 	    </div>
 	  </div>
 
@@ -132,9 +138,11 @@ Vue.component('new-apartment', {
    </div>
    </form>
     `, 
+     
+    
     methods:{
     	geocodeAddress: function(){
-    		var geoAddress=this.streetNum +" "+this.street+" "+this.city+" "+this.country;
+    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.country;
     		axios
     		.get('https://maps.googleapis.com/maps/api/geocode/json', {
     			params: {
@@ -142,11 +150,27 @@ Vue.component('new-apartment', {
     				key: 'AIzaSyCJ-9l16ACAmjuZ0xcZr-xcT-EYJZQ-md4',
     			}
     		})
-    		.then( response => {
-    			console.log(response);
-    			console.log(response.data.results[0].geometry.location.lat);
-    			});
+
+    		.then( (response) => {
+    			this.location
+    			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
+    					adress: this.adress};
+    			this.apartment.location=this.location;
+    			this.apartment.amenities=this.selectedAmenities;
+    			this.addApartment();
+    			
+    		});
+    	},
+    	
+    	addApartment: function(){
+    		axios
+   			.post('rest/apartmentService/save',this.apartment)
+   	        .then((response) => {console.log(response);}
+   	        );
+			
     	}
+    
+    
     }
 
     })

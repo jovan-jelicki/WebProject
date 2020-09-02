@@ -43,14 +43,6 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment save(Apartment apartment) throws IOException {
 		ApartmentDAO dao = (ApartmentDAO) sc.getAttribute("apartmentDAO");
-		List<Apartment> apartments;
-		apartments = dao.GetAll();
-		for (Apartment a : apartments) {
-			System.out.println(a.getId()+apartment.getId());
-			if(a.getName().equals(apartment.getName())) {
-				return null;
-			}
-		}
 		dao.Create(apartment);
 		return apartment;
 	}

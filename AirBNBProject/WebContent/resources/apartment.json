@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "id": 0,
+    "name": "Adice",
+    "numberOfRooms": 7,
+    "numberOfGuests": 7,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 11,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [],
+    "freePeriods": [],
+    "comments": [],
+    "pricePerNight": 65.0,
+    "checkIn": "4",
+    "checkOut": "12",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 9,
+        "name": "Kuhinja",
+        "deleted": false
+      }
+    ],
+    "reservations": []
+  },
+  {
+    "id": 0,
+    "name": "Adice",
+    "numberOfRooms": 2,
+    "numberOfGuests": 6,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 7,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [],
+    "freePeriods": [],
+    "comments": [],
+    "pricePerNight": 10.0,
+    "checkIn": "6",
+    "checkOut": "12",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 9,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      },
+      {
+        "id": 6,
+        "name": "TV",
+        "deleted": false
+      }
+    ],
+    "reservations": []
+  }
+]
