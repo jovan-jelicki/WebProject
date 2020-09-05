@@ -3,6 +3,7 @@ const userSettings = {template : '<user-settings></user-settings>'}
 const showUsers = {template : '<show-users></show-users>'}
 const newApartment={template: '<new-apartment></new-apartment>'}
 const editAmenity={template:'<edit-amenity></edit-amenity>'}
+const apartmentDetails = {template: '<apartment-details></apartment-details>'}
 
 const router = new VueRouter({
         mode:'hash',
@@ -11,7 +12,8 @@ const router = new VueRouter({
             {path:'/us', component : userSettings},
             {path:'/su', component : showUsers},
             {path:'/na', component: newApartment},
-            {path:'/sa', component: editAmenity}
+            {path:'/sa', component: editAmenity},
+            {path:'/ad', component : apartmentDetails}
         ]
 });
  
