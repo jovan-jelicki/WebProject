@@ -38,10 +38,15 @@ Vue.component('search', {
     </div>
     
 	
-	<div name="apartment"  v-bind:style="{display : disp}" class="row" >
+	<div name="apartment"  v-bind:style="{display : disp}" style="margin-left : 10%" class="row" >
+    	<div>
+    		<p style="display : inline"> Sortiraj po ceni </p>
+    		<button style="display : inline; background: url(https://img.favpng.com/0/11/14/computer-icons-sorting-algorithm-download-font-awesome-png-favpng-TgpcVDhbLgfA4TBAHKXU21VH6.jpg)" width="50" height="50"></button>
+    	</div>
+    	</br>
 			<div  v-for="a in apartements" class="column" >
     			<div class="card"  v-on:click="sendData(a)" style="width: 18rem;" >
-    				<img border-radius: 20%; padding: 10px; class="card-img-right" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" alt="Card image cap">
+    				<img  class="card-img-right" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" alt="Card image cap">
     				<h5 class="card-header">{{a.name}}</h5>
     				<div class="card-body">
 	    				 <p class="card-text" > Lokacija : {{a.location.adress.street}} {{a.location.adress.numberOfStreet}}, {{a.location.adress.city}} {{a.location.adress.postNumber}} </br>		 	
