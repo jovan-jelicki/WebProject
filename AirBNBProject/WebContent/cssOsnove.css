@@ -1,4 +1,15 @@
 
+		.filter-div {
+			background-color : 	lightskyblue;
+			height : auto;
+			width : 90%;
+			margin-left : 5%;
+			border-radius: .25rem;
+			padding: .375rem .75rem;
+			display : flex;
+			justify-content: space-between;
+		}
+
         input[type=text],input[type=number] ,input[type=password], input[type=date]{
             border-radius: 4px;
             font-size : 15px;
@@ -63,8 +74,7 @@
 
 		.column {
   		float: left;
-  		width: 33.33%;
-  		padding: 2px;
+  		
 		}
 
 		.row::after {

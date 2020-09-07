@@ -38,13 +38,31 @@ Vue.component('search', {
     </div>
     
 	
-	<div name="apartment"  v-bind:style="{display : disp}" style="margin-left : 10%" class="row" >
-    	<div>
-    		<p style="display : inline"> Sortiraj po ceni </p>
-    		<button style="display : inline; background: url(https://img.favpng.com/0/11/14/computer-icons-sorting-algorithm-download-font-awesome-png-favpng-TgpcVDhbLgfA4TBAHKXU21VH6.jpg)" width="50" height="50"></button>
+	<div name="apartment"  v-bind:style="{display : disp}"  class="row" >
+    	<div class="filter-div">
+    		<div style="display : flex; white-space: nowrap;">
+    			<p style="margin-top: 5% ; margin-right : 3%"> <b> Sortiraj po ceni </b> </p>
+    			<button  class="btn btn-primary"> 
+    				<!--img width="50px" height="40px" src="https://img.favpng.com/0/11/14/computer-icons-sorting-algorithm-download-font-awesome-png-favpng-TgpcVDhbLgfA4TBAHKXU21VH6.jpg" /-->
+    				Proba
+    			</button>
+    		</div>
+    		<div>
+    			<select  class="browser-default custom-select" id="type">
+    				<option selected>Odaberite tip apartmana</option>
+    				<option value="Apartman" > Apartman </option>
+    				<option value="Hotel" > Hotel </option>
+    			</select>
+    		</div>
+    		<div class="dropdown">
+    			<button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    				Izaberite dodatke
+    			</button>
+    		</div>
     	</div>
+    	
     	</br>
-			<div  v-for="a in apartements" class="column" >
+			<div  v-for="a in apartements" style="margin-left : 7%" class="column" >
     			<div class="card"  v-on:click="sendData(a)" style="width: 18rem;" >
     				<img  class="card-img-right" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" alt="Card image cap">
     				<h5 class="card-header">{{a.name}}</h5>
