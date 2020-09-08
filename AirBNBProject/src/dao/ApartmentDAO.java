@@ -69,7 +69,7 @@ public class ApartmentDAO {
 			if(a.getId()==apartment.getId()) {
 				a.setType(apartment.getType());
 				a.setName(apartment.getName());
-				a.setNumberOfGuests(apartment.getNumberOfRooms());
+				a.setNumberOfRooms(apartment.getNumberOfRooms());
 				a.setNumberOfGuests(apartment.getNumberOfGuests());
 				a.setLocation(apartment.getLocation());
 				a.setPricePerNight(apartment.getPricePerNight());

@@ -46,35 +46,21 @@ Vue.component('apartment-details', {
 		<div class="container">
 		  	<h4>Komentari: </h4>
 		  	</br>
-		  		<div class="comments-list">
-		  			<div class="media">
-		  				 <p class="float-right" >Ocena : 4.5 </p>
+		  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved">
+		  			<div class="media" style="display : inline ">
+		  				 <p class="float-right" >Ocena : {{com.grade}} </p>
 		  				<div class="media-body"> 
 		  				<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
-		  					Na adicama nema more ovo je laz!
+		  					{{com.text}}
 		  				</div>
 		  			</div>
 		  			<hr>
-		  			<div class="media">
-		  				<div class="media-body"> 
-		  				<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
-		  					Dobio sam batine na adicama!
-		  				</div>
-		  			</div>
-		  			<hr>
-		  			<div class="media">
-		  				<div class="media-body">
-							<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
-		  					Kakva prevara..
-		  				</div>
-		  			</div>
 		  		</div>
-		  	<hr>
-		  	<button id="buttonComment" v-on:click="commentForm()"> Ostavi komentar </button>
+		  	<button id="buttonComment" class="btn btn-primary" v-on:click="commentForm()"> Ostavi komentar </button>
 			<div class="form-group" v-bind:style="{display : comForm}">
 				<textarea class="form-control" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
 				<br>
-				<button v-on:click="leaveComment()"> Prosledi komentar </button>
+				<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
 			</div>
 		</div>
 
@@ -93,6 +79,18 @@ Vue.component('apartment-details', {
 		leaveComment : function () {
 			this.comForm = "none";
 			buttonComment.style.display = "inline";
+			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : "4"});
+			axios
+			.post("rest/apartmentService/edit", this.apartment)
+			.then(response => {
+				this.apartment = response.data;
+				var apartments = JSON.parse(localStorage.getItem("apartments"));
+				for(a of apartments){
+					if(a.id == this.apartment.id)
+						a.comments = this.apartment.comments;
+				}
+				localStorage.setItem("apartments",  JSON.stringify(apartments));
+			})
 		}
 		
 	}

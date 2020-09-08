@@ -3,15 +3,15 @@ package beans;
 public class Comment {
 
 	public int id;
-	public Apartment apartment;
+	public int apartment;
 	public User guest;
 	public String text;
 	public double grade;
-	public Boolean isApproved;
+	public Boolean isApproved = true;
 	
 	public Comment() {}
 	
-	public Comment(int id, Apartment apartment, User guest, String text, double grade, Boolean approved) {
+	public Comment(int id, int apartment, User guest, String text, double grade, Boolean approved) {
 		super();
 		this.id = id;
 		this.apartment = apartment;
@@ -39,11 +39,11 @@ public class Comment {
 		this.isApproved = isApproved;
 	}
 
-	public Apartment getApartment() {
+	public int getApartment() {
 		return apartment;
 	}
 
-	public void setApartment(Apartment apartment) {
+	public void setApartment(int apartment) {
 		this.apartment = apartment;
 	}
 
