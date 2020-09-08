@@ -4,15 +4,24 @@ Vue.component('search', {
             message : "",
             apartements : !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {},
             data : {},
-            disp : "none",
-            disp1 : "inline"
+            disp : !!localStorage.getItem("apartments") ? "inline" : "none",
+            disp1 : "inline",
+            sort : "desc",
+            amenities : {},
+            selectedAmenities : [],
+            typeOf : {}
         }
     },
     mounted() {
-    	if(this.apartements.length != 0){
+    	if(this.apartements.length != 0 && this.apartements.length != undefined){
     		this.disp = "inline";
     		this.disp1 = "none";
     	}
+    	axios
+        .get('rest/amenityService/getAmenities')
+        .then(response =>
+             {this.amenities = response.data}
+        );
     },
     
     
@@ -42,22 +51,30 @@ Vue.component('search', {
     	<div class="filter-div">
     		<div style="display : flex; white-space: nowrap;">
     			<p style="margin-top: 5% ; margin-right : 3%"> <b> Sortiraj po ceni </b> </p>
-    			<button  class="btn btn-primary"> 
+    			<button v-on:click="sortCall()"  class="btn btn-primary"> 
     				<!--img width="50px" height="40px" src="https://img.favpng.com/0/11/14/computer-icons-sorting-algorithm-download-font-awesome-png-favpng-TgpcVDhbLgfA4TBAHKXU21VH6.jpg" /-->
-    				Proba
+    				Sortiraj
     			</button>
     		</div>
     		<div>
-    			<select  class="browser-default custom-select" id="type">
-    				<option selected>Odaberite tip apartmana</option>
-    				<option value="Apartman" > Apartman </option>
-    				<option value="Hotel" > Hotel </option>
+    			<select @change="showType()" class="browser-default custom-select" id="type" v-model="typeOf">
+    				<option value="All">Prikazi sve</option>
+    				<option value="Apartment" > Apartman </option>
+    				<option value="Room" > Soba </option>
     			</select>
     		</div>
     		<div class="dropdown">
-    			<button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			<button  class="btn custom-select dropdown-toggle" style="opacity : 1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     				Izaberite dodatke
     			</button>
+    			 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    				 <div class="form-check" >
+					  	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
+					  	       <input  class="form-check-input"  @change="checked()" style="margin-left : 1%" type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
+					    	   <label class="form-check-label" style="font-size : 15px; margin-left : 15%"> {{a.name}} </label>
+					      </div>
+					</div>
+    			</div>
     		</div>
     	</div>
     	
@@ -112,7 +129,45 @@ methods : {
 	sendData : function(apartment) {
 		localStorage.setItem("apartment",  JSON.stringify(apartment));
 		location.replace('#/ad');
+	},
+	
+	sortCall : function(){
+		if(this.sort == "desc"){
+			this.apartements.sort((a,b) => (a.pricePerNight > b.pricePerNight) ? -1 : 1);
+			this.sort = "asc";
+		}else{ 
+			this.apartements.sort((a,b) => (a.pricePerNight > b.pricePerNight) ? 1 : -1);
+			this.sort = "desc";
+		}
+	},
+	
+	showType : function() {
+		if(this.typeOf == "Apartment"){
+			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
+			this.apartements = this.apartements.filter(obj => {return obj.type == "Apartment"});
+		}else if(this.typeOf == "Room"){
+			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
+			this.apartements = this.apartements.filter(obj => {return obj.type == "Room"});
+		}else {
+			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
+		}
+		
+	},
+	
+	checked : function () {
+		console.log(this.selectedAmenities);
+		this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
+		this.apartements = this.apartements.filter(obj => {
+			for(var a of this.selectedAmenities){
+				if(!obj.amenities.some(am => am.name === a.name)){
+					return false;
+				}
+			}
+			return true;
+		})
 	}
+	
+	
     
 }
 

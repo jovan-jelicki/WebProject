@@ -18,7 +18,7 @@
     "datesForRenting": [],
     "freePeriods": [],
     "comments": [],
-    "pricePerNight": 65.0,
+    "pricePerNight": 35.0,
     "checkIn": "2",
     "checkOut": "12",
     "status": "Active",
@@ -46,7 +46,7 @@
   {
     "id": 0,
     "name": "Adice",
-    "type": "Apartment",
+    "type": "Room",
     "numberOfRooms": 9,
     "numberOfGuests": 9,
     "location": {
@@ -62,7 +62,7 @@
     "datesForRenting": [],
     "freePeriods": [],
     "comments": [],
-    "pricePerNight": 65.0,
+    "pricePerNight": 45.0,
     "checkIn": "1",
     "checkOut": "12",
     "status": "Active",
@@ -106,7 +106,7 @@
     "datesForRenting": [],
     "freePeriods": [],
     "comments": [],
-    "pricePerNight": 65.0,
+    "pricePerNight": 25.0,
     "checkIn": "8",
     "checkOut": "12",
     "status": "Active",
@@ -133,7 +133,7 @@
   {
     "id": 0,
     "name": "Adice",
-    "type": "Apartment",
+    "type": "Room",
     "numberOfRooms": 2,
     "numberOfGuests": 6,
     "location": {
