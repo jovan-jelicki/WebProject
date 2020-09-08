@@ -20,10 +20,10 @@ public class Apartment {
 	public double pricePerNight;
 	public String checkIn ="2PM";
 	public String checkOut = "10PM";
-	public ApartmentStatus status;
+	public ApartmentStatus status = ApartmentStatus.NonActive;
 	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-	public Boolean deleted;
+	public Boolean deleted = false;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
 			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
