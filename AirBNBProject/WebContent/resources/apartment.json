@@ -89,7 +89,36 @@
     },
     "datesForRenting": [],
     "freePeriods": [],
-    "comments": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "Ostavi komentar",
+        "grade": 4.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "Blabla",
+        "grade": 4.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "Odlican smestaj!",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "Super!",
+        "grade": 4.0,
+        "isApproved": true
+      }
+    ],
     "pricePerNight": 45.0,
     "checkIn": "1",
     "checkOut": "12",

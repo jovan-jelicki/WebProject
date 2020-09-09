@@ -1,10 +1,26 @@
+function getAvgGrade(List){
+	var grades = 0;
+	for(comm of List){
+		grades += comm.grade;
+	}
+	return Math.round((grades/List.length) * 10) / 10;
+}
+
+
 Vue.component('apartment-details', {
 	data : function () {
 		return  {
 			apartment : !!localStorage.getItem("apartment") ? JSON.parse(localStorage.getItem("apartment")) : {},
-			comForm : "none"
+			comForm : "none",
+			grade : "5",
+			avgGrade : {}
 		}
 	},
+	mounted() {
+		this.avgGrade = getAvgGrade(this.apartment.comments);
+	},
+	
+	
 	template: `
 	<div>
 		</br>
@@ -22,12 +38,16 @@ Vue.component('apartment-details', {
 				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg">
 			</div>
 			<div style="margin-right: 5%; margin-left : 5%">
+				<p > <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
+				
 				<p class="card-text" style="font-family: Arial, Helvetica, sans-serif;"> </br> <b> Lokacija : </b> {{apartment.location.adress.street}} {{apartment.location.adress.numberOfStreet}}, {{apartment.location.adress.city}} {{apartment.location.adress.postNumber}} </br>		 	
 	    			<b> Geografska sirina i duzina : </b> {{apartment.location.latitude}} {{apartment.location.longitude}} </br>
 	    			<b> Cena po noci : </b> {{apartment.pricePerNight}}
 	    		</p>
+	    		
 	    		<!--Opis apartmana-->
 	    		<p 	style="word-wrap: break-word;"> "AAAAAAAAAAA AaaaaAAAAAAAAAAAA AAAAAAAAAAAAAAAA AAAAAA AAAAAAAAAAAAAA a    aaaaaa aaaaa aaaaa aaaaa aaaa"</p>
+			
 			</div>
 		</div>
 		
@@ -58,6 +78,26 @@ Vue.component('apartment-details', {
 		  		</div>
 		  	<button id="buttonComment" class="btn btn-primary" v-on:click="commentForm()"> Ostavi komentar </button>
 			<div class="form-group" v-bind:style="{display : comForm}">
+				<div style="display : inline" >
+					<p style="float : left" > Ocenite smestaj:  </p>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input v-model="grade" type="radio" id="1" name="grade" value="1">
+								<label style="margin : 5; font-size: 100%" >1</label><br>
+								<input v-model="grade" type="radio" id="2" name="grade" value="2">
+								<label style="margin : 5; font-size: 100%">2</label><br>
+							  	<input v-model="grade" type="radio" id="3" name="grade" value="3">
+								<label style="margin : 5; font-size: 100%">3</label><br>
+								<input v-model="grade"  type="radio" id="4" name="grade" value="4">
+								<label style="margin : 5; font-size: 100%">4</label><br>
+								<input v-model="grade"  type="radio" id="5" name="grade" value="5" checked>
+								<label style="margin : 5; font-size: 100%">5</label><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<textarea class="form-control" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
 				<br>
 				<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
@@ -75,11 +115,13 @@ Vue.component('apartment-details', {
 		commentForm : function() {
 			this.comForm = "inline";
 			buttonComment.style.display = "none";
+			console.log(this.grade);
 		},
 		leaveComment : function () {
 			this.comForm = "none";
 			buttonComment.style.display = "inline";
-			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : "4"});
+			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : this.grade});
+			console.log(this.grade);
 			axios
 			.post("rest/apartmentService/edit", this.apartment)
 			.then(response => {
@@ -90,6 +132,8 @@ Vue.component('apartment-details', {
 						a.comments = this.apartment.comments;
 				}
 				localStorage.setItem("apartments",  JSON.stringify(apartments));
+				localStorage.setItem("apartment", JSON.stringify(this.apartment));
+				this.avgGrade = getAvgGrade(this.apartment.comments);
 			})
 		}
 		

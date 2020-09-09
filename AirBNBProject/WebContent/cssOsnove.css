@@ -49,6 +49,7 @@
 
         label{
             font-size: 150%;
+            
         }
         
         h1 {
@@ -76,6 +77,7 @@
   		float: left;
   		
 		}
+		
 
 		.row::after {
 		  content: "";
