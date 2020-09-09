@@ -144,7 +144,6 @@ Vue.component('apartment-details', {
 		},
 		editApartment: function(){
 			location.replace('#/ea');
-
 		},
 		
 	}
