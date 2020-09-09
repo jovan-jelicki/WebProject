@@ -44,20 +44,39 @@ Vue.component('apartment-details', {
 				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg">
 			</div>
 			<div style="margin-right: 5%; margin-left : 5%">
-				<p > <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
+				<p v-if="avgGrade"> <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
 				
 				<p class="card-text" style="font-family: Arial, Helvetica, sans-serif;"> </br> <b> Lokacija : </b> {{apartment.location.adress.street}} {{apartment.location.adress.numberOfStreet}}, {{apartment.location.adress.city}} {{apartment.location.adress.postNumber}} </br>		 	
 	    			<b> Geografska sirina i duzina : </b> {{apartment.location.latitude}} {{apartment.location.longitude}} </br>
-	    			<b> Cena po noci : </b> {{apartment.pricePerNight}}
 	    		</p>
 	    		
 	    		<!--Opis apartmana-->
-	    		<p 	style="word-wrap: break-word;"> "AAAAAAAAAAA AaaaaAAAAAAAAAAAA AAAAAAAAAAAAAAAA AAAAAA AAAAAAAAAAAAAA a    aaaaaa aaaaa aaaaa aaaaa aaaa"</p>
+	    		<p 	style="word-wrap: break-word;"> {{apartment.note}}</p>
 			
 			</div>
 		</div>
 		
-		<!--<p> Domacin smestaja : {{apartment.host.name}} {{apartment.host.surname}} </p>-->
+		<div class="filter-div" style="background-color : white">
+			<label>  Domacin smestaja : {{apartment.host.name}} {{apartment.host.surname}} </label>
+			<div style="width : 25rem; min-width: max-content" class="card">
+				<h5 class="card-header"> Pogledajte dostupnost </h5>
+				<div class="card-body">
+					<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
+					<hr>
+					<div style="display : flex; margin-left : 3%">
+						<vuejs-datepicker id="date1" :monday-first="true" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
+						<vuejs-datepicker id="date2" :monday-first="true" placeholder="Unesite krajnji datum" format="dd.MM.yyyy" disabled></vuejs-datepicker>
+					</div>
+					<hr>
+					<div style="display : flex">
+						<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
+						<input type="number" style="width: 30%; margin-left: 5%;" />
+					</div>
+					
+					<button> Pretrazi </button>
+				</div>
+			</div>
+		</div>
 		<br>
 		
 		<div class="container">
@@ -146,6 +165,7 @@ Vue.component('apartment-details', {
 			location.replace('#/ea');
 		},
 		
-	}
+	},
+	components : { vuejsDatepicker }
 
 })

@@ -146,6 +146,20 @@
         "text": "Dobar komsiluk",
         "grade": 5.0,
         "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "LEGENDE",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 1,
+        "text": "Vrlo dobar ",
+        "grade": 4.0,
+        "isApproved": true
       }
     ],
     "pricePerNight": 42.0,
