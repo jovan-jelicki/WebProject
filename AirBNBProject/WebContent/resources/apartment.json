@@ -1,119 +1,63 @@
 [
   {
     "id": 0,
-    "name": "Adice",
+    "name": "Klisa",
     "type": "Apartment",
-    "numberOfRooms": 7,
-    "numberOfGuests": 7,
+    "numberOfRooms": 6,
+    "numberOfGuests": 25,
     "location": {
-      "longitude": 19.8412511,
-      "latitude": 45.2591651,
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
       "adress": {
-        "street": "Vuka Karadzica",
-        "numberOfStreet": 11,
-        "city": "Novi Sad",
+        "street": "Misarska",
+        "numberOfStreet": 40,
+        "city": "Novi",
         "postNumber": 21000
       }
     },
-    "datesForRenting": [],
-    "freePeriods": [],
-    "comments": [],
-    "pricePerNight": 35.0,
-    "checkIn": "2",
-    "checkOut": "12",
-    "status": "Active",
-    "amenities": [
+    "datesForRenting": [
       {
-        "id": 1,
-        "name": "Wi-FI",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
-        "deleted": false
-      },
-      {
-        "id": 9,
-        "name": "Kuhinja",
-        "deleted": false
+        "dateFrom": 1599602400000,
+        "dateTo": 1604876400000
       }
     ],
-    "reservations": [],
-    "deleted": false
-  },
-  
-  {
-    "id": 0,
-    "name": "Adice",
-    "type": "Room",
-    "numberOfRooms": 9,
-    "numberOfGuests": 9,
-    "location": {
-      "longitude": 19.8412511,
-      "latitude": 45.2591651,
-      "adress": {
-        "street": "Vuka Karadzica",
-        "numberOfStreet": 11,
-        "city": "Novi Sad",
-        "postNumber": 21000
-      }
-    },
-    "datesForRenting": [],
     "freePeriods": [],
-    "comments": [],
-    "pricePerNight": 45.0,
-    "checkIn": "1",
-    "checkOut": "12",
-    "status": "Active",
-    "amenities": [
-      {
-        "id": 1,
-        "name": "Wi-FI",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
-        "deleted": false
-      },
-      {
-        "id": 9,
-        "name": "Kuhinja",
-        "deleted": false
-      }
-    ],
-    "reservations": [],
-    "deleted": false
-  },
-  
-  {
-    "id": 0,
-    "name": "Adice",
-    "type": "Apartment",
-    "numberOfRooms": 1,
-    "numberOfGuests": 1,
-    "location": {
-      "longitude": 19.8412511,
-      "latitude": 45.2591651,
-      "adress": {
-        "street": "Vuka Karadzica",
-        "numberOfStreet": 11,
-        "city": "Novi Sad",
-        "postNumber": 21000
-      }
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
     },
-    "datesForRenting": [],
-    "freePeriods": [],
     "comments": [],
     "pricePerNight": 25.0,
-    "checkIn": "8",
+    "checkIn": "12",
     "checkOut": "12",
-    "status": "Active",
+    "status": "NonActive",
     "amenities": [
       {
         "id": 1,
         "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
         "deleted": false
       },
       {
@@ -125,38 +69,60 @@
         "id": 9,
         "name": "Kuhinja",
         "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
       }
     ],
     "reservations": [],
     "deleted": false
   },
   {
-    "id": 0,
+    "id": 1,
     "name": "Adice",
     "type": "Room",
     "numberOfRooms": 2,
-    "numberOfGuests": 6,
+    "numberOfGuests": 4,
     "location": {
-      "longitude": 19.8412511,
-      "latitude": 45.2591651,
+      "longitude": 19.7822521,
+      "latitude": 45.23719490000001,
       "adress": {
-        "street": "Vuka Karadzica",
-        "numberOfStreet": 7,
-        "city": "Novi Sad",
+        "street": "Milenka Serbana",
+        "numberOfStreet": 4,
+        "city": "Novi Sa",
         "postNumber": 21000
       }
     },
-    "datesForRenting": [],
+    "datesForRenting": [
+      {
+        "dateFrom": 1599688800000,
+        "dateTo": 1605913200000
+      }
+    ],
     "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
     "comments": [],
-    "pricePerNight": 10.0,
-    "checkIn": "6",
-    "checkOut": "12",
-    "status": "Active",
+    "pricePerNight": 12.0,
+    "checkIn": "09",
+    "checkOut": "11",
+    "status": "NonActive",
     "amenities": [
       {
-        "id": 1,
-        "name": "Wi-FI",
+        "id": 2,
+        "name": "Parking",
         "deleted": false
       },
       {
@@ -165,8 +131,217 @@
         "deleted": false
       },
       {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      },
+      {
+        "id": 8,
+        "name": "Zamrzivac",
+        "deleted": false
+      },
+      {
         "id": 9,
         "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 2,
+    "name": "Step town",
+    "type": "Apartment",
+    "numberOfRooms": 4,
+    "numberOfGuests": 15,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 23,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599602400000,
+        "dateTo": 1607209200000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 45.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 6,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
+      },
+      {
+        "id": 11,
+        "name": "Bazen",
+        "deleted": false
+      },
+      {
+        "id": 8,
+        "name": "Zamrzivac",
+        "deleted": false
+      },
+      {
+        "id": 9,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 3,
+    "name": "sss",
+    "type": "Apartment",
+    "numberOfRooms": 9,
+    "numberOfGuests": 25,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 22,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599688800000,
+        "dateTo": 1600984800000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 34.0,
+    "checkIn": "14",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 4,
+    "name": "Gazela",
+    "type": "Apartment",
+    "numberOfRooms": 3,
+    "numberOfGuests": 21,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "street": "Misarska",
+        "numberOfStreet": 45,
+        "city": "novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1601503200000,
+        "dateTo": 1606604400000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 15.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
         "deleted": false
       },
       {
@@ -178,9 +353,335 @@
         "id": 6,
         "name": "TV",
         "deleted": false
+      },
+      {
+        "id": 9,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
       }
     ],
     "reservations": [],
     "deleted": false
+  },
+  {
+    "id": 5,
+    "name": "Oktopod",
+    "type": "Room",
+    "numberOfRooms": 1,
+    "numberOfGuests": 2,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 22,
+        "city": "Novi",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1604703600000,
+        "dateTo": 1609974000000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 12.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 6,
+    "name": "Dijana",
+    "type": "Apartment",
+    "numberOfRooms": 3,
+    "numberOfGuests": 15,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "street": "Misarska",
+        "numberOfStreet": 4,
+        "city": "Novi Sa",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599688800000,
+        "dateTo": 1601157600000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 33.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
+      },
+      {
+        "id": 11,
+        "name": "Bazen",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 7,
+    "name": "Donka",
+    "type": "Apartment",
+    "numberOfRooms": 6,
+    "numberOfGuests": 36,
+    "location": {
+      "longitude": 19.8484674,
+      "latitude": 45.2492722,
+      "adress": {
+        "street": "Strazilovska",
+        "numberOfStreet": 12,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599688800000,
+        "dateTo": 1620943200000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 12.0,
+    "checkIn": "07",
+    "checkOut": "07",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 6,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
+      },
+      {
+        "id": 11,
+        "name": "Bazen",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 8,
+    "name": "Strahinja",
+    "type": "Apartment",
+    "numberOfRooms": 9,
+    "numberOfGuests": 18,
+    "location": {
+      "longitude": 19.8498675,
+      "latitude": 45.2604963,
+      "adress": {
+        "street": "Kosovska",
+        "numberOfStreet": 78,
+        "city": "Novi Sd",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1609282800000,
+        "dateTo": 1609542000000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 12.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      },
+      {
+        "id": 6,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Dvoriste",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 9,
+    "name": "Jelicki",
+    "type": "Apartment",
+    "numberOfRooms": 14,
+    "numberOfGuests": 25,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "street": "Misarska",
+        "numberOfStreet": 40,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1601503200000,
+        "dateTo": 1619820000000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 12.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Pogled na prirodu, svez vazduh, prijatan komsiluk, ljubazni domacini."
   }
 ]

@@ -33,7 +33,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal" v-if="isAuthorizedPar && user.role == 'Admin'">Registracija domacina</button>
        
         <!--Dugmici za hosta i admina-->
-        <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role != 'Guest'">Pregled apartmana</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='#/cha';" v-if="isAuthorizedPar && user.role != 'Guest'" >Pregled apartmana</button>
 
         <!--Dugmici za hosta-->
         <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Host'" >Pregled gostiju</button>
@@ -113,6 +113,7 @@
     <script src="app/registration.js"></script>
     <script src="app/userSettings.js"></script>
     <script src="app/newApartment.js"></script>
+    <script src="app/editApartment.js"></script	>
     <script src="app/amenities.js"></script> 
     <script src="app/search.js"></script> 
     <script src="app/showUsers.js"></script>

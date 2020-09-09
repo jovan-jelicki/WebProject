@@ -100,6 +100,7 @@ Vue.component('edit-amenity', {
    	    				infoErr.style.display="none";
    	    				infoSuccess.style.display="inline";
    	    				location.reload();
+
    	   	        	}
    	   	        });
    	   	        }

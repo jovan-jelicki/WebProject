@@ -24,11 +24,12 @@ public class Apartment {
 	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public Boolean deleted = false;
+	public String note;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
 			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
-			ArrayList<Reservation> reservations) {
+			ArrayList<Reservation> reservations, String note) {
 		super();
 		this.id = id;
 		this.name=name;
@@ -47,10 +48,20 @@ public class Apartment {
 		this.amenities = amenities;
 		this.reservations = reservations;
 		this.deleted = false;
+		this.note=note;
 	}
+	
 
 	
 	
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	public String getName() {
 		return name;
 	}

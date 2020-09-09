@@ -1,33 +1,32 @@
-Vue.component('new-apartment', {
+Vue.component('edit-apartment', {
     data : function(){
         return {
+        	apartment : !!localStorage.getItem("apartment") ? JSON.parse(localStorage.getItem("apartment")) : {},
             user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
-            apartment: {},
-            adress:{},
-            amenities:{},
-            selectedAmenities:[],
-            country:"",
-            period:[],
-	        dateTo:'',
-	        dateFrom:'',
-	        disabledDates: {to: new Date()} // Disable all dates up to specific date
+             adress:{},
+             amenities:{},
+             selectedAmenities:[],
+             country:"",
+             period:[],
+             dateTo:'',
+             dateFrom:'',
+             backup:[],
+             disabledDates: {to: new Date()} // Disable all dates up to specific date
 
-        }
-    },  
-   
-    mounted() {
-        axios
-        .get('rest/amenityService/getAmenities')
-        .then(response =>
-             {this.amenities = response.data}
-        );
+                        }
+                    },  
+                   
+   mounted() {
+       axios
+       .get('rest/amenityService/getAmenities')
+       .then(response =>
+       {this.amenities = response.data}
+     );
     },
-	  
-    template : 
-    `  
-  <form>
+  template : `
+     <form>
       <br>
-      <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Dodavanje novog apartmana</h1>
+      <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Izmena apartmana</h1>
       <hr>
    <div class="col-md-12 personal-info">
 
@@ -173,10 +172,9 @@ Vue.component('new-apartment', {
 	  <button id="addNew" type="button" class="btn btn-primary"  style = "display: none" v-on:click="goBack" >Povratak na dodavanje novog</button>
 
    </div>
-   </form>
-    `, 
-     
+   </form>`
     
+    ,
     methods:{
     	geocodeAddress: function(){
     		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.country;
@@ -285,4 +283,5 @@ Vue.component('new-apartment', {
     },
     components : { vuejsDatepicker },
 
-    })
+    
+})
