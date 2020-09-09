@@ -1,32 +1,37 @@
-Vue.component('new-apartment', {
+Vue.component('edit-apartment', {
     data : function(){
         return {
+        	apartment : !!localStorage.getItem("apartment") ? JSON.parse(localStorage.getItem("apartment")) : {},
             user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
-            apartment: {},
-            adress:{},
-            amenities:{},
-            selectedAmenities:[],
-            period:[],
-	        dateTo:'',
-	        dateFrom:'',
-	        disabledDates: {to: new Date()} // Disable all dates up to specific date
-
-        }
-    },  
-   
-    mounted() {
-        axios
-        .get('rest/amenityService/getAmenities')
-        .then(response =>
-             {this.amenities = response.data}
-        );
+             adress:{},
+             amenities:{},
+             selectedAmenities:[],
+             country:"",
+             period:[],
+             dateTo:'',
+             dateFrom:'',
+             backup:[],
+             disabledDates: {to: new Date()}, // Disable all dates up to specific date
+             dateParse1:new Date(),
+             }
+             },  
+                   
+   mounted() {
+       axios
+       .get('rest/amenityService/getAmenities')
+       .then(response =>
+       {this.amenities = response.data
+    	   
+    	//   var parsed = moment(new Date(this.apartment.datesForRenting[0].dateFrom));
+      // this.dateParse1=parsed.format('DD.MM.YYYY');
+       //    this.dateParse1=new Date(this.apartment.datesForRenting[0].dateFrom, 'DD.MM.YYYY');
+}
+     );
     },
-	  
-    template : 
-    `  
-  <form>
+  template : `
+     <form>
       <br>
-      <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Dodavanje novog apartmana</h1>
+      <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Izmena apartmana</h1>
       <hr>
    <div class="col-md-12 personal-info">
 
@@ -69,34 +74,34 @@ Vue.component('new-apartment', {
 	    <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Drzava:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="country" type="text"  v-model="adress.country">
+              <input class="form-control" id="country" type="text"  v-model="apartment.location.adress.country">
 	    </div> 
 	  </div>
 
 	   <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label " >Grad:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="city" type="text" v-model="adress.city">
+              <input class="form-control" id="city" type="text" v-model="apartment.location.adress.city">
 	    </div>
 	  </div>
 	  
 	   <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label"  >Ulica:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="street" type="text" v-model="adress.street">
+              <input class="form-control" id="street" type="text" v-model="apartment.location.adress.street">
 	    </div>
 	  </div>
 	   <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Broj:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="numOfStreet" type="number" v-model="adress.numberOfStreet">
+              <input class="form-control" id="numOfStreet" type="number" v-model="apartment.location.adress.numberOfStreet">
 	    </div>
 	  </div>
 	  
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Postanski broj:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="postNum" type="number" v-model="adress.postNumber">
+              <input class="form-control" id="postNum" type="number" v-model="apartment.location.adress.postNumber">
 	    </div>
 	  </div>
 
@@ -121,8 +126,6 @@ Vue.component('new-apartment', {
          <input class="form-control" id="time2" type="text"  v-model="apartment.checkOut">
 	    </div>
 	  </div>
-	  
-	    
 	
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
@@ -139,6 +142,13 @@ Vue.component('new-apartment', {
 	   </div>
 	    </div>
 	  </div>
+	  
+	  <div class="form-group row">
+	    <label class="col-sm-2 col-form-label ">blaassssssssssssssssss:</label>
+	    <div class="col-sm-10">
+	    <label class="col-sm-2 col-form-label ">{{this.apartment.datesForRenting[0].dateFrom | dateFormat('DD.MM.YYYY')}} </label>
+	    </div>
+	  </div> 
      
      <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
@@ -174,10 +184,9 @@ Vue.component('new-apartment', {
 	  <button id="addNew" type="button" class="btn btn-primary"  style = "display: none" v-on:click="goBack" >Povratak na dodavanje novog</button>
 
    </div>
-   </form>
-    `, 
-     
+   </form>`
     
+    ,
     methods:{
     	geocodeAddress: function(){
     		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
@@ -208,7 +217,7 @@ Vue.component('new-apartment', {
     	},
 
     	addApartment: function(){
-    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.adress.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
+    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
     				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.adress.numberOfStreet==undefined || 
     				this.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined ){
     			infoSuccess.style.display="none";
@@ -285,5 +294,13 @@ Vue.component('new-apartment', {
     
     },
     components : { vuejsDatepicker },
+    
+    filters: {
+    	dateFormat: function (value, format) {
+    		var parsed = moment(value);
+    		return parsed.format(format);
+    	}
+   	}
 
-    })
+    
+})

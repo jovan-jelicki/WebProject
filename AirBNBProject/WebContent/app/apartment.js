@@ -10,6 +10,7 @@ function getAvgGrade(List){
 Vue.component('apartment-details', {
 	data : function () {
 		return  {
+			user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
 			apartment : !!localStorage.getItem("apartment") ? JSON.parse(localStorage.getItem("apartment")) : {},
 			comForm : "none",
 			grade : "5",
@@ -29,6 +30,11 @@ Vue.component('apartment-details', {
 		<div style="display : inline">
 			<h3 style="float : left; margin-left : 20%">Smestaj {{apartment.name}}</h3>
 			<button class="btn btn-primary" v-on:click="backToSearch()" style="float: right; margin-right : 10%" >Povratak na pretragu </button>
+		</div>
+		<div>
+		  <template v-if="this.user.name!=undefined">
+		  <button class="btn btn-primary" v-on:click="editApartment()" style="float: right; margin-right : 10%" >Izmeni apartman</button>
+			</template>
 		</div>
 		<br>
 		</br>
@@ -135,7 +141,11 @@ Vue.component('apartment-details', {
 				localStorage.setItem("apartment", JSON.stringify(this.apartment));
 				this.avgGrade = getAvgGrade(this.apartment.comments);
 			})
-		}
+		},
+		editApartment: function(){
+			location.replace('#/ea');
+
+		},
 		
 	}
 

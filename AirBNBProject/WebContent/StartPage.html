@@ -33,7 +33,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal" v-if="isAuthorizedPar && user.role == 'Admin'">Registracija domacina</button>
        
         <!--Dugmici za hosta i admina-->
-        <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role != 'Guest'">Pregled apartmana</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='#/va';" v-if="isAuthorizedPar && user.role != 'Guest'" >Pregled apartmana</button>
 
         <!--Dugmici za hosta-->
         <button type="button" class="btn btn-primary" v-if="isAuthorizedPar && user.role == 'Host'" >Pregled gostiju</button>
@@ -108,14 +108,19 @@
 
     <script src="js/vue.js"></script>
     <script src="js/vue-router.js"></script>
+    <script src="js/vuejs-datepicker.min.js"></script>
     <script src="js/axios.js"></script>
     <script src="app/registration.js"></script>
     <script src="app/userSettings.js"></script>
     <script src="app/newApartment.js"></script>
+    <script src="app/editApartment.js"></script	>
+    <script src="app/apartmentsView.js"></script	>
     <script src="app/amenities.js"></script> 
     <script src="app/search.js"></script> 
     <script src="app/showUsers.js"></script>
     <script src="app/apartment.js"></script>
+    	<script src="js/moment.min.js"></script>
+    
     <script src="app/app.js"></script>
 
 

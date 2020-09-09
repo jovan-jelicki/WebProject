@@ -2,6 +2,7 @@ package beans;
 
 public class Adress {
 
+	public String country;
 	public String street;
 	public int numberOfStreet;
 	public String city;
@@ -9,14 +10,23 @@ public class Adress {
 	
 	public Adress() {}
 	
-	public Adress(String street, int numberOfStreet, String city, int postNumber) {
+	public Adress(String country, String street, int numberOfStreet, String city, int postNumber) {
 		super();
+		this.country=country;
 		this.street = street;
 		this.numberOfStreet = numberOfStreet;
 		this.city = city;
 		this.postNumber = postNumber;
 	}
 	
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getStreet() {
 		return street;

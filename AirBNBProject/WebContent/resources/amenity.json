@@ -48,5 +48,15 @@
     "id": 9,
     "name": "Kuhinja",
     "deleted": false
+  },
+  {
+    "id": 10,
+    "name": "Dvoriste",
+    "deleted": false
+  },
+  {
+    "id": 11,
+    "name": "Bazen",
+    "deleted": false
   }
 ]

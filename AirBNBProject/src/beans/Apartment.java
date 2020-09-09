@@ -11,10 +11,11 @@ public class Apartment {
 	public int numberOfRooms;
 	public int numberOfGuests;
 	public Location location;
-	public ArrayList<Date> datesForRenting = new ArrayList<Date>();
+	public ArrayList<Period> datesForRenting = new ArrayList<Period>();
 	public ArrayList<Date> freePeriods = new ArrayList<Date>();
 	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
+	 
 	//pikcure
 	public double pricePerNight;
 	public String checkIn ="2PM";
@@ -23,11 +24,12 @@ public class Apartment {
 	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public Boolean deleted = false;
+	public String note;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
-			ArrayList<Date> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
+			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
-			ArrayList<Reservation> reservations) {
+			ArrayList<Reservation> reservations, String note) {
 		super();
 		this.id = id;
 		this.name=name;
@@ -46,10 +48,20 @@ public class Apartment {
 		this.amenities = amenities;
 		this.reservations = reservations;
 		this.deleted = false;
+		this.note=note;
 	}
+	
 
 	
 	
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -102,11 +114,11 @@ public class Apartment {
 		this.location = location;
 	}
 
-	public ArrayList<Date> getDatesForRenting() {
+	public ArrayList<Period> getDatesForRenting() {
 		return datesForRenting;
 	}
 
-	public void setDatesForRenting(ArrayList<Date> datesForRenting) {
+	public void setDatesForRenting(ArrayList<Period> datesForRenting) {
 		this.datesForRenting = datesForRenting;
 	}
 
