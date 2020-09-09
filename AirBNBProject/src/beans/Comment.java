@@ -19,9 +19,7 @@ public class Comment {
 		this.text = text;
 		this.grade = grade;
 		this.isApproved = approved;
-	}
-	
-	
+	}	
 	
 	public int getId() {
 		return id;

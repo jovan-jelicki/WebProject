@@ -6,7 +6,6 @@ Vue.component('new-apartment', {
             adress:{},
             amenities:{},
             selectedAmenities:[],
-            country:"",
             period:[],
 	        dateTo:'',
 	        dateFrom:'',
@@ -70,7 +69,7 @@ Vue.component('new-apartment', {
 	    <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Drzava:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="country" type="text"  v-model="country">
+              <input class="form-control" id="country" type="text"  v-model="adress.country">
 	    </div> 
 	  </div>
 
@@ -122,6 +121,8 @@ Vue.component('new-apartment', {
          <input class="form-control" id="time2" type="text"  v-model="apartment.checkOut">
 	    </div>
 	  </div>
+	  
+	    
 	
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
@@ -179,7 +180,7 @@ Vue.component('new-apartment', {
     
     methods:{
     	geocodeAddress: function(){
-    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.country;
+    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
     		axios
     		.get('https://maps.googleapis.com/maps/api/geocode/json', {
     			params: {
@@ -207,7 +208,7 @@ Vue.component('new-apartment', {
     	},
 
     	addApartment: function(){
-    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
+    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.adress.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
     				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.adress.numberOfStreet==undefined || 
     				this.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined ){
     			infoSuccess.style.display="none";

@@ -11,16 +11,21 @@ Vue.component('edit-apartment', {
              dateTo:'',
              dateFrom:'',
              backup:[],
-             disabledDates: {to: new Date()} // Disable all dates up to specific date
-
-                        }
-                    },  
+             disabledDates: {to: new Date()}, // Disable all dates up to specific date
+             dateParse1:new Date(),
+             }
+             },  
                    
    mounted() {
        axios
        .get('rest/amenityService/getAmenities')
        .then(response =>
-       {this.amenities = response.data}
+       {this.amenities = response.data
+    	   
+    	//   var parsed = moment(new Date(this.apartment.datesForRenting[0].dateFrom));
+      // this.dateParse1=parsed.format('DD.MM.YYYY');
+       //    this.dateParse1=new Date(this.apartment.datesForRenting[0].dateFrom, 'DD.MM.YYYY');
+}
      );
     },
   template : `
@@ -69,34 +74,34 @@ Vue.component('edit-apartment', {
 	    <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Drzava:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="country" type="text"  v-model="country">
+              <input class="form-control" id="country" type="text"  v-model="apartment.location.adress.country">
 	    </div> 
 	  </div>
 
 	   <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label " >Grad:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="city" type="text" v-model="adress.city">
+              <input class="form-control" id="city" type="text" v-model="apartment.location.adress.city">
 	    </div>
 	  </div>
 	  
 	   <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label"  >Ulica:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="street" type="text" v-model="adress.street">
+              <input class="form-control" id="street" type="text" v-model="apartment.location.adress.street">
 	    </div>
 	  </div>
 	   <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Broj:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="numOfStreet" type="number" v-model="adress.numberOfStreet">
+              <input class="form-control" id="numOfStreet" type="number" v-model="apartment.location.adress.numberOfStreet">
 	    </div>
 	  </div>
 	  
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Postanski broj:</label>
 	    <div class="col-sm-10">
-              <input class="form-control" id="postNum" type="number" v-model="adress.postNumber">
+              <input class="form-control" id="postNum" type="number" v-model="apartment.location.adress.postNumber">
 	    </div>
 	  </div>
 
@@ -137,6 +142,13 @@ Vue.component('edit-apartment', {
 	   </div>
 	    </div>
 	  </div>
+	  
+	  <div class="form-group row">
+	    <label class="col-sm-2 col-form-label ">blaassssssssssssssssss:</label>
+	    <div class="col-sm-10">
+	    <label class="col-sm-2 col-form-label ">{{this.apartment.datesForRenting[0].dateFrom | dateFormat('DD.MM.YYYY')}} </label>
+	    </div>
+	  </div> 
      
      <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
@@ -177,7 +189,7 @@ Vue.component('edit-apartment', {
     ,
     methods:{
     	geocodeAddress: function(){
-    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.country;
+    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
     		axios
     		.get('https://maps.googleapis.com/maps/api/geocode/json', {
     			params: {
@@ -282,6 +294,13 @@ Vue.component('edit-apartment', {
     
     },
     components : { vuejsDatepicker },
+    
+    filters: {
+    	dateFormat: function (value, format) {
+    		var parsed = moment(value);
+    		return parsed.format(format);
+    	}
+   	}
 
     
 })
