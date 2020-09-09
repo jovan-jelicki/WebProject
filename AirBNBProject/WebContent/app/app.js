@@ -47,7 +47,7 @@ var logInJs = new Vue ({
                         $('#modalLogIn').modal('hide');
                        // console.log(this.user.role);
                         this.message="";
-                        this.isAuthorized();
+                        this.isAuthorizedPar = true;
                         if(this.user.role != "Guest"){
                         	 location.replace('#/us');
                         }
@@ -62,11 +62,6 @@ var logInJs = new Vue ({
             localStorage.removeItem("user");
             location.replace('#/');
             location.reload();
-        },
-
-        isAuthorized : function(){
-            console.log("aaaaaaa" +localStorage.getItem("user"));
-            return !!localStorage.getItem("user") ? this.isAuthorizedPar = true :  this.isAuthorizedPar = false;
         }
 
     }
