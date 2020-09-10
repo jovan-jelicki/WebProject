@@ -9,7 +9,7 @@ Vue.component('new-apartment', {
             period:[],
 	        dateTo:'',
 	        dateFrom:'',
-	        disabledDates: {to: new Date()}, // Disable all dates up to specific date
+	        disabledDates: {}, // Disable all dates up to specific date
             pom:[]
         }
     },  
@@ -18,7 +18,18 @@ Vue.component('new-apartment', {
         axios
         .get('rest/amenityService/getAmenities')
         .then(response =>
-             {this.amenities = response.data}
+             {this.amenities = response.data;
+             let ranges=[];
+	    		if(this.apartment.datesForRenting!=undefined){
+					for(let dates of this.apartment.datesForRenting){
+						ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+					}
+					this.disabledDates["ranges"]=ranges;
+					this.disabledDates["to"]=new Date();
+	    		}else{
+	    			this.disabledDates["to"]=new Date();
+	    		}
+             }
         );
     },
 	  
@@ -122,8 +133,15 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	  
+	  <div class="form-group row"  id="pomoc">
+	    <label class="col-sm-2 col-form-label ">Klikom na dugme izaberite datume za izdavanje</label>
+	    <div class="col-sm-10">
+	  <button id="datesButton" type="button" class="btn btn-primary"   v-on:click="display()" >Dodaj periode</button>
+	    </div>
+	  </div>
+	  
 	    
-	
+	<div id="dates" style = "display: none" >
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
 	    <div class="col-sm-10">
@@ -133,18 +151,27 @@ Vue.component('new-apartment', {
 
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje do:</label>
-	    <div class="col-sm-10">
-	    <div id="app">
+	    <div class="col-sm-10" >
 			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
-	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj jos perioda za izdavanje</button>
-
-	   </div>
+	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj period</button>
+			<br>
+			<div id="uputstvo"class="alert alert-warning alert-dismissible fade show" role="alert">
+			  Potvrdite dodavanje perioda pritiskom na dugme "Dodaj period". Mozete dodavati vise perioda jedan za drugim.
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
 	    </div>
 	  </div>
-     
+	</div>
+	
+     <div id="prikazi" class="alert alert-success" role="alert" style = "display: none" v-for="d in apartment.datesForRenting"> Uspesno ste dodali period od {{d.datesForRenting.period.dateFrom | dateFormat('DD.MM.YYYY')}} do {{d.datesForRenting.period.dateTo | dateFormat('DD.MM.YYYY') }} 
+	    </div> 	
+	
+	
      <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
-    	</div>
+    </div>
 
     <div class="col-md-2 personal-info">
   	  <div class="form-check"  >
@@ -220,14 +247,22 @@ Vue.component('new-apartment', {
 				let dateTo1 = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime();
 				let period1={dateFrom:dateFrom1, dateTo:dateTo1}
 				this.pom.push(period1);
-				
-				//this.pom.push({ dateFrom: dateFrom1 , dateTo: dateTo1 });
-
 				this.apartment.datesForRenting=this.pom;
+				
+				let ranges=[];
+	    		if(this.apartment.datesForRenting!=undefined){
+					for(let dates of this.apartment.datesForRenting){
+						ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+					}
+					this.disabledDates["ranges"]=ranges;
+					this.disabledDates["to"]=new Date();
+	    		}else{
+	    			this.disabledDates["to"]=new Date();
+	    		}
+				
 			}
 
     	},
-
     	addApartment: function(){
     		if(this.apartment.type==undefined || this.apartment.name==undefined || this.adress.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
     				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.adress.numberOfStreet==undefined || 
@@ -301,6 +336,22 @@ Vue.component('new-apartment', {
     	goBack: function(){
     		
 			location.reload();
+    	},
+    	display: function(){
+    		pomoc.style.display="none";
+    		dates.style.display="inline";
+    		
+    		let ranges=[];
+    		if(this.apartment.datesForRenting!=undefined){
+				for(let dates of this.apartment.datesForRenting){
+					ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+				}
+				this.disabledDates["ranges"]=ranges;
+				this.disabledDates["to"]=new Date();
+    		}else{
+    			this.disabledDates["to"]=new Date();
+    		}
+			
     	}
     
     

@@ -133,7 +133,6 @@ Vue.component('apartment-details', {
     </div>
   </div>
 </div>
-	
 	</div>
 	
 	`,
@@ -173,9 +172,11 @@ Vue.component('apartment-details', {
 			.post("rest/apartmentService/delete", this.apartment)
 			.then(response => {
 				this.apartment = response.data;
+				 $('#exampleModalCenter').modal('hide');
+
+				location.replace('#/va');
 
 				})
-				location.replace('#/va');
 		},
 		
 	}

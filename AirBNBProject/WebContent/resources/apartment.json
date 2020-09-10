@@ -103,7 +103,7 @@
     "status": "Active",
     "amenities": [],
     "reservations": [],
-    "deleted": false,
+    "deleted": true,
     "note": "Pogled na prirodu, svez vazduh, prijatan komsiluk, ljubazni domacini."
   },
   {
@@ -190,7 +190,7 @@
       }
     ],
     "reservations": [],
-    "deleted": false,
+    "deleted": true,
     "note": "Lep deo grada, bazen u izgradnji. "
   },
   {
@@ -395,7 +395,7 @@
       }
     ],
     "reservations": [],
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 6,
@@ -456,7 +456,7 @@
       }
     ],
     "reservations": [],
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 7,
@@ -507,6 +507,57 @@
       {
         "id": 4,
         "name": "Topla voda",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 8,
+    "name": "ddd",
+    "type": "Apartment",
+    "numberOfRooms": 9,
+    "numberOfGuests": 16,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 2,
+        "city": "Novi Sad",
+        "postNumber": 222
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1598997600000,
+        "dateTo": 1600466400000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 25.0,
+    "checkIn": "13",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 6,
+        "name": "TV",
         "deleted": false
       }
     ],

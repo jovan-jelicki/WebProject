@@ -77,7 +77,7 @@ public class ApartmentService {
 	@GET
 	@Path("/getApartments")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, IOException{
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		return dao.GetAll();
 	}
@@ -87,7 +87,7 @@ public class ApartmentService {
 	@Path("/searchApartments")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getFilteredApartments(SearchDAO parameters) throws JsonIOException, JsonSyntaxException, FileNotFoundException, UnsupportedEncodingException{
+	public List<Apartment> getFilteredApartments(SearchDAO parameters) throws JsonIOException, JsonSyntaxException, IOException{
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		List<Apartment> retVal =  new ArrayList<Apartment>();
 		retVal = dao.GetAll();

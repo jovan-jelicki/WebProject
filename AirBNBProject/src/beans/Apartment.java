@@ -22,7 +22,7 @@ public class Apartment {
 	public String checkIn ="2PM";
 	public String checkOut = "10PM";
 	public ApartmentStatus status = ApartmentStatus.NonActive;
-	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
+	public List<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public Boolean deleted = false;
 	public String note;
@@ -191,11 +191,11 @@ public class Apartment {
 		this.status = status;
 	}
 
-	public ArrayList<Amenity> getAmenities() {
+	public List<Amenity> getAmenities() {
 		return amenities;
 	}
 
-	public void setAmenities(ArrayList<Amenity> amenities) {
+	public void setAmenities(List<Amenity> amenities) {
 		this.amenities = amenities;
 	}
 

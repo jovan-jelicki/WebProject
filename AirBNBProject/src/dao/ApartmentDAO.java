@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +27,8 @@ public class ApartmentDAO {
 	private Gson gson;
 	private String path="";
 	
+	
 	public ApartmentDAO() {
-		this.gson=new GsonBuilder()
-				.setPrettyPrinting()
-				.create();
 	}
 	
 	public ApartmentDAO(String contextPath) {
@@ -45,11 +46,24 @@ public class ApartmentDAO {
 		out.close();
 	}
 
-	public List<Apartment> GetAll() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
-		return gson.fromJson( new JsonReader(new FileReader(path)), new TypeToken<List<Apartment>>(){}.getType());
+
+	
+	public List<Apartment> GetAll() throws JsonSyntaxException, IOException {
+		List<Apartment> list = gson.fromJson( new JsonReader(new FileReader(path)), new TypeToken<List<Apartment>>(){}.getType());
+		List<Apartment> result = new ArrayList<Apartment>();
+		
+		if(list!=null) {
+			for(Apartment a : list) {
+				if(!a.getDeleted())
+					result.add(a);
+			}
+		}
+
+		
+		return result;
 	}
 	
-	public int getMaxId() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
+	public int getMaxId() throws JsonIOException, JsonSyntaxException, IOException {
 		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
 		int maxId=-1;
 		apartments=(ArrayList<Apartment>) GetAll();
@@ -65,7 +79,6 @@ public class ApartmentDAO {
 	}
 
 	public void Create(Apartment apartment) throws IOException {
-		System.out.println(apartment.getCheckIn()+"*************************"+"\n");
 		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
 
 		apartments=(ArrayList<Apartment>) GetAll();
@@ -117,8 +130,14 @@ public class ApartmentDAO {
 		return apartment;
 	}
 	//TODO ove dve metode treba proveriti
-	public void DeleteAmenity(Amenity amenity) throws JsonIOException, JsonSyntaxException, IOException {
-		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
+	public  void DeleteAmenity(Amenity amenity) throws JsonSyntaxException, IOException {
+		System.out.println("usao sammm \n");
+		//ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
+
+		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
+		apartments=(ArrayList<Apartment>) GetAll();
+		System.out.println("usao sammm \n");
+
 		for(Apartment apa : apartments) {
 			ArrayList<Amenity> amenities=(ArrayList<Amenity>) apa.getAmenities();
 			for(Amenity amen: amenities) {
@@ -132,7 +151,7 @@ public class ApartmentDAO {
 		Save(apartments);
 	}
 	
-	public void EditAmenity(Amenity amenity) throws JsonIOException, JsonSyntaxException, IOException {
+	public void EditAmenity(Amenity amenity) throws JsonSyntaxException, IOException {
 		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
 		for(Apartment apa : apartments) {
 			ArrayList<Amenity> amenities=(ArrayList<Amenity>) apa.getAmenities();

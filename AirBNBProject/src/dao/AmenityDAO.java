@@ -22,10 +22,9 @@ public class AmenityDAO {
  
 	private Gson gson;
 	private String path="";
-	private static ApartmentDAO apartmentDao;
+	private static ApartmentDAO apartmentDao = new ApartmentDAO();
 	
-	public AmenityDAO(ApartmentDAO apartmentDao) {
-		this.apartmentDao = apartmentDao;
+	public AmenityDAO() {
 		this.gson=new GsonBuilder()
 				.setPrettyPrinting()
 				.create();

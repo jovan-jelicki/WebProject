@@ -7,32 +7,32 @@
   {
     "id": 1,
     "name": "Wi-FI",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 2,
     "name": "Parking",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 3,
     "name": "Mikrotalasna",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 4,
     "name": "Topla voda",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 5,
     "name": "Frizider",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 6,
     "name": "TV",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 7,
@@ -41,18 +41,18 @@
   },
   {
     "id": 8,
-    "name": "Zamrzivac",
+    "name": "Zamrzivacc",
     "deleted": false
   },
   {
     "id": 9,
     "name": "Kuhinja",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 10,
     "name": "Dvoriste",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 11,

@@ -84,7 +84,6 @@ public class AmenityService {
 		//	}
 		//}
 		dao.Delete(amenity);
-		System.out.println("*******************"+amenity.name+amenity.deleted+"\n");
 		return amenity;
 	}
 	

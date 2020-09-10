@@ -15,7 +15,9 @@ Vue.component('edit-apartment', {
              dateParse1:new Date(),
              dateTo:'',
  	         dateFrom:'',
- 	        disabledDates: {to: new Date()} 
+ 	        disabledDates: {to: new Date()},
+            pom:[]
+
              }
              },  
                    
@@ -25,6 +27,18 @@ Vue.component('edit-apartment', {
        .then(response =>
        {this.amenities = response.data
     	   
+    	   
+       		let ranges=[];
+       		if(this.apartment.datesForRenting!=undefined){
+   				for(let dates of this.apartment.datesForRenting){
+   					ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+   				}
+   				this.disabledDates["ranges"]=ranges;
+   				this.disabledDates["to"]=new Date();
+       		}else{
+       			this.disabledDates["to"]=new Date();
+       		}
+       	
     	//   var parsed = moment(new Date(this.apartment.datesForRenting[0].dateFrom));
       // this.dateParse1=parsed.format('DD.MM.YYYY');
        //    this.dateParse1=new Date(this.apartment.datesForRenting[0].dateFrom, 'DD.MM.YYYY');
@@ -142,12 +156,12 @@ Vue.component('edit-apartment', {
 	  </div>
 	  
 	  <div class="form-group row">
-	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od:</label>
-	    <div class="col-sm-10">
-	        <label id="dateFrom1" class="col-sm-2 col-form-label ">{{this.apartment.datesForRenting[0].dateFrom | dateFormat('DD.MM.YYYY')}} </label>
-    	    <label class="col-sm-2 col-form-label ">do:</label>
-            <label id="dateTo1" class="col-sm-2 col-form-label ">{{this.apartment.datesForRenting[0].dateTo | dateFormat('DD.MM.YYYY')}} </label>
-            <button id="editDates" type="button" class="btn btn-outline-primary" v-on:click="editDate" >Izmeni periode </button>
+	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od-do:</label>
+
+	    <div class="col-sm-15">
+	        <label id="dateFrom1" class="col-sm-2 col-form-label"  v-for="a in this.apartment.datesForRenting" style="float: left; margin-right : 20%">{{a.dateFrom | dateFormat('DD.MM.YYYY')}}  {{a.dateTo  | dateFormat('DD.MM.YYYY')}} </label>
+    	    <button id="editDates" type="button" class="btn btn-outline-primary" v-on:click="editDate" >Izmeni periode </button>
+    	    
 	    </div>
 	  </div>
 	  
@@ -165,7 +179,7 @@ Vue.component('edit-apartment', {
 			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates" v-model="dateTo" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"  ></vuejs-datepicker>
 	    </div>
 	  </div>
-
+     
 		  <button id="okDate" type="button" class="btn btn-outline-primary" v-on:click="okDate" >Potvrdi nove periode</button>
 		  <button id="cancelDate" type="button" class="btn btn-outline-primary"  v-on:click="cancelDate" >Otkazi nove periode</button>
 
@@ -300,11 +314,25 @@ Vue.component('edit-apartment', {
     			dateErr.style.display="none";
     			dateErr1.style.display="inline";
 			}else{
-    		let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
-			let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 		
-			let period=[{dateFrom:dateFrom, dateTo:dateTo}]
-			this.apartment.datesForRenting=period;
+				this.pom=this.apartment.datesForRenting;
+				let dateFrom1 = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime();
+				let dateTo1 = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime();
+				let period1={dateFrom:dateFrom1, dateTo:dateTo1}
+				this.pom.push(period1);
+				this.apartment.datesForRenting=this.pom;
 			
+		    		let ranges=[];
+		    		if(this.apartment.datesForRenting!=undefined){
+						for(let dates of this.apartment.datesForRenting){
+							ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+						}
+						this.disabledDates["ranges"]=ranges;
+						this.disabledDates["to"]=new Date();
+		    		}else{
+		    			this.disabledDates["to"]=new Date();
+		    		}
+		    	
+				
 			i.style.display="none";
 			editDates.style.display="inline";
 			}
