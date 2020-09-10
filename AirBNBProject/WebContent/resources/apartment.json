@@ -2,12 +2,12 @@
   {
     "id": 0,
     "name": "Step town",
-    "type": "Apartment",
+    "type": "Room",
     "numberOfRooms": 4,
     "numberOfGuests": 16,
     "location": {
-      "longitude": 19.8412511,
-      "latitude": 45.2591651,
+      "longitude": 19.8421396,
+      "latitude": 45.2606724,
       "adress": {
         "country": "Srbija",
         "street": "Vuka Karadzica",
@@ -18,8 +18,8 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599688800000,
-        "dateTo": 1604790000000
+        "dateFrom": 1600466400000,
+        "dateTo": 1602799200000
       }
     ],
     "freePeriods": [],
@@ -40,60 +40,9 @@
     "checkIn": "12",
     "checkOut": "12",
     "status": "NonActive",
-    "amenities": [
-      {
-        "id": 1,
-        "name": "Wi-FI",
-        "deleted": false
-      },
-      {
-        "id": 2,
-        "name": "Parking",
-        "deleted": false
-      },
-      {
-        "id": 3,
-        "name": "Mikrotalasna",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
-        "deleted": false
-      },
-      {
-        "id": 5,
-        "name": "Frizider",
-        "deleted": false
-      },
-      {
-        "id": 6,
-        "name": "TV",
-        "deleted": false
-      },
-      {
-        "id": 8,
-        "name": "Zamrzivac",
-        "deleted": false
-      },
-      {
-        "id": 9,
-        "name": "Kuhinja",
-        "deleted": false
-      },
-      {
-        "id": 10,
-        "name": "Dvoriste",
-        "deleted": false
-      },
-      {
-        "id": 11,
-        "name": "Bazen",
-        "deleted": false
-      }
-    ],
+    "amenities": [],
     "reservations": [],
-    "deleted": false,
+    "deleted": true,
     "note": "Savresena lokacija, sa pogledom na grad. Prijatan komsiluk. "
   },
   {
@@ -103,8 +52,8 @@
     "numberOfRooms": 6,
     "numberOfGuests": 24,
     "location": {
-      "longitude": 19.8235738,
-      "latitude": 45.29733179999999,
+      "longitude": 19.823899,
+      "latitude": 45.2988271,
       "adress": {
         "country": "Srbija",
         "street": "Misarska",
@@ -148,37 +97,11 @@
         "isApproved": true
       }
     ],
-    "pricePerNight": 42.0,
+    "pricePerNight": 26.0,
     "checkIn": "09",
     "checkOut": "09",
-    "status": "NonActive",
-    "amenities": [
-      {
-        "id": 1,
-        "name": "Wi-FI",
-        "deleted": false
-      },
-      {
-        "id": 2,
-        "name": "Parking",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
-        "deleted": false
-      },
-      {
-        "id": 5,
-        "name": "Frizider",
-        "deleted": false
-      },
-      {
-        "id": 10,
-        "name": "Dvoriste",
-        "deleted": false
-      }
-    ],
+    "status": "Active",
+    "amenities": [],
     "reservations": [],
     "deleted": false,
     "note": "Pogled na prirodu, svez vazduh, prijatan komsiluk, ljubazni domacini."
@@ -359,7 +282,7 @@
       }
     ],
     "reservations": [],
-    "deleted": false,
+    "deleted": true,
     "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
   },
   {
@@ -465,6 +388,122 @@
         "name": "Frizider",
         "deleted": false
       },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 6,
+    "name": "David",
+    "type": "Apartment",
+    "numberOfRooms": 9,
+    "numberOfGuests": 16,
+    "location": {
+      "longitude": 19.8484674,
+      "latitude": 45.2492722,
+      "adress": {
+        "country": "Srbija",
+        "street": "Strazilovska",
+        "numberOfStreet": 4,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599775200000,
+        "dateTo": 1601071200000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 33.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Wi-FI",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false
+  },
+  {
+    "id": 7,
+    "name": "ffff",
+    "type": "Apartment",
+    "numberOfRooms": 9,
+    "numberOfGuests": 6,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 32,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1599775200000,
+        "dateTo": 1600552800000
+      },
+      {
+        "dateFrom": 1602367200000,
+        "dateTo": 1603404000000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pricePerNight": 3.0,
+    "checkIn": "3",
+    "checkOut": "3",
+    "status": "NonActive",
+    "amenities": [
       {
         "id": 4,
         "name": "Topla voda",

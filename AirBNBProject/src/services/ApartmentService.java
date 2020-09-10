@@ -60,7 +60,6 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
-
 		Apartment editApartment=dao.Edit(apartment);
 		return editApartment;
 	}

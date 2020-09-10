@@ -23,14 +23,22 @@ Vue.component('view-apartment', {
 			var j=0
 			if(this.user.role=="Host"){
 				for(i=0;i<pom;i++){
-					if(response.data[i].host.username==this.user.username){
+					if(response.data[i].deleted==false){
+						if(response.data[i].host.username==this.user.username){
+							pom1[j]=response.data[i];
+							j++;
+						}
+					}
+				}
+				this.apartements = pom1;
+			}else{
+				for(i=0;i<pom;i++){
+					if(response.data[i].deleted==false){
 						pom1[j]=response.data[i];
 						j++;
 					}
 				}
 				this.apartements = pom1;
-			}else{
-				this.apartements = response.data;
 			}
 
 			localStorage.setItem("apartments",  JSON.stringify(this.apartements));

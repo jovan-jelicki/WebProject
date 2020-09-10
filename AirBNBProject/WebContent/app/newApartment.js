@@ -9,8 +9,8 @@ Vue.component('new-apartment', {
             period:[],
 	        dateTo:'',
 	        dateFrom:'',
-	        disabledDates: {to: new Date()} // Disable all dates up to specific date
-
+	        disabledDates: {to: new Date()}, // Disable all dates up to specific date
+            pom:[]
         }
     },  
    
@@ -136,6 +136,8 @@ Vue.component('new-apartment', {
 	    <div class="col-sm-10">
 	    <div id="app">
 			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
+	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj jos perioda za izdavanje</button>
+
 	   </div>
 	    </div>
 	  </div>
@@ -206,6 +208,25 @@ Vue.component('new-apartment', {
     			
     		});
     	},
+    	addNewPeriod: function(){
+    		dateErr.style.display="none";
+    		dateErr1.style.display="none";
+    		if(this.dateFrom == '' && this.dateTo == ''){
+    			dateErr.style.display="inline";
+			}else if(this.dateFrom.getTime() > this.dateTo.getTime()){
+				dateErr1.style.display="inline";
+			}else {
+				let dateFrom1 = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime();
+				let dateTo1 = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime();
+				let period1={dateFrom:dateFrom1, dateTo:dateTo1}
+				this.pom.push(period1);
+				
+				//this.pom.push({ dateFrom: dateFrom1 , dateTo: dateTo1 });
+
+				this.apartment.datesForRenting=this.pom;
+			}
+
+    	},
 
     	addApartment: function(){
     		if(this.apartment.type==undefined || this.apartment.name==undefined || this.adress.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
@@ -234,13 +255,13 @@ Vue.component('new-apartment', {
     			dateErr1.style.display="inline";
 			}
     		else{
-    			let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
-				let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
+    			//let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
+			//let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
 				
-				let period=[{dateFrom:dateFrom, dateTo:dateTo}]
+				//let period=[{dateFrom:dateFrom, dateTo:dateTo}]
 				//this.period.dateFrom=dateFrom;
 				// this.period.dateTo=dateTo;
-				this.apartment.datesForRenting=period;
+				//this.apartment.datesForRenting=period;
 				
     		axios
    			.post('rest/apartmentService/save',this.apartment)

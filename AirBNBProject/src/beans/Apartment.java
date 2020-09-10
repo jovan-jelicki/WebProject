@@ -2,6 +2,7 @@ package beans;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Apartment {
 	
@@ -11,8 +12,8 @@ public class Apartment {
 	public int numberOfRooms;
 	public int numberOfGuests;
 	public Location location;
-	public ArrayList<Period> datesForRenting = new ArrayList<Period>();
-	public ArrayList<Date> freePeriods = new ArrayList<Date>();
+	public List<Period> datesForRenting = new ArrayList<Period>();
+	public List<Date> freePeriods = new ArrayList<Date>();
 	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	 
@@ -114,21 +115,33 @@ public class Apartment {
 		this.location = location;
 	}
 
-	public ArrayList<Period> getDatesForRenting() {
+	public List<Period> getDatesForRenting() {
 		return datesForRenting;
 	}
 
-	public void setDatesForRenting(ArrayList<Period> datesForRenting) {
+
+
+
+	public void setDatesForRenting(List<Period> datesForRenting) {
 		this.datesForRenting = datesForRenting;
 	}
 
-	public ArrayList<Date> getFreePeriods() {
+
+
+
+	public List<Date> getFreePeriods() {
 		return freePeriods;
 	}
 
-	public void setFreePeriods(ArrayList<Date> freePeriods) {
+
+
+
+	public void setFreePeriods(List<Date> freePeriods) {
 		this.freePeriods = freePeriods;
 	}
+
+
+
 
 	public User getHost() {
 		return host;
