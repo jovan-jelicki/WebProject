@@ -22,9 +22,11 @@ public class AmenityDAO {
  
 	private Gson gson;
 	private String path="";
-	private static ApartmentDAO apartmentDao;
+	private static ApartmentDAO apartmentDao = new ApartmentDAO();
 	
 	public AmenityDAO(ApartmentDAO apartmentDao) {
+		File f=new File("webproject\\AirBNBProject\\WebContent\\resources\\amenity.json");
+		this.path=f.getAbsolutePath();
 		this.apartmentDao = apartmentDao;
 		this.gson=new GsonBuilder()
 				.setPrettyPrinting()

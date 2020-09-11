@@ -21,13 +21,17 @@ import com.google.gson.stream.JsonReader;
 import beans.User;
 
 public class UserDAO {
-
-	private HashMap<String, User> users = new HashMap<String, User>();
+	
+	public User user;
+	public String authorizedToken;
+	public String refreshToken;
 	
 	private  Gson gson;
 	private String path="";  //putanja do users.json
 	
 	public UserDAO () {
+		File f=new File("webproject\\AirBNBProject\\WebContent\\resources\\users.json");
+		this.path=f.getAbsolutePath();		
 		this.gson = new GsonBuilder()
 				.setPrettyPrinting()
 				.create();
@@ -85,6 +89,19 @@ public class UserDAO {
 		}
 		Save(users);
 		return user;
+	}
+	
+	public User getUserByUsername(String username) throws JsonIOException, JsonSyntaxException, FileNotFoundException {
+		User retVal = null;
+		List<User> users = GetAll();
+		for(User u : users) {
+			if(u.getUsername().equals(username)) {
+				retVal = u;
+				break;
+			}
+		}
+		
+		return retVal;
 	}
 }
 

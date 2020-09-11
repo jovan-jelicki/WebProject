@@ -41,7 +41,7 @@ var logInJs = new Vue ({
              axios
         		.post('rest/userService/logIn', this.parameters)
                 .then((response) => 
-                 {this.user = response.data;
+                 {this.user = response.data.user;
                     if(this.user == undefined || this.user == null || this.user === "") {
                         console.log(this.user);    
                         event.preventDefault();
@@ -49,6 +49,8 @@ var logInJs = new Vue ({
                      }else{ 
                         console.log(this.user);
                         localStorage.setItem("user", JSON.stringify(this.user));
+                        localStorage.setItem("token", response.data.authorizedToken);
+                        localStorage.setItem("refreshToken", response.data.refreshToken);
                         $('#modalLogIn').modal('hide');
                        // console.log(this.user.role);
                         this.message="";

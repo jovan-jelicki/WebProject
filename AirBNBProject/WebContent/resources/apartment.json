@@ -18,8 +18,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599688800000,
-        "dateTo": 1604790000000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -82,11 +83,6 @@
         "deleted": false
       },
       {
-        "id": 10,
-        "name": "Dvoriste",
-        "deleted": false
-      },
-      {
         "id": 11,
         "name": "Bazen",
         "deleted": false
@@ -115,8 +111,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599775200000,
-        "dateTo": 1605308400000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -165,7 +162,7 @@
     "pricePerNight": 42.0,
     "checkIn": "09",
     "checkOut": "09",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 1,
@@ -185,11 +182,6 @@
       {
         "id": 5,
         "name": "Frizider",
-        "deleted": false
-      },
-      {
-        "id": 10,
-        "name": "Dvoriste",
         "deleted": false
       }
     ],
@@ -216,8 +208,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1601503200000,
-        "dateTo": 1604185200000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -265,11 +258,6 @@
         "deleted": false
       },
       {
-        "id": 10,
-        "name": "Dvoriste",
-        "deleted": false
-      },
-      {
         "id": 9,
         "name": "Kuhinja",
         "deleted": false
@@ -303,8 +291,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1605394800000,
-        "dateTo": 1615590000000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -329,11 +318,6 @@
       {
         "id": 11,
         "name": "Bazen",
-        "deleted": false
-      },
-      {
-        "id": 10,
-        "name": "Dvoriste",
         "deleted": false
       },
       {
@@ -395,8 +379,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599688800000,
-        "dateTo": 1607727600000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -416,7 +401,7 @@
     "pricePerNight": 12.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 9,
@@ -451,8 +436,9 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599688800000,
-        "dateTo": 1607814000000
+        "years": 0,
+        "months": 0,
+        "days": 0
       }
     ],
     "freePeriods": [],
@@ -472,7 +458,7 @@
     "pricePerNight": 44.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 5,

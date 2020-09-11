@@ -79,7 +79,7 @@ Vue.component('search', {
     	</div>
     	
     	</br>
-			<div  v-for="a in apartements" style="margin-left : 7%" class="column" >
+			<div  v-for="a in apartements" style="margin-left : 7%" v-if="a.status == 'Active'" class="column" >
     			<div class="card"  v-on:click="sendData(a)" style="width: 18rem;" >
     				<img  class="card-img-right" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" alt="Card image cap">
     				<h5 class="card-header">{{a.name}}</h5>

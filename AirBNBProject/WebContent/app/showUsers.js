@@ -9,7 +9,10 @@ Vue.component('show-users', {
     },
     mounted() {
         axios
-        .get('rest/userService/getUsers')
+        .get('rest/userService/getUsers',	{ headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+        }
+        })
         .then(response =>
              {this.users = response.data;
              this.searchUsers = response.data}
