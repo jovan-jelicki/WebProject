@@ -16,8 +16,7 @@ public class Apartment {
 	public List<Date> freePeriods = new ArrayList<Date>();
 	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
-	 
-	//pikcure
+	public List<String> pictures=new ArrayList<String>();
 	public double pricePerNight;
 	public String checkIn ="2PM";
 	public String checkOut = "10PM";
@@ -28,7 +27,7 @@ public class Apartment {
 	public String note;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
-			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
+			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments, List<String> pictures,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
 			ArrayList<Reservation> reservations, String note) {
 		super();
@@ -42,6 +41,7 @@ public class Apartment {
 		this.freePeriods = freePeriods;
 		this.host = host;
 		this.comments = comments;
+		this.pictures=pictures;
 		this.pricePerNight = pricePerNight;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -55,6 +55,14 @@ public class Apartment {
 
 	
 	
+	public List<String> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(List<String> pictures) {
+		this.pictures = pictures;
+	}
+
 	public String getNote() {
 		return note;
 	}

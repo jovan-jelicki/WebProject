@@ -12,32 +12,32 @@
   {
     "id": 2,
     "name": "Parking",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 3,
     "name": "Mikrotalasna",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 4,
     "name": "Topla voda",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 5,
     "name": "Frizider",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 6,
     "name": "TV",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 7,
     "name": "Kafe aparat",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 8,
@@ -47,16 +47,16 @@
   {
     "id": 9,
     "name": "Kuhinja",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 10,
     "name": "Dvoriste",
-    "deleted": true
+    "deleted": false
   },
   {
     "id": 11,
     "name": "Bazen",
-    "deleted": false
+    "deleted": true
   }
 ]

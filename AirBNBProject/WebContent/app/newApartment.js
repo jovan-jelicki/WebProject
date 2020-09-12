@@ -10,7 +10,8 @@ Vue.component('new-apartment', {
 	        dateTo:'',
 	        dateFrom:'',
 	        disabledDates: {}, // Disable all dates up to specific date
-            pom:[]
+            pom:[],
+            files: ''
         }
     },  
    
@@ -164,9 +165,7 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	</div>
-	
-     <div id="prikazi" class="alert alert-success" role="alert" style = "display: none" v-for="d in apartment.datesForRenting"> Uspesno ste dodali period od {{d.datesForRenting.period.dateFrom | dateFormat('DD.MM.YYYY')}} do {{d.datesForRenting.period.dateTo | dateFormat('DD.MM.YYYY') }} 
-	    </div> 	
+
 	
 	
      <div class="form-group row">
@@ -191,6 +190,19 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	  
+	  
+	  <template>
+		  <div class="form-group row">
+		      	<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
+		
+        		<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
+		        <button v-on:click="submitFiles()">Potvrdi izbor slika</button>
+		  </div>
+	</template>
+	
+
+
+
 	  <br>
 	     <div id="infoSuccess" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste dodali apartman!!</div>
         <div id="infoErr" class="alert alert-success" role="alert" style = "display: none" >Neophodno je uneti sve podatke!</div>
@@ -352,9 +364,38 @@ Vue.component('new-apartment', {
     			this.disabledDates["to"]=new Date();
     		}
 			
-    	}
-    
-    
+    	},
+    	submitFiles(){
+
+        //    let formData = new FormData();
+
+          //  for( var i = 0; i < this.files.length; i++ ){
+            //  let file = this.files[i];
+              //formData.append('files[' + i + ']', file);
+            //}
+            //this.apartment.pictures=this.files;
+    		let formData = new FormData();
+    	    formData.append("file", this.files);
+
+    	    //for (var pair of formData.entries()) {
+    	      //  console.log(pair[0]+ ', ' + pair[1]); 
+    	    //}
+    		
+    		axios.post( 'rest/apartmentService/saveImages',formData,
+              {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(){
+              console.log('SUCCESS!!');
+            });
+          },
+
+          handleFilesUpload(){
+           this.files = this.$refs.files.files;
+           //this.apartment.pictures=this.files;
+         }
     },
     components : { vuejsDatepicker },
 
