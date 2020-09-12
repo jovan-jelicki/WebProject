@@ -151,7 +151,12 @@ Vue.component('apartment-details', {
 			buttonComment.style.display = "inline";
 		},
 		backToSearch : function () {
-			location.replace('#/');
+			if(this.user == undefined || this.user == {} || this.user == null)
+				location.replace('#/');
+			else if(this.user.role == "Admin" || this.user.role == "Host")
+				location.replace('#/va');
+			else 
+				location.replace('#/');
 		},
 		commentForm : function() {
 			this.comForm = "inline";

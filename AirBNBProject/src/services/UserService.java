@@ -77,6 +77,7 @@ public class UserService {
 	}
 
 	@POST
+	@Secured({UserType.Admin, UserType.Guest, UserType.Host})
 	@Path("/edit")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -90,8 +91,7 @@ public class UserService {
 	@Secured({UserType.Admin})
 	@Path("/getUsers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAllUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
-		
+	public List<User> getAllUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException{	
 		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
 		return dao.GetAll();
 	}

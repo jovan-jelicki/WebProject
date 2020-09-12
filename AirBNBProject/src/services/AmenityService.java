@@ -2,6 +2,7 @@ package services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import beans.Amenity;
+import beans.UserType;
 import dao.AmenityDAO;
 
 
@@ -39,6 +41,7 @@ public class AmenityService {
 	
 	@POST
 	@Path("/save")
+	@Secured({UserType.Admin})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Amenity save(Amenity amenity) throws IOException {
@@ -57,6 +60,7 @@ public class AmenityService {
 	
 	@POST
 	@Path("/edit")
+	@Secured({UserType.Admin})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Amenity edit(Amenity amenity) throws IOException {
@@ -73,6 +77,7 @@ public class AmenityService {
 	
 	@POST
 	@Path("/delete")
+	@Secured({UserType.Admin})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Amenity delete(Amenity amenity) throws IOException {
@@ -93,7 +98,13 @@ public class AmenityService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Amenity> getAllAmenities() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
 		AmenityDAO dao=(AmenityDAO) sc.getAttribute("amenityDAO");
-		return dao.GetAll();
+		List<Amenity> amenities = dao.GetAll();
+		ArrayList<Amenity> retVal = new ArrayList<Amenity>();
+		for(Amenity a : amenities) {
+			if(!a.getDeleted())
+				retVal.add(a);
+		}
+		return retVal;
 	}
 
 }

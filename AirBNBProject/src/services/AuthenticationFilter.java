@@ -3,6 +3,7 @@ package services;
 import java.io.IOException;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 
 import com.auth0.jwt.JWT;
@@ -66,6 +68,30 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 				} else {
 					checkPermissions(methodRoles, user);
 				}
+				
+				final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
+				requestContext.setSecurityContext(new SecurityContext() {
+
+				        @Override
+				        public Principal getUserPrincipal() {
+				            return () -> user.getUsername();
+				        }
+
+				    @Override
+				    public boolean isUserInRole(String role) {
+				        return true;
+				    }
+
+				    @Override
+				    public boolean isSecure() {
+				        return currentSecurityContext.isSecure();
+				    }
+
+				    @Override
+				    public String getAuthenticationScheme() {
+				        return AUTHENTICATION_SCHEME;
+				    }
+				});
 			} catch (Exception e) {
 				requestContext.abortWith(Response.status(Response.Status.FORBIDDEN).build());
 			}
@@ -97,7 +123,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	  
 	
 	private void abortWithUnauthorized(ContainerRequestContext requestContext) {
-		requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+		//Ili da stavim unauthorized?!
+		requestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
 				.header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"").build());
 	}
 

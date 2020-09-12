@@ -59,14 +59,19 @@ var logInJs = new Vue ({
                         	 location.replace('#/us');
                         }
                      } 
-                }
-                 );
+                 }
+                 )
+                 .catch(error => {
+                	 this.message = "Netacna lozinka ili korisnicko ime!"
+                 });
 
         	
         },
         
         logOut : function(){
             localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
             location.replace('#/');
             location.reload();
         }
