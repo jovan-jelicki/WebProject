@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ import com.google.gson.JsonSyntaxException;
 
 import beans.Apartment;
 import beans.ApartmentStatus;
+import beans.Period;
 import beans.User;
 import beans.UserType;
 import dao.ApartmentDAO;
@@ -150,6 +152,12 @@ public class ApartmentService {
 		retVal = filterPlace(retVal, parameters);
 		
 		//TODO datumi da se vide, cekam tvoj kod
+		for(Apartment a : retVal) {
+			for(Period p : a.getDatesForRenting()) {
+				Date d = new Date(p.getDateFrom());
+				System.out.println(d.after(new Date()));
+			}
+		}
 		
 		
 		//broj gostiju

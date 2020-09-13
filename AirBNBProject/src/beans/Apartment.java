@@ -13,7 +13,7 @@ public class Apartment {
 	public int numberOfGuests;
 	public Location location;
 	public List<Period> datesForRenting = new ArrayList<Period>();
-	public List<Date> freePeriods = new ArrayList<Date>();
+	public List<Period> freePeriods = new ArrayList<Period>();
 	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	public List<String> pictures=new ArrayList<String>();
@@ -27,7 +27,7 @@ public class Apartment {
 	public String note;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
-			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments, List<String> pictures,
+			ArrayList<Period> datesForRenting, ArrayList<Period> freePeriods, User host, ArrayList<Comment> comments, List<String> pictures,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
 			ArrayList<Reservation> reservations, String note) {
 		super();
@@ -137,14 +137,14 @@ public class Apartment {
 
 
 
-	public List<Date> getFreePeriods() {
+	public List<Period> getFreePeriods() {
 		return freePeriods;
 	}
 
 
 
 
-	public void setFreePeriods(List<Date> freePeriods) {
+	public void setFreePeriods(List<Period> freePeriods) {
 		this.freePeriods = freePeriods;
 	}
 

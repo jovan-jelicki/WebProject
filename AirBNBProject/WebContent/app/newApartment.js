@@ -191,11 +191,11 @@ Vue.component('new-apartment', {
 	  </div>
 	  
 	 
-		  <div class="form-group row">
+		  <div>
 		      	<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
 		
         		<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
-		        <button v-on:click="submitFiles()">Potvrdi izbor slika</button>
+		        <button  v-on:click="submitFiles()">Potvrdi izbor slika</button>
 		  </div>
 	
 

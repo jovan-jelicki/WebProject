@@ -98,8 +98,8 @@ public class ApartmentDAO {
 			apartments=new ArrayList<Apartment>();
 		}
 		apartment.setId(getMaxId());
+		apartment.setFreePeriods(apartment.getDatesForRenting());
 		apartments.add(apartment);
-
 		Save(apartments);	
 	}
 

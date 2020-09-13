@@ -15,7 +15,6 @@ Vue.component('edit-apartment', {
              dateParse1:new Date(),
              dateTo:'',
  	         dateFrom:'',
- 	        disabledDates: {to: new Date()},
             pom:[]
 
              }
