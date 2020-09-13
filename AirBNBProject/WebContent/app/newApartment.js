@@ -377,7 +377,8 @@ Vue.component('new-apartment', {
 	    		.post( 'rest/apartmentService/saveImages',formData,
 	              {
 	                headers: {
-	                    'Content-Type': 'multipart/form-data'
+	                    'Content-Type': 'multipart/form-data',
+	                    Authorization : 'Bearer ' + localStorage.getItem("token")
 	                }
 	              }
 	            )

@@ -1,7 +1,6 @@
 package beans;
 
 import java.sql.Date;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class Apartment {
 		this.note=note;
 	}
 	
-
+	public Apartment() {}
 	
 	
 	public List<String> getPictures() {
@@ -226,6 +225,5 @@ public class Apartment {
 	
 	
 	
-	public Apartment( ) {}
 	
 }

@@ -6,7 +6,11 @@ public class Period {
 	private long dateTo;
 	
 	public Period() {
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Period(long dateF, long dateT) {
+		this.dateFrom = dateF;
+		this.dateTo = dateT;
 	}
 
 	public long getDateFrom() {

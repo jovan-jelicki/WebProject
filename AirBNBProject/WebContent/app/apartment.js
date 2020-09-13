@@ -209,7 +209,10 @@ Vue.component('apartment-details', {
 		},
 		deleteApartment: function(){
 			axios
-			.post("rest/apartmentService/delete", this.apartment)
+			.post("rest/apartmentService/delete", this.apartment, { headers : {
+	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+	        }
+			})
 			.then(response => {
 				this.apartment = response.data;
 				 $('#exampleModalCenter').modal('hide');

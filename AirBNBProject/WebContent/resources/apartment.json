@@ -40,7 +40,7 @@
     "pricePerNight": 12.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 9,
@@ -101,7 +101,7 @@
     "pricePerNight": 3.0,
     "checkIn": "3",
     "checkOut": "3",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 4,
@@ -153,7 +153,7 @@
     "pricePerNight": 25.0,
     "checkIn": "13",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 6,
@@ -203,7 +203,7 @@
     "comments": [],
     "pictures": [
       "pictures/slika614.jpg"
-          ],
+    ],
     "pricePerNight": 8.0,
     "checkIn": "14",
     "checkOut": "4",
@@ -218,6 +218,75 @@
     "reservations": [],
     "deleted": false,
     "note": "shsduhdsij"
+  },
+  {
+    "id": 10,
+    "name": "Proba",
+    "type": "Apartment",
+    "numberOfRooms": 1,
+    "numberOfGuests": 2,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 1,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600120800000,
+        "dateTo": 1600552800000
+      }
+    ],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika558.jpg"
+    ],
+    "pricePerNight": 23.0,
+    "checkIn": "19",
+    "checkOut": "11",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Proba123"
   }
 ]
-

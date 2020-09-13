@@ -3,6 +3,7 @@ package services;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -67,6 +68,7 @@ public class ApartmentService {
 	}
 	
 	@POST
+	@Secured({UserType.Host})
 	@Path("/saveImages")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public List<String> image(@FormDataParam("files") InputStream fileInputStream, FormDataMultiPart  cdh) throws IOException {
@@ -116,7 +118,7 @@ public class ApartmentService {
 	@Path("/getApartments")
 	@Secured({UserType.Admin, UserType.Host})
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getAllApartments(@Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+	public List<Apartment> getAllApartments(@Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, IOException{
 		Principal principal = securityContext.getUserPrincipal();
 		String username = principal.getName();
 		UserDAO daou = (UserDAO) sc.getAttribute("userDAO");
