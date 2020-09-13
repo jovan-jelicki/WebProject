@@ -33,15 +33,16 @@ Vue.component('apartment-details', {
 		</div>
 		<div>
 		  <template v-if="this.user.name!=undefined">
-		  <button class="btn btn-primary" v-on:click="editApartment()" style="float: right; margin-right : 10%" >Izmeni apartman</button>
-			</template>
+		  <button class="btn btn-primary" v-on:click="editApartment()" style="float: right; margin-right : 4%" >Izmeni apartman</button>
+		  <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"  style="float: right; margin-right : 4%">Obrisi apartman</button>
+		</template>
 		</div>
 		<br>
 		</br>
 		<br>
 		<div style="display : flex; align-items : center; justify-content : center; height : auto; width : 100%;">
 			<div>
-				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg">
+				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" v-bind:src="apartment.pictures[0]">
 			</div>
 			<div style="margin-right: 5%; margin-left : 5%">
 				<p v-if="avgGrade"> <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
@@ -128,8 +129,29 @@ Vue.component('apartment-details', {
 				<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
 			</div>
 		</div>
+		
 
-	
+
+<!-- Modalni za brisane -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Da li ste sigurni da zelite da obrisete apartman {{apartment.name}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Otkazi</button>
+        <button type="button" class="btn btn-primary" v-on:click="deleteApartment()">Potvrdi brisanje</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</div>
 	
 	`,
@@ -163,6 +185,17 @@ Vue.component('apartment-details', {
 		},
 		editApartment: function(){
 			location.replace('#/ea');
+		},
+		deleteApartment: function(){
+			axios
+			.post("rest/apartmentService/delete", this.apartment)
+			.then(response => {
+				this.apartment = response.data;
+				 $('#exampleModalCenter').modal('hide');
+
+				location.replace('#/va');
+
+				})
 		},
 		
 	},

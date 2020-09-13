@@ -2,6 +2,7 @@ package beans;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Apartment {
 	
@@ -11,23 +12,22 @@ public class Apartment {
 	public int numberOfRooms;
 	public int numberOfGuests;
 	public Location location;
-	public ArrayList<Period> datesForRenting = new ArrayList<Period>();
-	public ArrayList<Date> freePeriods = new ArrayList<Date>();
+	public List<Period> datesForRenting = new ArrayList<Period>();
+	public List<Date> freePeriods = new ArrayList<Date>();
 	public User host;
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
-	 
-	//pikcure
+	public List<String> pictures=new ArrayList<String>();
 	public double pricePerNight;
 	public String checkIn ="2PM";
 	public String checkOut = "10PM";
 	public ApartmentStatus status = ApartmentStatus.NonActive;
-	public ArrayList<Amenity> amenities = new ArrayList<Amenity>();
+	public List<Amenity> amenities = new ArrayList<Amenity>();
 	public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	public Boolean deleted = false;
 	public String note;
 	
 	public Apartment(int id,String name, ApartmentType type, int numberOfRooms, int numberOfGuests, Location location,
-			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments,
+			ArrayList<Period> datesForRenting, ArrayList<Date> freePeriods, User host, ArrayList<Comment> comments, List<String> pictures,
 			double pricePerNight, String checkIn, String checkOut, ApartmentStatus status, ArrayList<Amenity> amenities,
 			ArrayList<Reservation> reservations, String note) {
 		super();
@@ -41,6 +41,7 @@ public class Apartment {
 		this.freePeriods = freePeriods;
 		this.host = host;
 		this.comments = comments;
+		this.pictures=pictures;
 		this.pricePerNight = pricePerNight;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -54,6 +55,14 @@ public class Apartment {
 
 	
 	
+	public List<String> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(List<String> pictures) {
+		this.pictures = pictures;
+	}
+
 	public String getNote() {
 		return note;
 	}
@@ -114,21 +123,33 @@ public class Apartment {
 		this.location = location;
 	}
 
-	public ArrayList<Period> getDatesForRenting() {
+	public List<Period> getDatesForRenting() {
 		return datesForRenting;
 	}
 
-	public void setDatesForRenting(ArrayList<Period> datesForRenting) {
+
+
+
+	public void setDatesForRenting(List<Period> datesForRenting) {
 		this.datesForRenting = datesForRenting;
 	}
 
-	public ArrayList<Date> getFreePeriods() {
+
+
+
+	public List<Date> getFreePeriods() {
 		return freePeriods;
 	}
 
-	public void setFreePeriods(ArrayList<Date> freePeriods) {
+
+
+
+	public void setFreePeriods(List<Date> freePeriods) {
 		this.freePeriods = freePeriods;
 	}
+
+
+
 
 	public User getHost() {
 		return host;
@@ -178,11 +199,11 @@ public class Apartment {
 		this.status = status;
 	}
 
-	public ArrayList<Amenity> getAmenities() {
+	public List<Amenity> getAmenities() {
 		return amenities;
 	}
 
-	public void setAmenities(ArrayList<Amenity> amenities) {
+	public void setAmenities(List<Amenity> amenities) {
 		this.amenities = amenities;
 	}
 

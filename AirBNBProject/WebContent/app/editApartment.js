@@ -13,6 +13,11 @@ Vue.component('edit-apartment', {
              backup:[],
              disabledDates: {to: new Date()}, // Disable all dates up to specific date
              dateParse1:new Date(),
+             dateTo:'',
+ 	         dateFrom:'',
+ 	        disabledDates: {to: new Date()},
+            pom:[]
+
              }
              },  
                    
@@ -22,6 +27,18 @@ Vue.component('edit-apartment', {
        .then(response =>
        {this.amenities = response.data
     	   
+    	   
+       		let ranges=[];
+       		if(this.apartment.datesForRenting!=undefined){
+   				for(let dates of this.apartment.datesForRenting){
+   					ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+   				}
+   				this.disabledDates["ranges"]=ranges;
+   				this.disabledDates["to"]=new Date();
+       		}else{
+       			this.disabledDates["to"]=new Date();
+       		}
+       	
     	//   var parsed = moment(new Date(this.apartment.datesForRenting[0].dateFrom));
       // this.dateParse1=parsed.format('DD.MM.YYYY');
        //    this.dateParse1=new Date(this.apartment.datesForRenting[0].dateFrom, 'DD.MM.YYYY');
@@ -52,11 +69,22 @@ Vue.component('edit-apartment', {
 	  <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label">Tip apartmana</label>
 	    <div class="col-sm-10">
-  				<div class="tip"><input type="radio"  id="type1" name="apartmentType" v-model="apartment.type" value="Apartment"> apartman<br></div>
-  				<div class="tip"><input type="radio" id="type2" name="apartmentType" v-model="apartment.type" value="Room"> soba<br></div>
-
+  				<div><input type="radio"  id="status1" name="apartmentStatus" v-model="apartment.status" value="NonActive">neaktivan<br></div>
+  				<div><input type="radio" id="status2" name="apartmentStatus" v-model="apartment.status" value="Active">aktivan<br></div>
 	    </div>
 	  </div>
+	  
+	  <div class="form-group row">
+	    <label  class="col-sm-2 col-form-label">Status apartmana</label>
+	    <div class="col-sm-10">
+  				<div><input type="radio"  id="type1" name="apartmentType" v-model="apartment.type" value="Apartment"> apartman<br></div>
+  				<div ><input type="radio" id="type2" name="apartmentType" v-model="apartment.type" value="Room"> soba<br></div>
+	    </div>
+	  </div>
+	  
+	  
+	  
+	  
 	  <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label">Broj soba</label>
 	    <div class="col-sm-10">
@@ -126,29 +154,36 @@ Vue.component('edit-apartment', {
          <input class="form-control" id="time2" type="text"  v-model="apartment.checkOut">
 	    </div>
 	  </div>
-	
+	  
 	  <div class="form-group row">
+	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od-do:</label>
+
+	    <div class="col-sm-15">
+	        <label id="dateFrom1" class="col-sm-2 col-form-label"  v-for="a in this.apartment.datesForRenting" style="float: left; margin-right : 20%">{{a.dateFrom | dateFormat('DD.MM.YYYY')}}  {{a.dateTo  | dateFormat('DD.MM.YYYY')}} </label>
+    	    <button id="editDates" type="button" class="btn btn-outline-primary" v-on:click="editDate" >Izmeni periode </button>
+    	    
+	    </div>
+	  </div>
+	  
+	  <div id="i" style = "display: none">
+		  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
 	    <div class="col-sm-10">
-			<vuejs-datepicker id="date1" :monday-first="true" :disabled-dates="disabledDates" 	placeholder="Unesite pocetni datum" format="dd.MM.yyyy" v-model="dateFrom" ></vuejs-datepicker>
+			<vuejs-datepicker id="date1" :monday-first="true" :disabled-dates="disabledDates"  v-model="dateFrom"	placeholder="Unesite pocetni datum" format="dd.MM.yyyy" ></vuejs-datepicker>
 	    </div>
 	  </div>
 
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje do:</label>
 	    <div class="col-sm-10">
-	    <div id="app">
-			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
-	   </div>
+			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates" v-model="dateTo" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"  ></vuejs-datepicker>
 	    </div>
 	  </div>
-	  
-	  <div class="form-group row">
-	    <label class="col-sm-2 col-form-label ">blaassssssssssssssssss:</label>
-	    <div class="col-sm-10">
-	    <label class="col-sm-2 col-form-label ">{{this.apartment.datesForRenting[0].dateFrom | dateFormat('DD.MM.YYYY')}} </label>
-	    </div>
-	  </div> 
+     
+		  <button id="okDate" type="button" class="btn btn-outline-primary" v-on:click="okDate" >Potvrdi nove periode</button>
+		  <button id="cancelDate" type="button" class="btn btn-outline-primary"  v-on:click="cancelDate" >Otkazi nove periode</button>
+
+     </div>
      
      <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
@@ -157,12 +192,12 @@ Vue.component('edit-apartment', {
     <div class="col-md-2 personal-info">
   	  <div class="form-check"  >
   	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
-  	       <input class="form-check-input"   type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
-    	   <label class="form-control" id="amenity"> {{a.name}} </label>
+  	       <input class="form-check-input"   type="checkbox"  id="defaultCheck1"  v-model="selectedAmenities" :value="a" >
+  	       <label class="form-control" id="amenity" > {{a.name}} </label>
+
       </div>
 	  </div>
-	  </div>
-	  
+	 </div>
 	  <br>
 	  
 	    <div class="form-group row">
@@ -173,7 +208,7 @@ Vue.component('edit-apartment', {
 	  </div>
 	  
 	  <br>
-	     <div id="infoSuccess" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste dodali apartman!!</div>
+	     <div id="infoSuccess" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste izmenili apartman!!</div>
         <div id="infoErr" class="alert alert-success" role="alert" style = "display: none" >Neophodno je uneti sve podatke!</div>
         <div id="infoErr1" class="alert alert-success" role="alert" style = "display: none" >Molimo proverite unete podatke. Doslo je do nevalidnog unosa.</div>
         <div id="dateErr" class="alert alert-success" role="alert" style = "display: none" > Molimo izaberite vremenski period izdavanja apartmana.</div>
@@ -181,15 +216,20 @@ Vue.component('edit-apartment', {
       <br>
 	  <button id="editAccButton" type="button" class="btn btn-primary"  style = "display:inline" v-on:click="geocodeAddress" >Potvrdi izmene</button>
 	  <br>
-	  <button id="addNew" type="button" class="btn btn-primary"  style = "display: none" v-on:click="goBack" >Povratak na dodavanje novog</button>
+	  <button id="goBackButton" type="button" class="btn btn-primary"  style = "display:none" v-on:click="back" >Povratak na pregled apartmana</button>
+
 
    </div>
    </form>`
     
     ,
     methods:{
+    	editDate: function(){
+    		editDates.style.display="none";
+    		i.style.display="inline";
+    	},
     	geocodeAddress: function(){
-    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
+    		var geoAddress=this.apartment.location.adress.numberOfStreet +" "+this.apartment.location.adress.street+" "+this.apartment.location.adress.city+" "+this.apartment.location.adress.country;
     		axios
     		.get('https://maps.googleapis.com/maps/api/geocode/json', {
     			params: {
@@ -199,27 +239,20 @@ Vue.component('edit-apartment', {
     		})
 
     		.then( (response) => {
-    			this.location
     			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
-    					adress: this.adress};
+    					adress: this.apartment.location.adress};
     			this.apartment.location=this.location;
     			this.apartment.amenities=this.selectedAmenities;
-
-    			
-    			
-
-				this.apartment.host=this.user;
-    			
-    			
-    			this.addApartment();
+				this.apartment.host=this.user;    			
+    			this.editApartment();
     			
     		});
     	},
 
-    	addApartment: function(){
-    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
-    				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.adress.numberOfStreet==undefined || 
-    				this.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined ){
+    	editApartment: function(){
+    		if(this.apartment.type==undefined || this.apartment.name==undefined || this.apartment.location.adress.country==undefined || this.apartment.location.adress.city==undefined || this.apartment.location.adress.street==undefined ||
+    				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.apartment.location.adress.numberOfStreet==undefined || 
+    				this.apartment.location.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined ){
     			infoSuccess.style.display="none";
     			infoErr.style.display="inline";
     			infoErr1.style.display="none";
@@ -229,36 +262,19 @@ Vue.component('edit-apartment', {
     			infoSuccess.style.display="none";
     			infoErr.style.display="none";
     			infoErr1.style.display="inline";
-    		}else if(this.dateFrom == "" || this.dateTo == ""){
-    			infoSuccess.style.display="none";
-    			infoErr.style.display="none";
-    			infoErr1.style.display="none";
-    			dateErr.style.display="inline";
     		}
-			else if(this.dateTo.getTime() <= this.dateFrom.getTime()){
-				infoSuccess.style.display="none";
-    			infoErr.style.display="none";
-    			infoErr1.style.display="none";
-    			dateErr.style.display="none";
-    			dateErr1.style.display="inline";
-			}
+			
     		else{
-    			let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
-				let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
-				
-				let period=[{dateFrom:dateFrom, dateTo:dateTo}]
-				//this.period.dateFrom=dateFrom;
-				// this.period.dateTo=dateTo;
-				this.apartment.datesForRenting=period;
 				
     		axios
-   			.post('rest/apartmentService/save',this.apartment)
+   			.post('rest/apartmentService/edit',this.apartment)
    	        .then((response) => {console.log(response);
-   	    	//apartmentName,type1, type2,roomNum,guestNum,country,city,street, numOfStreet,postNum,price,time1,time2,date1,date2,amenity
 
    	           document.getElementById('apartmentName').disabled = true;
    	           document.getElementById('type1').disabled = true;
    	           document.getElementById('type2').disabled = true;
+   	           document.getElementById('status1').disabled = true;
+	           document.getElementById('status2').disabled = true;
    	           document.getElementById('roomNum').disabled = true;
    	           document.getElementById('guestNum').disabled = true;
    	           document.getElementById('country').disabled = true;
@@ -276,12 +292,12 @@ Vue.component('edit-apartment', {
 
 
 			    editAccButton.style.display="none";
-   	            addNew.style.display="inline";
 				infoErr.style.display="none";
     			infoErr1.style.display="none";
     			dateErr.style.display="none";
     			dateErr1.style.display="none";
 				infoSuccess.style.display="inline";
+				goBackButton.style.display="inline";
    	        		});
     		}
     	},
@@ -289,7 +305,47 @@ Vue.component('edit-apartment', {
     	goBack: function(){
     		
 			location.reload();
+    	}, 
+    	okDate: function(){
+    	  if(this.dateTo.getTime() <= this.dateFrom.getTime()){
+				infoSuccess.style.display="none";
+    			infoErr.style.display="none";
+    			infoErr1.style.display="none";
+    			dateErr.style.display="none";
+    			dateErr1.style.display="inline";
+			}else{
+				this.pom=this.apartment.datesForRenting;
+				let dateFrom1 = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime();
+				let dateTo1 = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime();
+				let period1={dateFrom:dateFrom1, dateTo:dateTo1}
+				this.pom.push(period1);
+				this.apartment.datesForRenting=this.pom;
+			
+		    		let ranges=[];
+		    		if(this.apartment.datesForRenting!=undefined){
+						for(let dates of this.apartment.datesForRenting){
+							ranges.push({from: new Date(dates.dateFrom), to: new Date(dates.dateTo)});
+						}
+						this.disabledDates["ranges"]=ranges;
+						this.disabledDates["to"]=new Date();
+		    		}else{
+		    			this.disabledDates["to"]=new Date();
+		    		}
+		    	
+				
+			i.style.display="none";
+			editDates.style.display="inline";
+			}
+		}, 
+    	cancelDate: function(){
+    		i.style.display="none";
+    		editDates.style.display="inline";
+    	},
+    	back: function(){
+    		location.replace('#/va');
+
     	}
+    	
     
     
     },

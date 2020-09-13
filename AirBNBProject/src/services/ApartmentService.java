@@ -1,21 +1,34 @@
 package services;
 
-import java.io.FileNotFoundException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -45,6 +58,19 @@ public class ApartmentService {
 	}
 	
 	@POST
+	@Path("/saveImages")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public List<String> image(@FormDataParam("files") InputStream fileInputStream, FormDataMultiPart  cdh) throws IOException {
+		ApartmentDAO dao = (ApartmentDAO) sc.getAttribute("apartmentDAO");
+		List<FormDataBodyPart> parts = cdh.getFields("files");
+		
+		List<String> names=dao.saveImage(parts);
+
+
+		return names;
+	}
+	
+	@POST
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -60,7 +86,6 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
-
 		Apartment editApartment=dao.Edit(apartment);
 		return editApartment;
 	}
@@ -78,7 +103,7 @@ public class ApartmentService {
 	@GET
 	@Path("/getApartments")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, IOException{
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		return dao.GetAll();
 	}
@@ -88,7 +113,7 @@ public class ApartmentService {
 	@Path("/searchApartments")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getFilteredApartments(SearchDAO parameters) throws JsonIOException, JsonSyntaxException, FileNotFoundException, UnsupportedEncodingException{
+	public List<Apartment> getFilteredApartments(SearchDAO parameters) throws JsonIOException, JsonSyntaxException, IOException{
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		List<Apartment> retVal =  new ArrayList<Apartment>();
 		retVal = dao.GetAll();
