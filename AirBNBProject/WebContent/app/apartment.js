@@ -18,7 +18,10 @@ Vue.component('apartment-details', {
 		}
 	},
 	mounted() {
-		this.avgGrade = getAvgGrade(this.apartment.comments);
+		if(this.apartment.name == undefined)
+			history.back();
+		else 
+			this.avgGrade = getAvgGrade(this.apartment.comments);
 	},
 	
 	
@@ -58,80 +61,87 @@ Vue.component('apartment-details', {
 		</div>
 		
 		<div class="filter-div" style="background-color : white">
-			<label>  Domacin smestaja : {{apartment.host.name}} {{apartment.host.surname}} </label>
-			<div style="width : 25rem; min-width: max-content" class="card">
-				<h5 class="card-header"> Pogledajte dostupnost </h5>
-				<div class="card-body">
-					<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
-					<hr>
-					<div style="display : flex; margin-left : 3%">
-						<vuejs-datepicker id="date1" :monday-first="true" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
-						<vuejs-datepicker id="date2" :monday-first="true" placeholder="Unesite krajnji datum" format="dd.MM.yyyy" disabled></vuejs-datepicker>
-					</div>
-					<hr>
-					<div style="display : flex">
-						<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
-						<input type="number" style="width: 30%; margin-left: 5%;" />
-					</div>
-					
-					<button> Pretrazi </button>
-				</div>
-			</div>
-		</div>
-		<br>
 		
-		<div class="container">
-			<h4> Dodaci </h4>
-			<div style="display : inline" v-for="a in apartment.amenities">
-				 <p style="display : inline"> <b> {{a.name}}  </b>  </p> 
-			</div>
-		</div>
-		
-		<br>
-		<br>
-		<div class="container">
-		  	<h4>Komentari: </h4>
-		  	</br>
-		  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved">
-		  			<div class="media" style="display : inline ">
-		  				 <p class="float-right" >Ocena : {{com.grade}} </p>
-		  				<div class="media-body"> 
-		  				<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
-		  					{{com.text}}
-		  				</div>
-		  			</div>
-		  			<hr>
-		  		</div>
-		  	<button id="buttonComment" class="btn btn-primary" v-on:click="commentForm()"> Ostavi komentar </button>
-			<div class="form-group" v-bind:style="{display : comForm}">
-				<div style="display : inline" >
-					<p style="float : left" > Ocenite smestaj:  </p>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input v-model="grade" type="radio" id="1" name="grade" value="1">
-								<label style="margin : 5; font-size: 100%" >1</label><br>
-								<input v-model="grade" type="radio" id="2" name="grade" value="2">
-								<label style="margin : 5; font-size: 100%">2</label><br>
-							  	<input v-model="grade" type="radio" id="3" name="grade" value="3">
-								<label style="margin : 5; font-size: 100%">3</label><br>
-								<input v-model="grade"  type="radio" id="4" name="grade" value="4">
-								<label style="margin : 5; font-size: 100%">4</label><br>
-								<input v-model="grade"  type="radio" id="5" name="grade" value="5" checked>
-								<label style="margin : 5; font-size: 100%">5</label><br>
-							</div>
-						</div>
+			<div style="display : inline">
+				<div class="container">
+					<h4> Dodaci </h4>
+					<div style="display : inline" v-for="a in apartment.amenities">
+						 <p style="display : inline"> <b> {{a.name}}  </b>  </p> 
 					</div>
 				</div>
 				
-				<textarea class="form-control" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
 				<br>
-				<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
+				<br>
+				<div class="container">
+				  	<h4>Komentari: </h4>
+				  	</br>
+				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved">
+				  			<div class="media" style="display : inline ">
+				  				 <p class="float-right" >Ocena : {{com.grade}} </p>
+				  				<div class="media-body"> 
+				  				<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
+				  					{{com.text}}
+				  				</div>
+				  			</div>
+				  			<hr>
+				  		</div>
+			  	<button id="buttonComment" class="btn btn-primary" v-on:click="commentForm()"> Ostavi komentar </button>
+					<div class="form-group" v-bind:style="{display : comForm}">
+						<div style="display : inline" >
+							<p style="float : left" > Ocenite smestaj:  </p>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<input v-model="grade" type="radio" id="1" name="grade" value="1">
+										<label style="margin : 5; font-size: 100%" >1</label><br>
+										<input v-model="grade" type="radio" id="2" name="grade" value="2">
+										<label style="margin : 5; font-size: 100%">2</label><br>
+									  	<input v-model="grade" type="radio" id="3" name="grade" value="3">
+										<label style="margin : 5; font-size: 100%">3</label><br>
+										<input v-model="grade"  type="radio" id="4" name="grade" value="4">
+										<label style="margin : 5; font-size: 100%">4</label><br>
+										<input v-model="grade"  type="radio" id="5" name="grade" value="5" checked>
+										<label style="margin : 5; font-size: 100%">5</label><br>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<textarea class="form-control" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
+						<br>
+						<div style="display : flex" >
+							<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
+							<button class="btn btn-primary" style="background-color : gray; margin-left : 5%; border-color : gray" v-on:click="cancel()" > Odustanak </button>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<div>
+				<label style="margin-bottom: 10%;"><b>  Domacin smestaja {{apartment.host.name}} {{apartment.host.surname}} </b> </label>
+				
+				</br>
+				<div style="width : 25rem; min-width: max-content" class="card">
+					<h5 class="card-header"> Pogledajte dostupnost </h5>
+					<div class="card-body">
+						<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
+						<hr>
+						<div style="display : flex; margin-left : 3%">
+							<vuejs-datepicker id="date1" :monday-first="true" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
+							<vuejs-datepicker id="date2" :monday-first="true" placeholder="Unesite krajnji datum" format="dd.MM.yyyy" disabled></vuejs-datepicker>
+						</div>
+						<hr>
+						<div style="display : flex">
+							<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
+							<input type="number" onkeydown="return false" style="width: 20%; margin-left: 5%;" />
+						</div>
+							
+						<button class="btn btn-primary"> Pretrazi </button>
+					</div>
+				</div>
 			</div>
 		</div>
 		
-
-
 <!-- Modalni za brisane -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -156,13 +166,21 @@ Vue.component('apartment-details', {
 	
 	`,
 	methods : {
+		cancel : function() {
+			this.comForm = "none";
+			buttonComment.style.display = "inline";
+		},
 		backToSearch : function () {
-			location.replace('#/');
+			if(this.user == undefined || this.user == {} || this.user == null)
+				location.replace('#/');
+			else if(this.user.role == "Admin" || this.user.role == "Host")
+				location.replace('#/va');
+			else 
+				location.replace('#/');
 		},
 		commentForm : function() {
 			this.comForm = "inline";
 			buttonComment.style.display = "none";
-			console.log(this.grade);
 		},
 		leaveComment : function () {
 			this.comForm = "none";
@@ -170,7 +188,10 @@ Vue.component('apartment-details', {
 			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : this.grade});
 			console.log(this.grade);
 			axios
-			.post("rest/apartmentService/edit", this.apartment)
+			.post("rest/apartmentService/edit", this.apartment, { headers : {
+	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+	        }
+			})
 			.then(response => {
 				this.apartment = response.data;
 				var apartments = JSON.parse(localStorage.getItem("apartments"));

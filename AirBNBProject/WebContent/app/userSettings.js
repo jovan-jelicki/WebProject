@@ -8,6 +8,10 @@ Vue.component('user-settings', {
             newPass1:""
         }
     },
+    mounted() {
+    	if(this.user.username == undefined)
+    		history.back();
+    },
     template : 
 `
 <div class="container bootstrap snippets bootdey">
@@ -118,7 +122,10 @@ methods:{
 			otkazi.style.display="none";
 		}
         axios
-		.post('rest/userService/edit', this.user)
+		.post('rest/userService/edit', this.user, { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+        }
+		})
         .then((response) => this.user=response.data );
 	}, 
 	cancel: function(){
@@ -146,7 +153,10 @@ methods:{
 			this.user.password=this.newPass;
 			
 			  axios
-				.post('rest/userService/edit', this.user)
+				.post('rest/userService/edit', this.user, { headers : {
+		        	Authorization : 'Bearer ' + localStorage.getItem("token")
+		        }
+				})
 		        .then((response) => this.user=response.data );
 		}
 		

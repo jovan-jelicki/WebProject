@@ -36,6 +36,11 @@ public class ApartmentDAO {
 	
 	
 	public ApartmentDAO() {
+		File f=new File("webproject\\AirBNBProject\\WebContent\\resources\\apartment.json");
+		this.path=f.getAbsolutePath();
+		this.gson=new GsonBuilder()
+				.setPrettyPrinting()
+				.create();
 	}
 	
 	public ApartmentDAO(String contextPath) {

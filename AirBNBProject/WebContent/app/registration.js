@@ -19,10 +19,14 @@ var userJS = new Vue ({
                 });
             }else if(registeredUser.role == "Admin") {
                 axios
-                .post('rest/guestRegistration/save-host', this.user)
+                .post('rest/guestRegistration/save-host', this.user , { headers : {
+                	Authorization : 'Bearer ' + localStorage.getItem("token")
+                }
+                })
                 .then(response => {
                     if(response.data == "Good"){
-                        alert('Uspesno ste registrovali korisnika ' + user.name + ' ' + user.surname);
+                        alert('Uspesno ste registrovali korisnika ' + this.user.name + ' ' + this.user.surname);
+                        $('#registrationModal').modal('hide');
                     }
                 });
             }

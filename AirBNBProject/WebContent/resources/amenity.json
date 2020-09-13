@@ -52,11 +52,16 @@
   {
     "id": 10,
     "name": "Dvoriste",
-    "deleted": false
+    "deleted": true
   },
   {
     "id": 11,
     "name": "Bazen",
-    "deleted": true
+    "deleted": false
+  },
+  {
+    "id": 12,
+    "name": "Kablovska",
+    "deleted": false
   }
 ]

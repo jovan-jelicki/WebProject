@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -34,8 +36,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import beans.Apartment;
+import beans.ApartmentStatus;
+import beans.User;
+import beans.UserType;
 import dao.ApartmentDAO;
 import dao.SearchDAO;
+import dao.UserDAO;
 
 @Path("/apartmentService")
 
@@ -55,6 +61,9 @@ public class ApartmentService {
 	    	String contextPath = sc.getRealPath("");
 			sc.setAttribute("apartmentDAO", new ApartmentDAO(contextPath));
 		}
+		if(sc.getAttribute("userDAO") == null) {
+			sc.setAttribute("userDAO", new UserDAO());
+		}
 	}
 	
 	@POST
@@ -72,6 +81,7 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/save")
+	@Secured({UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment save(Apartment apartment) throws IOException {
@@ -82,6 +92,7 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/edit")
+	@Secured({UserType.Admin, UserType.Host, UserType.Guest})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {
@@ -92,6 +103,7 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/delete")
+	@Secured({UserType.Admin, UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment delete(Apartment apartment) throws IOException {
@@ -102,10 +114,25 @@ public class ApartmentService {
 	
 	@GET
 	@Path("/getApartments")
+	@Secured({UserType.Admin, UserType.Host})
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getAllApartments() throws JsonIOException, JsonSyntaxException, IOException{
+	public List<Apartment> getAllApartments(@Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+		Principal principal = securityContext.getUserPrincipal();
+		String username = principal.getName();
+		UserDAO daou = (UserDAO) sc.getAttribute("userDAO");
+		User user = daou.getUserByUsername(username);
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
-		return dao.GetAll();
+		List<Apartment> retVal =  dao.GetAll();
+		if(user.getRole() == UserType.Admin) {
+			return retVal;
+		}else {
+			ArrayList<Apartment> apartments = new ArrayList<Apartment>();
+			for(Apartment a : retVal) {
+				if(a.getHost().getUsername().equals(username))
+					apartments.add(a);
+			}
+			return apartments;
+		}
 	}
 	
 	
@@ -124,7 +151,6 @@ public class ApartmentService {
 		
 		
 		//broj gostiju
-		System.out.println(parameters.guests);
 		if(parameters.guests != 0) {
 			retVal = filterGuests(retVal, parameters);
 		}
@@ -141,7 +167,13 @@ public class ApartmentService {
 		
 		System.out.println(retVal);
 		
-		return retVal;
+		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
+		for(Apartment a : retVal) {
+			if(!a.getDeleted() && a.getStatus() == ApartmentStatus.Active)
+				apartments.add(a);
+		}
+		
+		return apartments;
 	}
 	
 	

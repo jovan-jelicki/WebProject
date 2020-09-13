@@ -309,7 +309,10 @@ Vue.component('new-apartment', {
 				//this.apartment.datesForRenting=period;
 				
     		axios
-   			.post('rest/apartmentService/save',this.apartment)
+   			.post('rest/apartmentService/save',this.apartment, { headers : {
+   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	        }
+   			})
    	        .then((response) => {console.log(response);
    	    	//apartmentName,type1, type2,roomNum,guestNum,country,city,street, numOfStreet,postNum,price,time1,time2,date1,date2,amenity
 
