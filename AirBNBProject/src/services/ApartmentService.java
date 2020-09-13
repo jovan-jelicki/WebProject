@@ -1,14 +1,19 @@
 package services;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -20,11 +25,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.glassfish.jersey.server.ContainerRequest;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.sun.javafx.collections.MappingChange.Map;
 
 import beans.Apartment;
 import dao.ApartmentDAO;
@@ -53,24 +60,15 @@ public class ApartmentService {
 	@POST
 	@Path("/saveImages")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void image(   @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition cdh)
-	  //  Map<String, String[]> parameterMap = (Map<String, String[]>) request.getParameterMap();
-	    //Map<String, List<String>> collect = (Map<String, List<String>>) ((java.util.Map<String, String[]>) parameterMap).entrySet().stream().collect( Collectors.toMap( entry -> entry.getKey(), entry -> Arrays.asList( entry.getValue() ) ) );
-	   
+	public List<String> image(@FormDataParam("files") InputStream fileInputStream, FormDataMultiPart  cdh) throws IOException {
+		ApartmentDAO dao = (ApartmentDAO) sc.getAttribute("apartmentDAO");
+		List<FormDataBodyPart> parts = cdh.getFields("files");
 		
-		    
-	//    Map<String, File> formData = getFormData( request );
-		//MultivaluedMap<String, String> pathparam = request.getUriInfo().getPathParameters();
-        //MultivaluedMap<String, String> queryparam = request.getUriInfo().getQueryParameters();
-     
-				
-		
-		//request.getProperty("file");
-		//FormDataMultiPart multiPart = ((ContainerRequest) context).readEntity(FormDataMultiPart.class);
-		System.out.println("USAAAAAAAAAAAAAO");
+		List<String> names=dao.saveImage(parts);
+
+
+		return names;
 	}
-	
 	
 	@POST
 	@Path("/save")

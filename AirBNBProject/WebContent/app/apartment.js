@@ -42,14 +42,15 @@ Vue.component('apartment-details', {
 		<br>
 		<div style="display : flex; align-items : center; justify-content : center; height : auto; width : 100%;">
 			<div>
-				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg">
+				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" v-bind:src="apartment.pictures[0]">
 			</div>
 			<div style="margin-right: 5%; margin-left : 5%">
 				<p > <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
 				
 				<p class="card-text" style="font-family: Arial, Helvetica, sans-serif;"> </br> <b> Lokacija : </b> {{apartment.location.adress.street}} {{apartment.location.adress.numberOfStreet}}, {{apartment.location.adress.city}} {{apartment.location.adress.postNumber}} </br>		 	
 	    			<b> Geografska sirina i duzina : </b> {{apartment.location.latitude}} {{apartment.location.longitude}} </br>
-	    			<b> Cena po noci : </b> {{apartment.pricePerNight}}
+	    			<b> Cena po noci : </b> {{apartment.pricePerNight}} </br>
+	    			<b> ajdeeeeeeeeeeee</b>{{apartment.pictures[0]}}
 	    		</p>
 	    		
 	    		<!--Opis apartmana-->

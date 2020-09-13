@@ -190,15 +190,13 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	  
-	  
-	  <template>
+	 
 		  <div class="form-group row">
 		      	<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
 		
         		<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
 		        <button v-on:click="submitFiles()">Potvrdi izbor slika</button>
 		  </div>
-	</template>
 	
 
 
@@ -363,39 +361,34 @@ Vue.component('new-apartment', {
     		}else{
     			this.disabledDates["to"]=new Date();
     		}
-			
+			//..images//1-0.jpg 
     	},
     	submitFiles(){
 
-        //    let formData = new FormData();
-
-          //  for( var i = 0; i < this.files.length; i++ ){
-            //  let file = this.files[i];
-              //formData.append('files[' + i + ']', file);
-            //}
-            //this.apartment.pictures=this.files;
-    		let formData = new FormData();
-    	    formData.append("file", this.files);
-
-    	    //for (var pair of formData.entries()) {
-    	      //  console.log(pair[0]+ ', ' + pair[1]); 
+          let formData = new FormData();
+            for( var i = 0; i < this.files.length; i++ ){
+              let file = this.files[i];
+              formData.append('files', file);
+            }
+	    		axios
+	    		.post( 'rest/apartmentService/saveImages',formData,
+	              {
+	                headers: {
+	                    'Content-Type': 'multipart/form-data'
+	                }
+	              }
+	            )
+		        .then((response) => this.apartment.pictures=response.data );
+	            
     	    //}
-    		
-    		axios.post( 'rest/apartmentService/saveImages',formData,
-              {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(){
-              console.log('SUCCESS!!');
-            });
           },
+    	
 
           handleFilesUpload(){
-           this.files = this.$refs.files.files;
+              this.files = this.$refs.files.files;
            //this.apartment.pictures=this.files;
          }
+    	
     },
     components : { vuejsDatepicker },
 

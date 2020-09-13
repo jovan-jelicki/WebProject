@@ -1,16 +1,23 @@
 package dao;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -166,6 +173,33 @@ public class ApartmentDAO {
 		}
 		Save(apartments);
 	}
+	public List<String> saveImage(List<FormDataBodyPart> parts ) {
+		int brojac=0;
+		List<String> names=new ArrayList<String>();
+		for(FormDataBodyPart field : parts){
+			InputStream valueAs=field.getValueAs(InputStream.class);
+			try {
+				BufferedImage img = ImageIO.read(valueAs);
+				
+		        Random rand = new Random(); 
+				int rand_int1 = rand.nextInt(1000); 
+				String imgName="slika"+rand_int1+".jpg";
+				
+				File f=new File("webproject\\AirBNBProject\\WebContent\\pictures\\"+imgName);
+				ImageIO.write(img, "jpg", f);
+				
+				
+				String name="pictures/"+f.getName();
+				names.add(name);
+				
+			}catch(Exception e){
+			e.printStackTrace();	
+			}
+		 }
+		return names;
+	}
+	
+
 
 
 
