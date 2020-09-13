@@ -288,5 +288,75 @@
     "reservations": [],
     "deleted": false,
     "note": "Proba123"
+  },
+  {
+    "id": 11,
+    "name": "d",
+    "type": "Apartment",
+    "numberOfRooms": 2,
+    "numberOfGuests": 2,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 2,
+        "city": "Novi Sad",
+        "postNumber": 222
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika21.jpg"
+    ],
+    "pricePerNight": 2.0,
+    "checkIn": "19",
+    "checkOut": "11",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Proba123"
   }
 ]
