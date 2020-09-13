@@ -21,7 +21,12 @@ Vue.component('view-apartment', {
 		})
 		.then(response => {
 				this.apartements = response.data;
-			})
+				this.disp = "inline";
+		})
+		.catch(error => {
+			console.log(error);
+			history.back();
+		})
     },
     
     

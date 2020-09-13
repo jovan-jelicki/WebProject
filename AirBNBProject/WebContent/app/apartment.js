@@ -18,7 +18,10 @@ Vue.component('apartment-details', {
 		}
 	},
 	mounted() {
-		this.avgGrade = getAvgGrade(this.apartment.comments);
+		if(this.apartment.name == undefined)
+			history.back();
+		else 
+			this.avgGrade = getAvgGrade(this.apartment.comments);
 	},
 	
 	
@@ -168,7 +171,10 @@ Vue.component('apartment-details', {
 			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : this.grade});
 			console.log(this.grade);
 			axios
-			.post("rest/apartmentService/edit", this.apartment)
+			.post("rest/apartmentService/edit", this.apartment, { headers : {
+	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+	        }
+			})
 			.then(response => {
 				this.apartment = response.data;
 				var apartments = JSON.parse(localStorage.getItem("apartments"));

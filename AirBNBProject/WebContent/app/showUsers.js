@@ -16,6 +16,9 @@ Vue.component('show-users', {
         .then(response =>
              {this.users = response.data;
              this.searchUsers = response.data}
+        ).catch(error => {
+        	history.back();
+        }
         );
     },
     template : 

@@ -66,7 +66,7 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/edit")
-	@Secured({UserType.Admin, UserType.Host})
+	@Secured({UserType.Admin, UserType.Host, UserType.Guest})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {

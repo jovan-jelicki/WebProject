@@ -111,7 +111,10 @@ methods : {
 	search : function() {
 		this.data.location = city.value;
 		axios
-		.post("rest/apartmentService/searchApartments", this.data)
+		.post("rest/apartmentService/searchApartments", this.data, { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+        }
+		})
 		.then(response => {
 			this.apartements = response.data;
 			localStorage.setItem("apartments",  JSON.stringify(this.apartements));
