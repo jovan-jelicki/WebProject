@@ -2,7 +2,7 @@ Vue.component('view-apartment', {
     data : function() {
         return {
             message : "",
-            apartements : !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {},
+            apartements : {},
             user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
             disp : !!localStorage.getItem("apartments") ? "inline" : "none",
             disp1 : "inline",
@@ -15,39 +15,18 @@ Vue.component('view-apartment', {
     },
     mounted() {
     	axios
-		.get("rest/apartmentService/getApartments")
+		.get("rest/apartmentService/getApartments",{ headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+        }
+		})
 		.then(response => {
-			var pom=response.data.length;
-			var pom1=[];
-			var i;
-			var j=0
-			if(this.user.role=="Host"){
-				for(i=0;i<pom;i++){
-					if(response.data[i].deleted==false){
-						if(response.data[i].host.username==this.user.username){
-							pom1[j]=response.data[i];
-							j++;
-						}
-					}
-				}
-				this.apartements = pom1;
-			}else{
-				for(i=0;i<pom;i++){
-					if(response.data[i].deleted==false){
-						pom1[j]=response.data[i];
-						j++;
-					}
-				}
-				this.apartements = pom1;
-			}
-
-			localStorage.setItem("apartments",  JSON.stringify(this.apartements));
-			if(this.apartements.length != 0){
-				console.log(this.apartements);
-			}else {
-				localStorage.removeItem("apartments");
-			}
-			})
+			this.apartements = response.data;
+			this.disp = "inline";
+		})
+		.catch(error => {
+			console.log(error);
+			history.back();
+		})
     },
     
     

@@ -52,7 +52,7 @@ public class Apartment {
 		this.note=note;
 	}
 	
-
+	public Apartment() {}
 	
 	
 	public List<String> getPictures() {
@@ -225,6 +225,5 @@ public class Apartment {
 	
 	
 	
-	public Apartment( ) {}
 	
 }

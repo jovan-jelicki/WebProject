@@ -89,7 +89,10 @@ Vue.component('edit-amenity', {
    			}else{
    				infoErr.style.display="none";
    				axios
-   	   			.post('rest/amenityService/save', this.amenity)
+   	   			.post('rest/amenityService/save', this.amenity, { headers : {
+   	         	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	         }
+   	         })
    	   	        .then((response) => {
    	   	        	
    	   	        	this.amenity=response.data;
@@ -132,14 +135,20 @@ Vue.component('edit-amenity', {
   			editAccButton.style.display="none";
   			infoSuccessEdit.style.display="inline";
   			axios
-	   			.post('rest/amenityService/edit',this.selected)
+	   			.post('rest/amenityService/edit',this.selected, { headers : {
+	   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+	   	        }
+	   			})
 	   	        .then((response) => {console.log(response);}
 	   	        );
   		},
   		deleteAmenity: function(){
   			infoSuccessDelete.style.display="inline";
   		axios
-   			.post('rest/amenityService/delete',this.selected)
+   			.post('rest/amenityService/delete',this.selected, { headers : {
+   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	        }
+   			})
    	        .then((response) => { console.log(response);}
    	        );
   		}

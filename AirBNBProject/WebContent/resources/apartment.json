@@ -40,7 +40,7 @@
     "pricePerNight": 12.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 9,
@@ -101,7 +101,7 @@
     "pricePerNight": 3.0,
     "checkIn": "3",
     "checkOut": "3",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 4,
@@ -153,7 +153,7 @@
     "pricePerNight": 25.0,
     "checkIn": "13",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 6,
@@ -202,9 +202,13 @@
     },
     "comments": [],
     "pictures": [
+<<<<<<< HEAD
       "pictures/slika614.jpg",      
       "pictures/slika351.jpg"
       
+=======
+      "pictures/slika614.jpg"
+>>>>>>> master
     ],
     "pricePerNight": 8.0,
     "checkIn": "14",
@@ -223,27 +227,51 @@
   },
   {
     "id": 10,
+<<<<<<< HEAD
     "name": "dddd",
     "type": "Apartment",
     "numberOfRooms": 5,
     "numberOfGuests": 5,
+=======
+    "name": "Proba",
+    "type": "Apartment",
+    "numberOfRooms": 1,
+    "numberOfGuests": 2,
+>>>>>>> master
     "location": {
       "longitude": 19.8235738,
       "latitude": 45.29733179999999,
       "adress": {
         "country": "Srbija",
         "street": "Misarska",
+<<<<<<< HEAD
         "numberOfStreet": 41,
+=======
+        "numberOfStreet": 1,
+>>>>>>> master
         "city": "Novi Sad",
         "postNumber": 21000
       }
     },
+<<<<<<< HEAD
     "datesForRenting": [],
+=======
+    "datesForRenting": [
+      {
+        "dateFrom": 1600120800000,
+        "dateTo": 1600552800000
+      }
+    ],
+>>>>>>> master
     "freePeriods": [],
     "host": {
       "username": "dane",
       "password": "d",
+<<<<<<< HEAD
       "name": "Dane",
+=======
+      "name": "Danee",
+>>>>>>> master
       "surname": "Danic",
       "gender": "Muski",
       "role": "Host",
@@ -254,21 +282,51 @@
     },
     "comments": [],
     "pictures": [
+<<<<<<< HEAD
       "pictures/slika351.jpg"
     ],
     "pricePerNight": 2.0,
     "checkIn": "2",
     "checkOut": "2",
+=======
+      "pictures/slika558.jpg"
+    ],
+    "pricePerNight": 23.0,
+    "checkIn": "19",
+    "checkOut": "11",
+>>>>>>> master
     "status": "NonActive",
     "amenities": [
       {
         "id": 2,
         "name": "Parking",
         "deleted": false
+<<<<<<< HEAD
+=======
+      },
+      {
+        "id": 3,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Frizider",
+        "deleted": false
+>>>>>>> master
       }
     ],
     "reservations": [],
     "deleted": false,
+<<<<<<< HEAD
     "note": "eeee"
+=======
+    "note": "Proba123"
+>>>>>>> master
   }
 ]

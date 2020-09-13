@@ -309,7 +309,10 @@ Vue.component('new-apartment', {
 
 				
     		axios
-   			.post('rest/apartmentService/save',this.apartment)
+   			.post('rest/apartmentService/save',this.apartment, { headers : {
+   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	        }
+   			})
    	        .then((response) => {console.log(response);
 
    	           document.getElementById('apartmentName').disabled = true;
@@ -374,7 +377,8 @@ Vue.component('new-apartment', {
 	    		.post( 'rest/apartmentService/saveImages',formData,
 	              {
 	                headers: {
-	                    'Content-Type': 'multipart/form-data'
+	                    'Content-Type': 'multipart/form-data',
+	                    Authorization : 'Bearer ' + localStorage.getItem("token")
 	                }
 	              }
 	            )

@@ -61,6 +61,7 @@ public class GuestRegistrationService {
 	}
 	
 	@POST
+	@Secured({UserType.Admin})
 	@Path("/save-host")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
