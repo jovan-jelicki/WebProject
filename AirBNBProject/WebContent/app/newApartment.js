@@ -219,31 +219,37 @@ Vue.component('new-apartment', {
     
     methods:{
     	geocodeAddress: function(){
-    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
-    		axios
-    		.get('https://maps.googleapis.com/maps/api/geocode/json', {
-    			params: {
-    				address:geoAddress, 
-    				key: 'AIzaSyCJ-9l16ACAmjuZ0xcZr-xcT-EYJZQ-md4',
-    			}
-    		})
-
-    		.then( (response) => {
-    			this.location
-    			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
-    					adress: this.adress};
-    			this.apartment.location=this.location;
-    			this.apartment.amenities=this.selectedAmenities;
-
-    			
-    			
-
-				this.apartment.host=this.user;
-    			
-    			
-    			this.addApartment();
-    			
-    		});
+    		if(this.adress.streetNum==undefined || this.adress.street==undefined || this.adress.city==undefined || this.adress.country==undefined){
+    			infoSuccess.style.display="none";
+    			infoErr.style.display="inline";
+    			infoErr1.style.display="none";
+    		}else{
+	    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
+	    		axios
+	    		.get('https://maps.googleapis.com/maps/api/geocode/json', {
+	    			params: {
+	    				address:geoAddress, 
+	    				key: 'AIzaSyCJ-9l16ACAmjuZ0xcZr-xcT-EYJZQ-md4',
+	    			}
+	    		})
+	
+	    		.then( (response) => {
+	    			this.location
+	    			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
+	    					adress: this.adress};
+	    			this.apartment.location=this.location;
+	    			this.apartment.amenities=this.selectedAmenities;
+	
+	    			
+	    			
+	
+					this.apartment.host=this.user;
+	    			
+	    			
+	    			this.addApartment();
+	    			
+	    		});
+    		}
     	},
     	addNewPeriod: function(){
     		dateErr.style.display="none";
@@ -300,18 +306,11 @@ Vue.component('new-apartment', {
     			dateErr1.style.display="inline";
 			}
     		else{
-    			//let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
-			//let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
-				
-				//let period=[{dateFrom:dateFrom, dateTo:dateTo}]
-				//this.period.dateFrom=dateFrom;
-				// this.period.dateTo=dateTo;
-				//this.apartment.datesForRenting=period;
+
 				
     		axios
    			.post('rest/apartmentService/save',this.apartment)
    	        .then((response) => {console.log(response);
-   	    	//apartmentName,type1, type2,roomNum,guestNum,country,city,street, numOfStreet,postNum,price,time1,time2,date1,date2,amenity
 
    	           document.getElementById('apartmentName').disabled = true;
    	           document.getElementById('type1').disabled = true;
@@ -347,6 +346,7 @@ Vue.component('new-apartment', {
     		
 			location.reload();
     	},
+    	
     	display: function(){
     		pomoc.style.display="none";
     		dates.style.display="inline";
@@ -361,7 +361,7 @@ Vue.component('new-apartment', {
     		}else{
     			this.disabledDates["to"]=new Date();
     		}
-			//..images//1-0.jpg 
+ 
     	},
     	submitFiles(){
 
@@ -379,14 +379,10 @@ Vue.component('new-apartment', {
 	              }
 	            )
 		        .then((response) => this.apartment.pictures=response.data );
-	            
-    	    //}
-          },
-    	
-
-          handleFilesUpload(){
+	    },
+   
+       handleFilesUpload(){
               this.files = this.$refs.files.files;
-           //this.apartment.pictures=this.files;
          }
     	
     },

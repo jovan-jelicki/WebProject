@@ -41,8 +41,8 @@ Vue.component('apartment-details', {
 		</br>
 		<br>
 		<div style="display : flex; align-items : center; justify-content : center; height : auto; width : 100%;">
-			<div>
-				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" v-bind:src="apartment.pictures[0]">
+			<div v-for="a in apartment.pictures">
+				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" v-bind:src="a">
 			</div>
 			<div style="margin-right: 5%; margin-left : 5%">
 				<p > <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
@@ -112,28 +112,26 @@ Vue.component('apartment-details', {
 			</div>
 		</div>
 		
-
-
-<!-- Modalni za brisane -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Da li ste sigurni da zelite da obrisete apartman {{apartment.name}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Otkazi</button>
-        <button type="button" class="btn btn-primary" v-on:click="deleteApartment()">Potvrdi brisanje</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<!-- Modalni za brisane -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Da li ste sigurni da zelite da obrisete apartman {{apartment.name}}
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Otkazi</button>
+		        <button type="button" class="btn btn-primary" v-on:click="deleteApartment()">Potvrdi brisanje</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 	
 	`,

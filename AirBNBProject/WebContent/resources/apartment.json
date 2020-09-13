@@ -202,8 +202,10 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika614.jpg"
-          ],
+      "pictures/slika614.jpg",      
+      "pictures/slika351.jpg"
+      
+    ],
     "pricePerNight": 8.0,
     "checkIn": "14",
     "checkOut": "4",
@@ -218,5 +220,55 @@
     "reservations": [],
     "deleted": false,
     "note": "shsduhdsij"
+  },
+  {
+    "id": 10,
+    "name": "dddd",
+    "type": "Apartment",
+    "numberOfRooms": 5,
+    "numberOfGuests": 5,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 41,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [],
+    "freePeriods": [],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Dane",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika351.jpg"
+    ],
+    "pricePerNight": 2.0,
+    "checkIn": "2",
+    "checkOut": "2",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 2,
+        "name": "Parking",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "eeee"
   }
 ]
