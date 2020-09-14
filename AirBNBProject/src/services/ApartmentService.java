@@ -78,7 +78,9 @@ public class ApartmentService {
 		List<FormDataBodyPart> parts = cdh.getFields("files");
 		
 		List<String> names=dao.saveImage(parts);
-
+		for (String string : names) {
+			System.out.println(string);
+		}
 
 		return names;
 	}

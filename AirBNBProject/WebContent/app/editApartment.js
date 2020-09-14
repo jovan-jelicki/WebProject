@@ -266,7 +266,7 @@ Vue.component('edit-apartment', {
     		else{
 				
     		axios
-   		.post('rest/apartmentService/save',this.apartment, { headers : {
+   		.post('rest/apartmentService/edit',this.apartment, { headers : {
    	        	Authorization : 'Bearer ' + localStorage.getItem("token")
    	        }
    			})

@@ -31,22 +31,52 @@ Vue.component('apartment-details', {
 		</br>
 		
 		<div style="display : inline">
-			<h3 style="float : left; margin-left : 20%">Smestaj {{apartment.name}}</h3>
-			<button class="btn btn-primary" v-on:click="backToSearch()" style="float: right; margin-right : 10%" >Povratak na pretragu </button>
+			<h3 class="display-4" style="float : left; margin-left : 10%">Smestaj {{apartment.name}}</h3>
+			<button class="btn btn-outline-primary" type="button" v-on:click="backToSearch()" style="float: right; margin-right : 10%" >Povratak na pretragu </button>
 		</div>
 		<div>
 		  <template v-if="this.user.name!=undefined">
-		  <button class="btn btn-primary" v-on:click="editApartment()" style="float: right; margin-right : 4%" >Izmeni apartman</button>
-		  <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"  style="float: right; margin-right : 4%">Obrisi apartman</button>
+		  <button class="btn btn-outline-primary" type="button" v-on:click="editApartment()" style="float: right; margin-right : 4%" >Izmeni apartman</button>
+		  <button class="btn btn-outline-primary" type="button"  data-toggle="modal" data-target="#deleteModal"  style="float: right; margin-right : 4%">Obrisi apartman</button>
 		</template>
 		</div>
 		<br>
 		</br>
 		<br>
-		<div style="display : flex; align-items : center; justify-content : center; height : auto; width : 100%;">
-			<div v-for="a in apartment.pictures">
-				<img style="margin-left : 5%; border-radius: 20%; padding: 10px;"  width="350" height="300" v-bind:src="a">
-			</div>
+
+	<div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel"  style="width: 800px ; margin: 0 auto ">
+	  <!--Indicators-->
+	  <ol class="carousel-indicators">
+	    
+		  <div v-for="a in apartment.pictures" >
+		    <li data-target="#carousel-example-2" data-slide-to=idx class="{ active: idx==0 }" ></li>
+		  </div>
+	  </ol>
+	
+	  <div class="carousel-inner" role="listbox">
+	    <div   v-for="(a,index) in apartment.pictures"  :class="(index === 0 ? 'carousel-item active' : 'carousel-item')">
+	      <!--Mask color-->
+	      <div class="view">
+	        <img class="d-block w-100" v-bind:src="a" >
+	        <div class="mask rgba-black-light"></div>
+	      </div>    
+	    </div>
+	  </div>
+
+
+	  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
+		
+		
+		
+		<div style="display : flex; height : auto; width : 100%;">
 			<div style="margin-right: 5%; margin-left : 5%">
 				<p v-if="avgGrade"> <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
 				
@@ -60,8 +90,8 @@ Vue.component('apartment-details', {
 			</div>
 		</div>
 		
-		<div class="filter-div" style="background-color : white">
 		
+		<div class="filter-div" style="background-color : white">
 			<div style="display : inline">
 				<div class="container">
 					<h4> Dodaci </h4>
@@ -143,7 +173,7 @@ Vue.component('apartment-details', {
 		</div>
 
 <!-- Modalni za brisane -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -215,12 +245,13 @@ Vue.component('apartment-details', {
 			})
 			.then(response => {
 				this.apartment = response.data;
-				 $('#exampleModalCenter').modal('hide');
+				 $('#deleteModal').modal('hide');
 
 				location.replace('#/va');
 
 				})
 		},
+		
 		
 	},
 	components : { vuejsDatepicker }

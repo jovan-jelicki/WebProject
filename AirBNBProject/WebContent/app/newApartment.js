@@ -36,7 +36,7 @@ Vue.component('new-apartment', {
 	  
     template : 
     `  
-  <form>
+  <div>
       <br>
       <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Dodavanje novog apartmana</h1>
       <hr>
@@ -98,6 +98,7 @@ Vue.component('new-apartment', {
               <input class="form-control" id="street" type="text" v-model="adress.street">
 	    </div>
 	  </div>
+	  
 	   <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Broj:</label>
 	    <div class="col-sm-10">
@@ -112,14 +113,14 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 
-	    <div class="form-group row">
+	 <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Cena po noci:</label>
 	    <div class="col-sm-10">
               <input class="form-control" id="price" type="number" v-model="apartment.pricePerNight">
 	    </div>
 	  </div>
 	  
-	    <div class="form-group row">
+	  <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label ">Vreme za prijavu:</label>
 	    <div class="col-sm-10">
               <input class="form-control" id="time1" type="text" v-model="apartment.checkIn">
@@ -137,7 +138,7 @@ Vue.component('new-apartment', {
 	  <div class="form-group row"  id="pomoc">
 	    <label class="col-sm-2 col-form-label ">Klikom na dugme izaberite datume za izdavanje</label>
 	    <div class="col-sm-10">
-	  <button id="datesButton" type="button" class="btn btn-primary"   v-on:click="display()" >Dodaj periode</button>
+	    <button id="datesButton" type="button" class="btn btn-primary"   v-on:click="display()" >Dodaj periode</button>
 	    </div>
 	  </div>
 	  
@@ -168,35 +169,34 @@ Vue.component('new-apartment', {
 
 	
 	
-     <div class="form-group row">
+    <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
     </div>
 
     <div class="col-md-2 personal-info">
-  	  <div class="form-check"  >
-  	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
+  	  <div class="form-check" >
+    	<div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
   	       <input class="form-check-input"   type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
     	   <label class="form-control" id="amenity"> {{a.name}} </label>
-      </div>
+    	</div>
 	  </div>
-	  </div>
+	</div>
 	  
 	  <br>
 	  
-	    <div class="form-group row">
-	    <label  class="col-sm-2 col-form-label ">Dodatne beleske:</label>
-	    <div class="col-sm-10">
-              <input class="form-control" id="note" type="text" v-model="apartment.note">
-	    </div>
-	  </div>
+	<div class="form-group row">
+	   <label  class="col-sm-2 col-form-label ">Dodatne beleske:</label>
+	   <div class="col-sm-10">
+          <input class="form-control" id="note" type="text" v-model="apartment.note">
+	   </div>
+    </div>
 	  
 	 
-		  <div>
-		      	<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
-		
-        		<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
-		        <button  v-on:click="submitFiles()">Potvrdi izbor slika</button>
-		  </div>
+	 <div>
+		<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
+        <input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
+		 <button type="button" v-on:click="submitFiles()">Potvrdi izbor slika</button>
+	 </div>
 	
 
 
@@ -213,13 +213,13 @@ Vue.component('new-apartment', {
 	  <button id="addNew" type="button" class="btn btn-primary"  style = "display: none" v-on:click="goBack" >Povratak na dodavanje novog</button>
 
    </div>
-   </form>
+   </div>
     `, 
      
     
     methods:{
     	geocodeAddress: function(){
-    		if(this.adress.streetNum==undefined || this.adress.street==undefined || this.adress.city==undefined || this.adress.country==undefined){
+    		if(this.adress.numberOfStreet==undefined || this.adress.street==undefined || this.adress.city==undefined || this.adress.country==undefined){
     			infoSuccess.style.display="none";
     			infoErr.style.display="inline";
     			infoErr1.style.display="none";
