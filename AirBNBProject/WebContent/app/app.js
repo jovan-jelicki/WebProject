@@ -6,6 +6,7 @@ const editAmenity={template:'<edit-amenity></edit-amenity>'}
 const apartmentDetails = {template: '<apartment-details></apartment-details>'}
 const editApartment = {template: '<edit-apartment></edit-apartment>'}
 const viewApartments={template: '<view-apartment></view-apartment>'}
+const viewReservations = {template: '<view-reservations></view-reservations>'}
 
 const router = new VueRouter({
         mode:'hash',
@@ -17,7 +18,8 @@ const router = new VueRouter({
             {path:'/sa', component: editAmenity},
             {path:'/ad', component : apartmentDetails},
             {path:'/ea', component : editApartment},
-            {path:'/va', component : viewApartments}
+            {path:'/va', component : viewApartments},
+            {path:'/vr', component : viewReservations}
 
         ]
 });
@@ -55,9 +57,11 @@ var logInJs = new Vue ({
                        // console.log(this.user.role);
                         this.message="";
                         this.isAuthorizedPar = true;
+                        location.reload();
                         if(this.user.role != "Guest"){
-                        	 location.replace('#/us');
+                        	 location.replace('#/va');
                         }
+                        location.reload();
                      } 
                  }
                  )

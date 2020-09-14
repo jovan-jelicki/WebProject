@@ -39,7 +39,7 @@ Vue.component('show-users', {
       <th scope="col">Ime</th>
       <th scope="col">Prezime</th>
       <th scope="col">Username</th>
-      <th scope="col" v-if="user.role == 'Admin'">Pol</th>
+      <th scope="col">Pol</th>
       <th scope="col" v-if="user.role == 'Admin'">Uloga</th>
     </tr>
   </thead>

@@ -12,10 +12,12 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.ws.rs.BadRequestException;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
@@ -28,6 +30,7 @@ import com.google.gson.stream.JsonReader;
 
 import beans.Amenity;
 import beans.Apartment;
+import beans.Period;
 
 public class ApartmentDAO {
 
@@ -202,6 +205,34 @@ public class ApartmentDAO {
 			}
 		 }
 		return names;
+	}
+
+	public Apartment schedulePeriod(Apartment apartment, Date reservationStart, Date reservationEnd) throws IOException {
+		ArrayList<Period> freePeriods = new ArrayList<Period>();
+		for(Period period : apartment.getFreePeriods()) {
+			if(reservationStart.getTime() >= period.getDateFrom() && reservationEnd.getTime() <= period.getDateTo()) {
+					Period first = new Period();
+					Period second = new Period();
+					first.setDateFrom(period.getDateFrom());
+					first.setDateTo(reservationStart.getTime());
+					second.setDateFrom(reservationEnd.getTime());
+					second.setDateTo(period.getDateTo());
+					freePeriods.add(first);
+					freePeriods.add(second);
+			}else {
+				freePeriods.add(period);
+			}
+		}
+		
+		apartment.setFreePeriods(freePeriods);
+		Edit(apartment);
+		ArrayList<Apartment> help = (ArrayList<Apartment>) GetAll();
+		for(Apartment a : help) {
+			if(a.getId() == apartment.getId())
+				return a;
+		}
+		throw new BadRequestException();
+		
 	}
 	
 

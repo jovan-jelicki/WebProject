@@ -1,6 +1,6 @@
 package beans;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Reservation {
 
@@ -11,10 +11,11 @@ public class Reservation {
 	public double fullPrice;
 	public String message;
 	public User guest;
-	public ReservationStatus status;
+	public int numberOfGuests;
+	public ReservationStatus status = ReservationStatus.Created;
 
 	public Reservation(int id, Apartment apartment, Date startDate, int numberOfNights, double fullPrice,
-			String message, User guest, ReservationStatus status) {
+			String message, User guest, ReservationStatus status, int guests) {
 		super();
 		this.id = id;
 		this.apartment = apartment;
@@ -24,10 +25,21 @@ public class Reservation {
 		this.message = message;
 		this.guest = guest;
 		this.status = status;
+		this.numberOfGuests = guests;
 	}
 
 	public Reservation() {
 		
+	}
+
+	
+	
+	public int getNumberOfGuests() {
+		return numberOfGuests;
+	}
+
+	public void setNumberOfGuests(int numberOfGuests) {
+		this.numberOfGuests = numberOfGuests;
 	}
 
 	public int getId() {

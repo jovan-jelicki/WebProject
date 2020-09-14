@@ -212,7 +212,7 @@ public class ApartmentService {
 			 * 
 			 * za sad ostavljam samo grad da se pretrazuje
 			 */
-			if(parameters.location.contains(aparment.location.adress.city)) {
+			if(parameters.location.toLowerCase().contains(aparment.location.adress.city.toLowerCase())) {
 				retVal.add(aparment);
 			}
 		}

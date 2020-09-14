@@ -14,14 +14,47 @@ Vue.component('apartment-details', {
 			apartment : !!localStorage.getItem("apartment") ? JSON.parse(localStorage.getItem("apartment")) : {},
 			comForm : "none",
 			grade : "5",
-			avgGrade : {}
+			avgGrade : {},
+			disabledPicker : true,
+			disabledDatesFirst : {},
+			disabledDatesSecond: {},
+			reservation : {
+				message : ""
+			},
+			fullPrice : {}
 		}
 	},
 	mounted() {
 		if(this.apartment.name == undefined)
 			history.back();
-		else 
+		else {
 			this.avgGrade = getAvgGrade(this.apartment.comments);
+			if(this.apartment.freePeriods != undefined){
+				var ranges = [];
+				var first = {};
+				var second = {};
+				first = this.apartment.freePeriods[0].dateTo;
+				var lastDay = {};
+				//20.06 - 25.06   19-19  27.06 - 29.06
+				for(let period of this.apartment.freePeriods){
+					if(period.dateTo != first){
+						ranges.push({from: new Date(first), to: new Date(period.dateFrom)});
+						first = period.dateTo;
+						console.log(new Date( first))
+						
+					}
+					lastDay = new Date(period.dateTo + 86400000);
+				}
+				
+				this.disabledDatesFirst["ranges"] = ranges;
+				this.disabledDatesFirst["from"] = lastDay;
+				this.disabledDatesFirst["to"] = new Date();
+			}
+				
+		
+		}
+		
+		
 	},
 	
 	
@@ -36,8 +69,8 @@ Vue.component('apartment-details', {
 		</div>
 		<div>
 		  <template v-if="this.user.name!=undefined">
-		  <button class="btn btn-primary" v-on:click="editApartment()" style="float: right; margin-right : 4%" >Izmeni apartman</button>
-		  <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"  style="float: right; margin-right : 4%">Obrisi apartman</button>
+		  <button class="btn btn-primary" v-if="user.role != 'Guest'" v-on:click="editApartment()" style="float: right; margin-right : 4%" >Izmeni apartman</button>
+		  <button class="btn btn-primary" v-if="user.role != 'Guest'" data-toggle="modal" data-target="#exampleModalCenter"  style="float: right; margin-right : 4%">Obrisi apartman</button>
 		</template>
 		</div>
 		<br>
@@ -127,20 +160,56 @@ Vue.component('apartment-details', {
 						<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
 						<hr>
 						<div style="display : flex; margin-left : 3%">
-							<vuejs-datepicker id="date1" :monday-first="true" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
-							<vuejs-datepicker id="date2" :monday-first="true" placeholder="Unesite krajnji datum" format="dd.MM.yyyy" disabled></vuejs-datepicker>
+							<vuejs-datepicker id="date1"  @closed="enableDatePicker()" v-model="reservation.reservationStart" :monday-first="true" :disabled-dates="disabledDatesFirst" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
+							<vuejs-datepicker id="date2" v-bind:disabled="disabledPicker" v-model="reservation.reservationEnd" :monday-first="true" :disabled-dates="disabledDatesSecond" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"></vuejs-datepicker>
 						</div>
 						<hr>
 						<div style="display : flex">
 							<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
-							<input type="number" onkeydown="return false" style="width: 20%; margin-left: 5%;" />
+							<input type="number" v-model="reservation.guests"  min="1" v-bind:max="apartment.numberOfGuests" onkeydown="return false" style="width: 20%; margin-left: 5%;" />
 						</div>
 							
-						<button class="btn btn-primary"> Pretrazi </button>
+						<button class="btn btn-primary" v-if="user.role == 'Guest' || user.role == undefined" v-on:click="fullPriceM()"> Zakazi </button>
+						<p style="color : red; display : none" id="logInMessage"> Potrebno je prvo da se ulogujete! </p>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal" id="success">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Obavestenje</h1>
+                    </div>
+                    <div class="modal-body">
+						<p> Uspesno ste kreirali rezervaciju! </p>
+						<hr>
+						<button class="btn btn-primary" v-on:click="exit()" style="background-color : gray; margin-left : 5%" > Ok </button>
+					</div>
+                </div>
+            </div>
+        </div>
+		
+		
+		<div class="modal" id="modalReservation">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Rezervacija</h1>
+                    </div>
+                    <div class="modal-body">
+						<p> Ukupna cena : {{fullPrice}} </p>
+						<p> Unesite poruku za domacina : </p>
+						<textarea class="form-control" rows="5" cols="20" v-model="reservation.message" placeholder="Ostavite poruku..." id="comment"></textarea>
+						<div style="display : flex; margin-top : 5%"> 
+							<button class="btn btn-primary" data-target="#success" data-backdrop="static"  data-toggle="modal" v-on:click="makeReservation()"> Rezervisi </button>
+							<button class="btn btn-primary" v-on:click="exitModal()" style="background-color : gray; margin-left : 5%" > Otkazi </button>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
 		
 <!-- Modalni za brisane -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -166,6 +235,42 @@ Vue.component('apartment-details', {
 	
 	`,
 	methods : {
+		exit : function (){
+			$('#success').modal('hide');
+			location.replace("#/");
+			location.reload();
+		},
+		makeReservation : function() {
+			this.reservation.guest = this.user;
+			this.reservation.apartment = this.apartment;
+			axios
+			.post("rest/reservationService/save", this.reservation, { headers : {
+   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	        }
+			}).then(response => {
+				localStorage.removeItem("apartment");
+				localStorage.removeItem("apartments");
+				$('#modalReservation').modal('hide');
+				console.log(response.data)
+			}).catch(error => {
+				console.log(error.response);
+			})
+			
+				
+		},
+		exitModal : function (){
+			$('#modalReservation').modal('hide');
+		},
+		fullPriceM : function() {
+			if(localStorage.getItem("user") == null || localStorage.getItem("user") == undefined ){
+				logInMessage.style.display = "inline";
+				return;
+			}
+			if(this.reservation.reservationStart != undefined && this.reservation.reservationEnd != undefined && this.reservation.guests != undefined)	{
+				this.fullPrice = Math.floor((this.reservation.reservationEnd - this.reservation.reservationStart)/ 86400000)*this.apartment.pricePerNight;
+				$('#modalReservation').modal('show');
+			}
+		},
 		cancel : function() {
 			this.comForm = "none";
 			buttonComment.style.display = "inline";
@@ -221,6 +326,23 @@ Vue.component('apartment-details', {
 
 				})
 		},
+		enableDatePicker : function() {
+			if(this.reservation.reservationStart != undefined){
+				this.disabledPicker = false;
+				
+				var lastDay = {};
+				//20.06 - 25.06     27.06 - 29.06
+				for(let period of this.apartment.freePeriods){
+					if(this.reservation.reservationStart >= new Date(period.dateFrom) && this.reservation.reservationStart <= new Date(period.dateTo)){
+						lastDay = new Date(period.dateTo + 86400000);
+						break;
+					}
+				}
+				this.disabledDatesSecond["to"] = this.reservation.reservationStart;
+				this.disabledDatesSecond["from"] = lastDay;
+				
+			}
+		}
 		
 	},
 	components : { vuejsDatepicker }

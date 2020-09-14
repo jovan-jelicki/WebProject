@@ -22,7 +22,12 @@
         "dateTo": 1607727600000
       }
     ],
-    "freePeriods": [],
+    "freePeriods": [
+      {
+        "dateFrom": 1599688800000,
+        "dateTo": 1607727600000
+      }
+    ],
     "host": {
       "username": "dane",
       "password": "d",
@@ -83,7 +88,24 @@
         "dateTo": 1603404000000
       }
     ],
-    "freePeriods": [],
+    "freePeriods": [
+      {
+        "dateFrom": 1599775200000,
+        "dateTo": 1600171980000
+      },
+      {
+        "dateFrom": 1600431180000,
+        "dateTo": 1600552800000
+      },
+      {
+        "dateFrom": 1602367200000,
+        "dateTo": 1602677640000
+      },
+      {
+        "dateFrom": 1603023240000,
+        "dateTo": 1603404000000
+      }
+    ],
     "host": {
       "username": "dane",
       "password": "d",
@@ -98,7 +120,7 @@
     },
     "comments": [],
     "pictures": [],
-    "pricePerNight": 3.0,
+    "pricePerNight": 30.0,
     "checkIn": "3",
     "checkOut": "3",
     "status": "Active",
@@ -131,11 +153,16 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1598997600000,
-        "dateTo": 1600466400000
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
       }
     ],
-    "freePeriods": [],
+    "freePeriods": [
+      {
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
+      }
+    ],
     "host": {
       "username": "dane",
       "password": "d",
@@ -183,11 +210,16 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599861600000,
-        "dateTo": 1601157600000
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
       }
     ],
-    "freePeriods": [],
+    "freePeriods": [
+      {
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
+      }
+    ],
     "host": {
       "username": "dane",
       "password": "d",
@@ -238,11 +270,16 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1600120800000,
-        "dateTo": 1600552800000
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
       }
     ],
-    "freePeriods": [],
+    "freePeriods": [
+      {
+        "dateFrom": 1600207200000,
+        "dateTo": 1613862000000
+      }
+    ],
     "host": {
       "username": "dane",
       "password": "d",

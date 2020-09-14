@@ -3,7 +3,9 @@ package services;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +28,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import beans.Reservation;
 import beans.User;
 import beans.UserType;
+import dao.ReservationDAO;
 import dao.UserDAO;
 
 @Path("/userService")
@@ -88,12 +93,25 @@ public class UserService {
 	}
 
 	@GET
-	@Secured({UserType.Admin})
+	@Secured({UserType.Admin, UserType.Host})
 	@Path("/getUsers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAllUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException{	
+	public List<User> getAllUsers(@Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, IOException{	
 		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
-		return dao.GetAll();
+		ReservationDAO resDao = new ReservationDAO();
+		Principal principal = securityContext.getUserPrincipal();
+		String username = principal.getName();
+		User user = dao.getUserByUsername(username);
+		if(user.getRole() == UserType.Admin)
+			return dao.GetAll();
+		else {
+			ArrayList<User> users = new ArrayList<User>();
+			for(Reservation res : resDao.GetAll()) {
+				if(res.getApartment().getHost().getUsername().equals(username))
+					users.add(res.getGuest());
+			}
+			return users;
+		}
 	}
 	
 	private String generateToken(User user, int time) {
