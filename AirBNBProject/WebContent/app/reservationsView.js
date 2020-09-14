@@ -1,7 +1,8 @@
 Vue.component('view-reservations', {
 	data : function () {
 		return {
-			reservations : {}
+			reservations : {},
+			user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
 		}
 	},
 	mounted () {
@@ -21,7 +22,7 @@ Vue.component('view-reservations', {
 	
 	template : `
 		<div>
-		
+		</br>
 			<div class="container" >
 			
 				<div class="row">
@@ -35,15 +36,27 @@ Vue.component('view-reservations', {
 									<th scope="col"> Broj noci </th>
 									<th scope="col"> Ukupna cena  </th>
 									<th scope="col"> Broj gostiju </th>
-									<th scope="col"> Gost </th>
-									<th scope="col">  </th>
+									<th scope="col" v-if="user.role != 'Guest'"> Gost </th>
+									<th scope="col"> Status </th>
+									<th scope="col"> Poruka domacinu </th>
+									<th scope="col" v-if="user.role != 'Admin'">  </th>
+									<th scope="col" v-if="user.role == 'Host'" > </th>
 								</tr>
-							<thead>
+							</thead>
 							<tbody>
 								<tr v-for="res of reservations">
-									<td class="w-25"> <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep"> </td>
+									<td class="w-25" v-on:click="apartmentDetails(res.apartment)"> <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep"> </td>
 									<td> {{res.apartment.name}} </td>
-									<td> {{res.startDate}} </td>
+									<td> {{new Date(res.startDate)| dateFormat('DD.MM.YYYY')}} </td>
+									<td> {{res.numberOfNights}} </td>
+									<td> {{res.fullPrice}} </td>
+									<td> {{res.numberOfGuests}} </td>
+									<td  v-if="user.role != 'Guest'"> {{res.guest.username}} </td>
+									<td> {{res.status}} </td>
+									<td> {{res.message}} </td>
+									<td><button class="btn btn-primary" v-if="user.role == 'Guest'" > Otkazi </button>
+									<td><button class="btn btn-primary" v-if="user.role == 'Host'" > Prihvati </button>
+									<td> <button class="btn btn-primary"  v-if="user.role == 'Host'" > Odbij </button>
 								</tr>
 								
 							</tbody>
@@ -57,6 +70,23 @@ Vue.component('view-reservations', {
 	
 	`,
 	methods : {
-		
-	}
+		apartmentDetails : function(apart) {
+			axios
+			.post("rest/apartmentService/getApartment", apart, { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+			}
+			})
+			.then(response => {
+				localStorage.setItem("apartment", JSON.stringify(response.data));
+				location.replace("#/ad");
+			})
+			
+		}
+	},
+	 filters: {
+	    	dateFormat: function (value, format) {
+	    		var parsed = moment(value);
+	    		return parsed.format(format);
+	    	}
+	   	}
 })

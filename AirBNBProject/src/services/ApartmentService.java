@@ -139,6 +139,24 @@ public class ApartmentService {
 		}
 	}
 	
+	@POST
+	@Path("/getApartment")
+	@Secured({UserType.Admin, UserType.Guest, UserType.Host})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Apartment getApartmen(Apartment apartmen) throws JsonSyntaxException, IOException {
+		Apartment retVal = new Apartment();
+		ApartmentDAO dao = new ApartmentDAO();
+		for(Apartment a : dao.GetAll()) {
+			if(a.getId() == apartmen.getId()) {
+				retVal = a;
+				break;
+			}
+		}
+		
+		return retVal;
+	}
+	
 	
 	@POST
 	@Path("/searchApartments")

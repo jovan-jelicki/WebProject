@@ -47,11 +47,11 @@
                         <h1>Log in</h1>
                     </div>
                     <div class="modal-body">
-                        <form >
                             <input type="text" id="usernameLogIn" placeholder="Username" v-model="parameters.username">
                             <input type="password" id='passwordLogIn' placeholder="Password" v-model="parameters.password">
                             <label style="color:red" >{{message}}</label>
-                            <input type="submit" value="Potvrdi" v-on:click="logIn($event)" >
+                            <hr>
+                            <button  class="btn btn-primary"  v-on:click="logIn($event)" >Potvrdi </button>
                         </form> 
                     </div>
                 </div>
