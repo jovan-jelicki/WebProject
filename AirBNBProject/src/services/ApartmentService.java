@@ -86,6 +86,17 @@ public class ApartmentService {
 	}
 	
 	@POST
+	@Path("/deleteImages")
+	@Secured({UserType.Host})
+	@Produces("text/plain")
+	public void deleteImage(String url) throws IOException {
+		ApartmentDAO dao = (ApartmentDAO) sc.getAttribute("apartmentDAO");
+		//List<Apartment> apartments=
+				dao.deleteImage(url);
+	//	return apartments;
+	}
+	
+	@POST
 	@Path("/save")
 	@Secured({UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)

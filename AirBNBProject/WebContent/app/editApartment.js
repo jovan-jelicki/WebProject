@@ -20,7 +20,8 @@ Vue.component('edit-apartment', {
             ind:'',
             files: [],
             datesForDelete:[],
-            list:[]
+            list:[],
+            path: ''
              }
             },  
                    
@@ -458,13 +459,31 @@ Vue.component('edit-apartment', {
     		 $('#deleteModal').modal('show');
     	},
     	deleteImage: function(){
-    	    var pictures=this.apartment.pictures;
+       		this.path=this.apartment.pictures[this.ind];
+
+    		axios
+    		.post( 'rest/apartmentService/deleteImages',JSON.stringify(this.path),
+              {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization : 'Bearer ' + localStorage.getItem("token")
+                }
+              }
+            )
+	        .then((response) => {
+	    		 $('#deleteModal').modal('hide');
+	    		 let pom;
+	    		 pom=this.apartment.pictures;
+				 Array.prototype.splice.call(pom,this.ind, 1);
+				 Vue.set(this.apartment.pictures,pom);
+	        	});
     		
-    		//Vue.delete(this.apartment.pictures,a);
-    		Array.prototype.splice.call(pictures, this.ind, 1);
-    		console.log(this.apartment.pictures);
-    		   Vue.set(this.apartment.pictures,pictures);
-    		 $('#deleteModal').modal('hide');
+		// let deletePath=Paths.get(peth);   		  
+        // Files.delete(deletePath);
+    	    
+    	    
+    	    
+    	   
     		 
     	},
     	displayPic: function(){

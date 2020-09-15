@@ -2,14 +2,13 @@ package dao;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
@@ -271,6 +270,33 @@ public class ApartmentDAO {
 			}
 		 }
 		return names;
+	}
+	
+	public void deleteImage(String url) throws IOException {
+		String pom=url.split("/")[1];
+		System.out.println(pom);
+		String imgName=pom.substring(0, pom.length() - 1);
+		System.out.println(imgName);
+		Path path=Paths.get("webproject\\AirBNBProject\\WebContent\\pictures\\"+imgName);
+		System.out.println(path);
+        Files.delete(path);
+        
+        String url1=url.substring(1, url.length()-1);
+		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
+		List<String> pic= new ArrayList<String>();
+		
+		for (Apartment apartment : apartments) {
+			for (String picPath : apartment.getPictures()) {
+				System.out.println(picPath);
+				if(picPath.equals(url1)) {
+					pic.add(picPath);	
+					apartment.pictures.removeAll(pic);
+					break;
+				}
+			}
+		}
+		Save(apartments);
+		//return apartments;
 	}
 
 	public Apartment schedulePeriod(Apartment apartment, Date reservationStart, Date reservationEnd) throws IOException {

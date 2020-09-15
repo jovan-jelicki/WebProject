@@ -202,25 +202,7 @@ Vue.component('new-apartment', {
     	    
 	    </div>
 	  </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
     <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
     </div>
@@ -242,16 +224,12 @@ Vue.component('new-apartment', {
         <input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
 		 <button class="btn btn-info" type="button" v-on:click="submitFiles()">Potvrdi izbor slika</button>
 
-		<div class="large-12 medium-12 small-12 cell">
-		  <div v-for="(file, key) in files" class="file-listing"> {{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">
-		  Ukloni sliku </span></div>
-		</div>
-		<br>
-	 </div>
-	         <div id="picErr" class="alert alert-warning" role="alert" style = "display: none" >Neophodno je uneti barem jednu fotografiju!</div>
+		
+		
+	    <div id="picErr" class="alert alert-warning" role="alert" style = "display: none" >Neophodno je uneti barem jednu fotografiju!</div>
 
-		 	 <br>
-		 	 <br>
+	     <br>
+	 	 <br>
 		  
 	    <div id="end" style = "display:none">
 		<div class="form-group row">
@@ -353,7 +331,7 @@ Vue.component('new-apartment', {
     	addApartment: function(){
     		if(this.apartment.type==undefined || this.apartment.name==undefined || this.adress.country==undefined || this.adress.city==undefined || this.adress.street==undefined ||
     				this.apartment.numberOfRooms==undefined || this.apartment.numberOfGuests==undefined || this.adress.numberOfStreet==undefined || 
-    				this.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined ){
+    				this.adress.postNumber==undefined || this.apartment.pricePerNight==undefined || this.apartment.checkIn==undefined || this.apartment.checkOut==undefined || this.apartment.datesForRenting.length==0){
     			infoSuccess.style.display="none";
     			infoErr.style.display="inline";
     			infoErr1.style.display="none";
@@ -464,7 +442,11 @@ Vue.component('new-apartment', {
 	              }
 	            )
 		        .then((response) => {
-		        	this.apartment.pictures=response.data;
+		        	let pom;
+		        	pom=response.data;
+		        	this.apartment.pictures=pom;
+		        	Vue.set(this.apartment.pictures,pom);
+		        	
 		        	end.style.display="inline";
 		        	});
           }
@@ -480,10 +462,6 @@ Vue.component('new-apartment', {
 	    	  this.files.push( uploadedFiles[i] );
 	    	}
          },
-       removeFile( key ){
-        	 Array.prototype.splice.call(this.files, key, 1);
-       // 	  this.files.splice( key, 1 );
-        	},
        focus: function() {
              var self = this;
              

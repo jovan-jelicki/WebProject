@@ -59,12 +59,7 @@
       }
     ],
     "pictures": [
-      "pictures/slika348.jpg",
-      "pictures/slika313.jpg",
-      "pictures/slika63.jpg",
-      "pictures/slika210.jpg",
-      "pictures/slika733.jpg",
-      "pictures/slika63.jpg"
+      "pictures/slika827.jpg"
     ],
     "pricePerNight": 12.0,
     "checkIn": "12",
@@ -145,11 +140,7 @@
       }
     ],
     "pictures": [
-      "pictures/slika622.jpg",
-      "pictures/slika63.jpg",
-      "pictures/slika932.jpg",
-      "pictures/slika948.jpg",
-      "pictures/slika951.jpg"
+      "pictures/slika270.jpg"
     ],
     "pricePerNight": 12.0,
     "checkIn": "12",
@@ -175,84 +166,6 @@
     "reservations": [],
     "deleted": false,
     "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
-  },
-  {
-    "id": 9,
-    "name": "proba",
-    "type": "Apartment",
-    "numberOfRooms": 7,
-    "numberOfGuests": 7,
-    "location": {
-      "longitude": 19.8235144,
-      "latitude": 45.2961492,
-      "adress": {
-        "country": "Srbija",
-        "street": "Misarska",
-        "numberOfStreet": 4,
-        "city": "Novi Sad",
-        "postNumber": 21212
-      }
-    },
-    "datesForRenting": [
-      {
-        "dateFrom": 1599861600000,
-        "dateTo": 1601157600000
-      }
-    ],
-    "freePeriods": [],
-    "host": {
-      "username": "dane",
-      "password": "d",
-      "name": "Dane",
-      "surname": "Danic",
-      "gender": "Muski",
-      "role": "Host",
-      "rentedApartment": [],
-      "reservations": [],
-      "apartements": [],
-      "blocked": false
-    },
-    "comments": [],
-    "pictures": [
-      "pictures/slika616.jpg",
-      "pictures/slika313.jpg",
-      "pictures/slika126.jpg",
-      "pictures/slika622.jpg",
-      "pictures/slika733.jpg",
-      "pictures/slika63.jpg",
-      "pictures/slika951.jpg",
-      "pictures/slika294.jpg",
-      "pictures/slika948.jpg"
-    ],
-    "pricePerNight": 8.0,
-    "checkIn": "14",
-    "checkOut": "4",
-    "status": "NonActive",
-    "amenities": [
-      {
-        "id": 2,
-        "name": "Kuhinja",
-        "deleted": false
-      },
-      {
-        "id": 3,
-        "name": "TV",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Internet",
-        "deleted": false
-      },
-      {
-        "id": 5,
-        "name": "Kablovska",
-        "deleted": false
-      }
-    ],
-    "reservations": [],
-    "deleted": false,
-    "note": "Ljubazni domacini, prijatan ambijent, vrhunska hrana. pogled na grad"
   },
   {
     "id": 10,
@@ -291,12 +204,7 @@
       "blocked": false
     },
     "comments": [],
-    "pictures": [
-      "pictures/slika733.jpg",
-      "pictures/slika210.jpg",
-      "pictures/slika206.jpg",
-      "pictures/slika270.jpg"
-    ],
+    "pictures": [],
     "pricePerNight": 23.0,
     "checkIn": "19",
     "checkOut": "11",
@@ -360,8 +268,7 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika63.jpg",
-      "pictures/slika617.jpg"
+      "pictures/slika953.jpg"
     ],
     "pricePerNight": 2.0,
     "checkIn": "12",
@@ -441,23 +348,6 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika63.jpg",
-      "pictures/slika617.jpg",
-      "pictures/slika446.jpg",
-      "pictures/slika270.jpg",
-      "pictures/slika597.jpg",
-      "pictures/slika218.jpg",
-      "pictures/slika348.jpg",
-      "pictures/slika206.jpg",
-      "pictures/slika622.jpg",
-      "pictures/slika948.jpg",
-      "pictures/slika932.jpg",
-      "pictures/slika342.jpg",
-      "pictures/slika616.jpg",
-      "pictures/slika126.jpg",
-      "pictures/slika313.jpg",
-      "pictures/slika294.jpg",
-      "pictures/slika951.jpg",
       "pictures/slika733.jpg",
       "pictures/slika210.jpg"
     ],
@@ -583,9 +473,7 @@
       "blocked": false
     },
     "comments": [],
-    "pictures": [
-      "pictures/slika953.jpg"
-    ],
+    "pictures": [],
     "pricePerNight": 43.0,
     "checkIn": "12",
     "checkOut": "12",
