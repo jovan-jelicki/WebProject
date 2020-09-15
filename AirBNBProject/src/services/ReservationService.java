@@ -85,7 +85,7 @@ public class ReservationService {
 	}
 	
 	@POST
-	@Path("/acceptReservation")
+	@Path("/edit")
 	@Secured({UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

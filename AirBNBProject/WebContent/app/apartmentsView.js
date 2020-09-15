@@ -9,7 +9,7 @@ Vue.component('view-apartment', {
             sort : "desc",
             amenities : {},
             selectedAmenities : [],
-            typeOf : {}, 
+            typeOf : "All", 
 
         }
     },
