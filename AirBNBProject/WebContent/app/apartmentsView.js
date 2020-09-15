@@ -56,7 +56,7 @@ Vue.component('view-apartment', {
     	</br>
 			<div  v-for="a in this.apartements" style="margin-left : 7%" class="column" >
     			<div class="card"  v-on:click="sendData(a)" style="width: 18rem;" >
-    				<img  class="card-img-right" src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" alt="Card image cap">
+    				<img  class="card-img-top embed-responsive-item"  v-bind:src="a.pictures[0]" alt="Card image cap"  >
     				<h5 class="card-header">{{a.name}}</h5>
     				<div class="card-body">
 	    				 <p class="card-text" > Lokacija : {{a.location.adress.street}} {{a.location.adress.numberOfStreet}}, {{a.location.adress.city}} {{a.location.adress.postNumber}} </br>		 	

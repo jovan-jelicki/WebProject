@@ -30,6 +30,7 @@ import com.google.gson.stream.JsonReader;
 
 import beans.Amenity;
 import beans.Apartment;
+import beans.Comment;
 import beans.Period;
 
 public class ApartmentDAO {
@@ -105,7 +106,23 @@ public class ApartmentDAO {
 		apartments.add(apartment);
 		Save(apartments);	
 	}
+	
 
+
+	public int getMaxIdForComment(Apartment apartment) {
+		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
+		int maxId=0;
+		
+		for(Comment comment:apartment.getComments()) {
+			if(comment.getId()>maxId) {
+				maxId=comment.getId();
+			}
+		}
+
+		return ++maxId;
+	}
+	
+	
 	public Apartment Edit(Apartment apartment) throws IOException {
 		ArrayList<Apartment> apartments =(ArrayList<Apartment>) GetAll();
 		for(Apartment a: apartments) {
@@ -123,6 +140,15 @@ public class ApartmentDAO {
 				
 				a.setDatesForRenting(apartment.getDatesForRenting());
 				a.setFreePeriods(apartment.getFreePeriods());
+				int br=0;
+				for (Comment com : apartment.getComments()) {
+					if(com.getId()==0) {
+						++br;
+						if(br!=1) {
+							com.setId(getMaxIdForComment(apartment));
+						}
+					}
+				}
 				a.setComments(apartment.getComments());
 				a.setAmenities(apartment.getAmenities());
 				a.setReservations(apartment.getReservations());
@@ -130,9 +156,43 @@ public class ApartmentDAO {
 			}
 		}
 		Save(apartments);
+		//sortDatesForRenting(apartment.getDatesForRenting());
 		return apartment;
 	}
+	//11-23.10  20-23.9
+	public List<Period> sortDatesForRenting(List<Period> datesForRenting){
+		List<Period> retVal=new ArrayList<Period>();
+		Date today=new Date(); 
+		Boolean flag=false;
+		
+		for (Period period : datesForRenting) { //14-18
+		//	System.out.println("pocetni datum"+new Date(period.getDateFrom()));
+		//	System.out.println("danasnji datum"+new Date(today.getTime()));
+
+			if(period.getDateFrom()>=today.getTime()) {
+				int index=0;
+				flag=false;
+				for(Period retPeriod :retVal) {// retval 11.a0 i 23.10 su dodati
+					if(period.getDateFrom()<retPeriod.getDateFrom()) {//20.9< 11.10
+						retVal.add(index,period);
+						flag=true;
+						break;
+					}
+					index++;
+				}
+				
+				if(!flag) {
+					retVal.add(period);  //11-15
+				}
+			}
+			
+		}
 	
+		//for (Period period2 : retVal) {
+		//	System.out.println(new Date(period2.getDateFrom()));
+		//}
+		return retVal;
+	}
 	public Apartment Delete(Apartment apartment) throws IOException {
 		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
 		for(Apartment a:apartments) {

@@ -1,3 +1,18 @@
+var is10Days = "";
+var Randomizer = (function(){
+  var is10DaysSetter = function(){
+    if(is10Days === "") {
+      is10Days = Math.round(Math.random()) === 1;        
+    }
+    //console.log("is10Days: " + is10Days);
+    return is10Days;
+  }
+  return {
+    Is10DaysSetter: is10DaysSetter
+  }
+})
+
+
 Vue.component('new-apartment', {
     data : function(){
         return {
@@ -9,9 +24,9 @@ Vue.component('new-apartment', {
             period:[],
 	        dateTo:'',
 	        dateFrom:'',
-	        disabledDates: {}, // Disable all dates up to specific date
+	        disabledDates: {},
             pom:[],
-            files: ''
+            files: []
         }
     },  
    
@@ -36,9 +51,16 @@ Vue.component('new-apartment', {
 	  
     template : 
     `  
-  <form>
+  <div>
       <br>
       <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Dodavanje novog apartmana</h1>
+      <div  class="alert alert-warning alert-dismissible fade show" role="alert">
+			  Neophodno je popuniti sve trazene podatke. Nakon zavrsetka pritiskom na dugme "Dodaj apartman" dodajte novi apartman.
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  
+			</div>
       <hr>
    <div class="col-md-12 personal-info">
 
@@ -98,6 +120,7 @@ Vue.component('new-apartment', {
               <input class="form-control" id="street" type="text" v-model="adress.street">
 	    </div>
 	  </div>
+	  
 	   <div class="form-group row">
 	    <label class="col-sm-2 col-form-label" >Broj:</label>
 	    <div class="col-sm-10">
@@ -112,14 +135,14 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 
-	    <div class="form-group row">
+	 <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Cena po noci:</label>
 	    <div class="col-sm-10">
               <input class="form-control" id="price" type="number" v-model="apartment.pricePerNight">
 	    </div>
 	  </div>
 	  
-	    <div class="form-group row">
+	  <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label ">Vreme za prijavu:</label>
 	    <div class="col-sm-10">
               <input class="form-control" id="time1" type="text" v-model="apartment.checkIn">
@@ -134,120 +157,168 @@ Vue.component('new-apartment', {
 	    </div>
 	  </div>
 	  
-	  <div class="form-group row"  id="pomoc">
-	    <label class="col-sm-2 col-form-label ">Klikom na dugme izaberite datume za izdavanje</label>
+	  <div class="form-group row"  >
+	    <label class="col-sm-2 col-form-label " id="pomoc">Klikom na dugme izaberite datume za izdavanje</label>
 	    <div class="col-sm-10">
-	  <button id="datesButton" type="button" class="btn btn-primary"   v-on:click="display()" >Dodaj periode</button>
+	    <button id="datesButton" type="button" class="btn btn-primary"   v-on:click="displayDat()" >Dodaj periode</button>
 	    </div>
 	  </div>
-	  
+	   
 	    
 	<div id="dates" style = "display: none" >
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje od:</label>
 	    <div class="col-sm-10">
-			<vuejs-datepicker id="date1" :monday-first="true" :disabled-dates="disabledDates" 	placeholder="Unesite pocetni datum" format="dd.MM.yyyy" v-model="dateFrom" ></vuejs-datepicker>
+			<vuejs-datepicker ref="picker"   :open-date="new Date()" @focusin.native="focus()" id="date1" :monday-first="true" :disabled-dates="disabledDates" 	placeholder="Unesite pocetni datum" format="dd.MM.yyyy" v-model="dateFrom" ></vuejs-datepicker>
 	    </div>
 	  </div>
 
 	  <div class="form-group row">
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje do:</label>
 	    <div class="col-sm-10" >
-			<vuejs-datepicker id="date2" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
-	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj period</button>
+			<vuejs-datepicker id="date2" :open-date="new Date()" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
+	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj novi period</button>
 			<br>
-			<div id="uputstvo"class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div id="uputstvo" class="alert alert-warning alert-dismissible fade show" role="alert">
 			  Potvrdite dodavanje perioda pritiskom na dugme "Dodaj period". Mozete dodavati vise perioda jedan za drugim.
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			  </button>
+			  
 			</div>
 	    </div>
 	  </div>
 	</div>
+    <div id="dateErr" class="alert alert-warning" role="alert" style = "display: none" > Molimo izaberite vremenski period izdavanja apartmana.</div>
+   	 <div id="dateErr1" class="alert alert-warning" role="alert" style = "display: none" > Datum pocetka izdavanja mora biti pre krajnjeg datuma izdavanja.</div>
+  <br>
+	
+		
+	  <div id="dodatiDatumi" class="form-group row" style="display:none">
+	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od-do:</label>
 
+	    <div class="col-sm-15">
+	        <label id="dateFrom1" class="col-sm-2 col-form-label" style="float: left; margin-right : 20%"> </label>
+    	    
+	    </div>
+	  </div>
 	
 	
-     <div class="form-group row">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    <div class="form-group row">
    	    <label class="col-sm-2 col-form-label ">Izaberite dodatni sadrzaj koji poseduje apartman:</label>
     </div>
 
     <div class="col-md-2 personal-info">
-  	  <div class="form-check"  >
-  	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
+  	  <div class="form-check" >
+    	<div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
   	       <input class="form-check-input"   type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
     	   <label class="form-control" id="amenity"> {{a.name}} </label>
-      </div>
+    	</div>
 	  </div>
-	  </div>
+	</div>
 	  
 	  <br>
 	  
-	    <div class="form-group row">
-	    <label  class="col-sm-2 col-form-label ">Dodatne beleske:</label>
-	    <div class="col-sm-10">
-              <input class="form-control" id="note" type="text" v-model="apartment.note">
-	    </div>
-	  </div>
-	  
 	 
-		  <div>
-		      	<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
-		
-        		<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
-		        <button  v-on:click="submitFiles()">Potvrdi izbor slika</button>
-		  </div>
-	
+	 <div>
+		<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
+        <input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
+		 <button class="btn btn-info" type="button" v-on:click="submitFiles()">Potvrdi izbor slika</button>
 
+		<div class="large-12 medium-12 small-12 cell">
+		  <div v-for="(file, key) in files" class="file-listing"> {{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">
+		  Ukloni sliku </span></div>
+		</div>
+		<br>
+	 </div>
+	         <div id="picErr" class="alert alert-warning" role="alert" style = "display: none" >Neophodno je uneti barem jednu fotografiju!</div>
+
+		 	 <br>
+		 	 <br>
+		  
+	    <div id="end" style = "display:none">
+		<div class="form-group row">
+		   <label  class="col-sm-2 col-form-label ">Dodatne beleske:</label>
+		   <div class="col-sm-10">
+	          <input class="form-control" id="note" type="text" v-model="apartment.note">
+		   </div>
+	    </div>
+		  <button id="editAccButton" type="button" class="btn btn-primary"   v-on:click="geocodeAddress" >Dodaj apartman </button>
+	</div>
 
 
 	  <br>
 	     <div id="infoSuccess" class="alert alert-success" role="alert" style = "display: none" >Uspesno ste dodali apartman!!</div>
-        <div id="infoErr" class="alert alert-success" role="alert" style = "display: none" >Neophodno je uneti sve podatke!</div>
-        <div id="infoErr1" class="alert alert-success" role="alert" style = "display: none" >Molimo proverite unete podatke. Doslo je do nevalidnog unosa.</div>
-        <div id="dateErr" class="alert alert-success" role="alert" style = "display: none" > Molimo izaberite vremenski period izdavanja apartmana.</div>
-        <div id="dateErr1" class="alert alert-success" role="alert" style = "display: none" > Datum pocetka izdavanja mora biti pre krajnjeg datuma izdavanja.</div>
-      <br>
-	  <button id="editAccButton" type="button" class="btn btn-primary"  style = "display:inline" v-on:click="geocodeAddress" >Potvrdi izmene</button>
+        <div id="infoErr" class="alert alert-warning" role="alert" style = "display: none" >Neophodno je uneti sve podatke!</div>
+        <div id="infoErr1" class="alert alert-warning" role="alert" style = "display: none" >Molimo proverite unete podatke. Doslo je do nevalidnog unosa.</div>
+            <br>
 	  <br>
 	  <button id="addNew" type="button" class="btn btn-primary"  style = "display: none" v-on:click="goBack" >Povratak na dodavanje novog</button>
 
    </div>
-   </form>
+   </div>
     `, 
      
     
     methods:{
     	geocodeAddress: function(){
-    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
-    		axios
-    		.get('https://maps.googleapis.com/maps/api/geocode/json', {
-    			params: {
-    				address:geoAddress, 
-    				key: 'AIzaSyCJ-9l16ACAmjuZ0xcZr-xcT-EYJZQ-md4',
-    			}
-    		})
-
-    		.then( (response) => {
-    			this.location
-    			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
-    					adress: this.adress};
-    			this.apartment.location=this.location;
-    			this.apartment.amenities=this.selectedAmenities;
-
-    			
-    			
-
-				this.apartment.host=this.user;
-    			
-    			
-    			this.addApartment();
-    			
-    		});
+    		if(this.adress.numberOfStreet==undefined || this.adress.street==undefined || this.adress.city==undefined || this.adress.country==undefined){
+    			infoSuccess.style.display="none";
+    			infoErr.style.display="inline";
+    			infoErr1.style.display="none";
+    		}else{
+	    		var geoAddress=this.adress.streetNum +" "+this.adress.street+" "+this.adress.city+" "+this.adress.country;
+	    		axios
+	    		.get('https://maps.googleapis.com/maps/api/geocode/json', {
+	    			params: {
+	    				address:geoAddress, 
+	    				key: 'AIzaSyCJ-9l16ACAmjuZ0xcZr-xcT-EYJZQ-md4',
+	    			}
+	    		})
+	
+	    		.then( (response) => {
+	    			this.location
+	    			this.location={longitude:response.data.results[0].geometry.location.lng, latitude:response.data.results[0].geometry.location.lat,
+	    					adress: this.adress};
+	    			this.apartment.location=this.location;
+	    			this.apartment.amenities=this.selectedAmenities;
+	
+	    			
+	    			
+	
+					this.apartment.host=this.user;
+	    			
+	    			
+	    			this.addApartment();
+	    			
+	    		});
+    		}
     	},
     	addNewPeriod: function(){
     		dateErr.style.display="none";
     		dateErr1.style.display="none";
+    		uputstvo.style.display="none";
+
+    		
+    		  		
+    		
     		if(this.dateFrom == '' && this.dateTo == ''){
     			dateErr.style.display="inline";
 			}else if(this.dateFrom.getTime() > this.dateTo.getTime()){
@@ -259,6 +330,12 @@ Vue.component('new-apartment', {
 				this.pom.push(period1);
 				this.apartment.datesForRenting=this.pom;
 				
+				document.getElementById('dodatiDatumi').innerHTML = 'Uspesno ste dodali period od'+ this.dateFrom.getDate()+'.'+this.dateFrom.getMonth()+'.'+this.dateFrom.getFullYear()
+																    +'do'+this.dateTo.getDate()+'.'+this.dateTo.getMonth()+'.'+this.dateTo.getFullYear();
+				
+				console.log(this.apartment.datesForRenting[0].dateFrom)
+	    		dodatiDatumi.style.display="inline"
+
 				let ranges=[];
 	    		if(this.apartment.datesForRenting!=undefined){
 					for(let dates of this.apartment.datesForRenting){
@@ -280,17 +357,20 @@ Vue.component('new-apartment', {
     			infoSuccess.style.display="none";
     			infoErr.style.display="inline";
     			infoErr1.style.display="none";
+    			picErr.style.display="none";
 
     		}else if(this.apartment.numberOfRooms<0 || this.apartment.numberOfGuests<0 || this.adress.numberOfStreet<0 || 
     				this.adress.postNumber<0 || this.apartment.pricePerNight<0){
     			infoSuccess.style.display="none";
     			infoErr.style.display="none";
     			infoErr1.style.display="inline";
+    			picErr.style.display="none";
     		}else if(this.dateFrom == "" || this.dateTo == ""){
     			infoSuccess.style.display="none";
     			infoErr.style.display="none";
     			infoErr1.style.display="none";
     			dateErr.style.display="inline";
+    			picErr.style.display="none";
     		}
 			else if(this.dateTo.getTime() <= this.dateFrom.getTime()){
 				infoSuccess.style.display="none";
@@ -298,15 +378,10 @@ Vue.component('new-apartment', {
     			infoErr1.style.display="none";
     			dateErr.style.display="none";
     			dateErr1.style.display="inline";
+    			picErr.style.display="none";
 			}
     		else{
-    			//let dateFrom = (new Date(this.dateFrom.getFullYear(),this.dateFrom.getMonth() , this.dateFrom.getDate())).getTime(); 
-			//let dateTo = (new Date(this.dateTo.getFullYear(),this.dateTo.getMonth() , this.dateTo.getDate())).getTime(); 
-				
-				//let period=[{dateFrom:dateFrom, dateTo:dateTo}]
-				//this.period.dateFrom=dateFrom;
-				// this.period.dateTo=dateTo;
-				//this.apartment.datesForRenting=period;
+
 				
     		axios
    			.post('rest/apartmentService/save',this.apartment, { headers : {
@@ -314,7 +389,6 @@ Vue.component('new-apartment', {
    	        }
    			})
    	        .then((response) => {console.log(response);
-   	    	//apartmentName,type1, type2,roomNum,guestNum,country,city,street, numOfStreet,postNum,price,time1,time2,date1,date2,amenity
 
    	           document.getElementById('apartmentName').disabled = true;
    	           document.getElementById('type1').disabled = true;
@@ -334,7 +408,7 @@ Vue.component('new-apartment', {
    	           document.getElementById('amenity').disabled = true;
    	           document.getElementById('note').disabled = true;
 
-
+           	    picErr.style.display="none";
 			    editAccButton.style.display="none";
    	            addNew.style.display="inline";
 				infoErr.style.display="none";
@@ -350,10 +424,13 @@ Vue.component('new-apartment', {
     		
 			location.reload();
     	},
-    	display: function(){
+    	
+    	displayDat: function(){
     		pomoc.style.display="none";
+    		datesButton.style.display="none";
     		dates.style.display="inline";
     		
+ 
     		let ranges=[];
     		if(this.apartment.datesForRenting!=undefined){
 				for(let dates of this.apartment.datesForRenting){
@@ -364,11 +441,15 @@ Vue.component('new-apartment', {
     		}else{
     			this.disabledDates["to"]=new Date();
     		}
-			//..images//1-0.jpg 
+ 
     	},
     	submitFiles(){
-
+    	  
           let formData = new FormData();
+          if(this.files.length==0){
+        	  picErr.style.display="inline";
+          }else{
+        	picErr.style.display="none";
             for( var i = 0; i < this.files.length; i++ ){
               let file = this.files[i];
               formData.append('files', file);
@@ -382,18 +463,44 @@ Vue.component('new-apartment', {
 	                }
 	              }
 	            )
-		        .then((response) => this.apartment.pictures=response.data );
-	            
-    	    //}
-          },
-    	
+		        .then((response) => {
+		        	this.apartment.pictures=response.data;
+		        	end.style.display="inline";
+		        	});
+          }
+         },
+   
+       handleFilesUpload(){
+	    	let uploadedFiles = this.$refs.files.files;
 
-          handleFilesUpload(){
-              this.files = this.$refs.files.files;
-           //this.apartment.pictures=this.files;
-         }
+	    	/*
+	    	  Adds the uploaded file to the files array
+	    	*/
+	    	for( var i = 0; i < uploadedFiles.length; i++ ){
+	    	  this.files.push( uploadedFiles[i] );
+	    	}
+         },
+       removeFile( key ){
+        	 Array.prototype.splice.call(this.files, key, 1);
+       // 	  this.files.splice( key, 1 );
+        	},
+       focus: function() {
+             var self = this;
+             
+             
+             this.$nextTick(_ => {
+               this.$refs.picker.picker.date = new Date()
+             })
+             
+           }
+     	
     	
     },
     components : { vuejsDatepicker },
-
+    filters: {
+    	dateFormat: function (value, format) {
+    		var parsed = moment(value);
+    		return parsed.format(format);
+    	}
+   	}
     })

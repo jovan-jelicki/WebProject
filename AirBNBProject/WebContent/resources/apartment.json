@@ -40,24 +40,42 @@
       "apartements": [],
       "blocked": false
     },
-    "comments": [],
-    "pictures": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 4,
+        "text": "Odlican apartman",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 4,
+        "text": "he5e5eh54",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 4,
+        "text": "Uzas",
+        "grade": 1.0,
+        "isApproved": true
+      }
+    ],
+    "pictures": [
+      "pictures/slika348.jpg",
+      "pictures/slika313.jpg",
+      "pictures/slika63.jpg",
+      "pictures/slika210.jpg",
+      "pictures/slika733.jpg",
+      "pictures/slika63.jpg"
+    ],
     "pricePerNight": 12.0,
     "checkIn": "12",
     "checkOut": "12",
     "status": "Active",
-    "amenities": [
-      {
-        "id": 9,
-        "name": "Kuhinja",
-        "deleted": false
-      },
-      {
-        "id": 2,
-        "name": "Parking",
-        "deleted": false
-      }
-    ],
+    "amenities": [],
     "reservations": [],
     "deleted": false
   },
@@ -119,15 +137,27 @@
       "blocked": false
     },
     "comments": [],
+<<<<<<< HEAD
     "pictures": [],
     "pricePerNight": 30.0,
+=======
+    "pictures": [
+      "pictures/slika617.jpg",
+      "pictures/slika622.jpg",
+      "pictures/slika63.jpg",
+      "pictures/slika932.jpg",
+      "pictures/slika948.jpg",
+      "pictures/slika951.jpg"
+    ],
+    "pricePerNight": 3.0,
+>>>>>>> Tamara
     "checkIn": "3",
     "checkOut": "3",
     "status": "Active",
     "amenities": [
       {
         "id": 4,
-        "name": "Topla voda",
+        "name": "Internet",
         "deleted": false
       }
     ],
@@ -175,8 +205,51 @@
       "apartements": [],
       "blocked": false
     },
-    "comments": [],
-    "pictures": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 8,
+        "text": "Ljubazno osoblje",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 1,
+        "apartment": 8,
+        "text": "Vrhunska usluga, svaka cast",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 2,
+        "apartment": 8,
+        "text": "Hrna domacinska, prava!",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 3,
+        "apartment": 8,
+        "text": "Sve pohvale!",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 4,
+        "apartment": 8,
+        "text": "ggggggg",
+        "grade": 3.0,
+        "isApproved": true
+      }
+    ],
+    "pictures": [
+      "pictures/slika597.jpg",
+      "pictures/slika313.jpg",
+      "pictures/slika126.jpg",
+      "pictures/slika622.jpg",
+      "pictures/slika733.jpg",
+      "pictures/slika63.jpg"
+    ],
     "pricePerNight": 25.0,
     "checkIn": "13",
     "checkOut": "12",
@@ -184,7 +257,7 @@
     "amenities": [
       {
         "id": 6,
-        "name": "TV",
+        "name": "Bracni krevet",
         "deleted": false
       }
     ],
@@ -234,7 +307,15 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika614.jpg"
+      "pictures/slika616.jpg",
+      "pictures/slika313.jpg",
+      "pictures/slika126.jpg",
+      "pictures/slika622.jpg",
+      "pictures/slika733.jpg",
+      "pictures/slika63.jpg",
+      "pictures/slika951.jpg",
+      "pictures/slika294.jpg",
+      "pictures/slika948.jpg"
     ],
     "pricePerNight": 8.0,
     "checkIn": "14",
@@ -242,14 +323,29 @@
     "status": "NonActive",
     "amenities": [
       {
-        "id": 6,
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 3,
         "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Internet",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Kablovska",
         "deleted": false
       }
     ],
     "reservations": [],
     "deleted": false,
-    "note": "shsduhdsij"
+    "note": "Ljubazni domacini, prijatan ambijent, vrhunska hrana. pogled na grad"
   },
   {
     "id": 10,
@@ -294,7 +390,10 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika558.jpg"
+      "pictures/slika733.jpg",
+      "pictures/slika210.jpg",
+      "pictures/slika206.jpg",
+      "pictures/slika270.jpg"
     ],
     "pricePerNight": 23.0,
     "checkIn": "19",
@@ -303,22 +402,12 @@
     "amenities": [
       {
         "id": 2,
-        "name": "Parking",
+        "name": "Kuhinja",
         "deleted": false
       },
       {
         "id": 3,
-        "name": "Mikrotalasna",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
-        "deleted": false
-      },
-      {
-        "id": 5,
-        "name": "Frizider",
+        "name": "TV",
         "deleted": false
       }
     ],
@@ -369,7 +458,10 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika21.jpg"
+      "pictures/slika342.jpg",
+      "pictures/slika616.jpg",
+      "pictures/slika126.jpg",
+      "pictures/slika313.jpg"
     ],
     "pricePerNight": 2.0,
     "checkIn": "19",
@@ -378,22 +470,251 @@
     "amenities": [
       {
         "id": 2,
-        "name": "Parking",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Topla voda",
+        "name": "Kuhinja",
         "deleted": false
       },
       {
         "id": 3,
-        "name": "Mikrotalasna",
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Internet",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Kablovska",
         "deleted": false
       }
     ],
     "reservations": [],
     "deleted": false,
     "note": "Proba123"
+  },
+  {
+    "id": 12,
+    "name": "Exclusive",
+    "type": "Apartment",
+    "numberOfRooms": 6,
+    "numberOfGuests": 12,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 4,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1601503200000,
+        "dateTo": 1602799200000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1601503200000,
+        "dateTo": 1602799200000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika63.jpg",
+      "pictures/slika617.jpg"
+    ],
+    "pricePerNight": 2.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 11,
+        "name": "Frizider",
+        "deleted": false
+      },
+      {
+        "id": 12,
+        "name": "Sporet",
+        "deleted": false
+      },
+      {
+        "id": 13,
+        "name": "Djakuzi",
+        "deleted": false
+      },
+      {
+        "id": 14,
+        "name": "Tus kabina",
+        "deleted": false
+      },
+      {
+        "id": 15,
+        "name": "Kada",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
+  },
+  {
+    "id": 13,
+    "name": "Exclusive",
+    "type": "Apartment",
+    "numberOfRooms": 6,
+    "numberOfGuests": 16,
+    "location": {
+      "longitude": 19.8412511,
+      "latitude": 45.2591651,
+      "adress": {
+        "country": "Srbija",
+        "street": "Vuka Karadzica",
+        "numberOfStreet": 23,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1602194400000,
+        "dateTo": 1605308400000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1602194400000,
+        "dateTo": 1605308400000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika63.jpg",
+      "pictures/slika617.jpg",
+      "pictures/slika446.jpg",
+      "pictures/slika270.jpg",
+      "pictures/slika597.jpg",
+      "pictures/slika218.jpg",
+      "pictures/slika348.jpg",
+      "pictures/slika206.jpg",
+      "pictures/slika622.jpg",
+      "pictures/slika948.jpg",
+      "pictures/slika932.jpg",
+      "pictures/slika342.jpg",
+      "pictures/slika616.jpg",
+      "pictures/slika126.jpg",
+      "pictures/slika313.jpg",
+      "pictures/slika294.jpg",
+      "pictures/slika951.jpg",
+      "pictures/slika733.jpg",
+      "pictures/slika210.jpg"
+    ],
+    "pricePerNight": 25.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Internet",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Kablovska",
+        "deleted": false
+      },
+      {
+        "id": 6,
+        "name": "Bracni krevet",
+        "deleted": false
+      },
+      {
+        "id": 7,
+        "name": "Krevetic",
+        "deleted": false
+      },
+      {
+        "id": 8,
+        "name": "Topla voda",
+        "deleted": false
+      },
+      {
+        "id": 9,
+        "name": "Parking",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Zamrzivac",
+        "deleted": false
+      },
+      {
+        "id": 11,
+        "name": "Frizider",
+        "deleted": false
+      },
+      {
+        "id": 12,
+        "name": "Sporet",
+        "deleted": false
+      },
+      {
+        "id": 13,
+        "name": "Djakuzi",
+        "deleted": false
+      },
+      {
+        "id": 14,
+        "name": "Tus kabina",
+        "deleted": false
+      },
+      {
+        "id": 15,
+        "name": "Kada",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Savresena lokacija, sa pogledom na grad. Prijatan komsiluk. "
   }
 ]

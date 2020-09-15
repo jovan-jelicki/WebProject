@@ -45,11 +45,11 @@ public class AmenityService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Amenity save(Amenity amenity) throws IOException {
+	//	System.out.println("imeeeeeeee"+amenity.getName());
 		AmenityDAO dao = (AmenityDAO) sc.getAttribute("amenityDAO");
-		List<Amenity> amenities;
-		amenities = dao.GetAll();
+		List<Amenity> amenities=dao.GetAll();
 		for (Amenity a : amenities) {
-			System.out.println(a.getId()+amenity.getId());
+			//System.out.println(a.getId()+amenity.getId());
 			if(a.getName().equals(amenity.getName())) {
 				return null;
 			}
