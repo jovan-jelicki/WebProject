@@ -20,6 +20,14 @@
     margin-top:20px;
 }
 
+@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");
+
+
+  span.remove-file{
+    color: red;
+    cursor: pointer;
+    float: center;
+  }
 
 
 		.filter-div {
