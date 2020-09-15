@@ -59,7 +59,8 @@
       }
     ],
     "pictures": [
-      "pictures/slika827.jpg"
+      "pictures/slika827.jpg",
+            "pictures/slika827.jpg"
     ],
     "pricePerNight": 12.0,
     "checkIn": "12",
@@ -140,7 +141,10 @@
       }
     ],
     "pictures": [
-      "pictures/slika270.jpg"
+      "pictures/slika270.jpg",
+         "pictures/slika403.jpg",
+      "pictures/slika942.jpg"
+
     ],
     "pricePerNight": 12.0,
     "checkIn": "12",
@@ -204,7 +208,11 @@
       "blocked": false
     },
     "comments": [],
-    "pictures": [],
+    "pictures": [
+          "pictures/slika900.jpg",
+      "pictures/slika308.jpg",
+      "pictures/slika912.jpg"
+      ],
     "pricePerNight": 23.0,
     "checkIn": "19",
     "checkOut": "11",
@@ -268,7 +276,10 @@
     },
     "comments": [],
     "pictures": [
-      "pictures/slika953.jpg"
+      "pictures/slika953.jpg",
+            "pictures/slika490.jpg",
+      "pictures/slika229.jpg"
+
     ],
     "pricePerNight": 2.0,
     "checkIn": "12",
@@ -349,7 +360,9 @@
     "comments": [],
     "pictures": [
       "pictures/slika733.jpg",
-      "pictures/slika210.jpg"
+      "pictures/slika210.jpg",
+      "pictures/slika605.jpg"
+
     ],
     "pricePerNight": 25.0,
     "checkIn": "12",
@@ -473,7 +486,12 @@
       "blocked": false
     },
     "comments": [],
-    "pictures": [],
+    "pictures": [
+    "pictures/slika325.jpg",
+      "pictures/slika724.jpg",
+      "pictures/slika275.jpg",
+      "pictures/slika221.jpg"
+      ],
     "pricePerNight": 43.0,
     "checkIn": "12",
     "checkOut": "12",
@@ -508,5 +526,88 @@
     "reservations": [],
     "deleted": false,
     "note": "rq3r34r34"
+  },
+  {
+    "id": 15,
+    "name": "Gazela",
+    "type": "Room",
+    "numberOfRooms": 1,
+    "numberOfGuests": 2,
+    "location": {
+      "longitude": 19.6397759,
+      "latitude": 45.5720401,
+      "adress": {
+        "country": "Srbija",
+        "street": "Marsala Tita",
+        "numberOfStreet": 43,
+        "city": "Vrbas",
+        "postNumber": 21460
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1600984800000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1600984800000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+   
+      "pictures/slika5.jpg",
+      "pictures/slika497.jpg",
+      "pictures/slika118.jpg"
+    ],
+    "pricePerNight": 15.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 0,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 1,
+        "name": "Bazen",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 10,
+        "name": "Zamrzivac",
+        "deleted": false
+      },
+      {
+        "id": 11,
+        "name": "Frizider",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Lep deo grada, bazen u izgradnji. "
   }
 ]
