@@ -40,9 +40,11 @@ import com.google.gson.JsonSyntaxException;
 import beans.Apartment;
 import beans.ApartmentStatus;
 import beans.Period;
+import beans.Reservation;
 import beans.User;
 import beans.UserType;
 import dao.ApartmentDAO;
+import dao.ReservationDAO;
 import dao.SearchDAO;
 import dao.UserDAO;
 
@@ -102,6 +104,14 @@ public class ApartmentService {
 	public Apartment edit(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		Apartment editApartment=dao.Edit(apartment);
+		ReservationDAO resDao = new ReservationDAO();
+		ArrayList<Reservation> reservations = (ArrayList<Reservation>) resDao.GetAll();
+		for(Reservation res : reservations) {
+			if(res.getApartment().getId() == editApartment.getId()) {
+				res.setApartment(editApartment);
+				resDao.Edit(res);
+			}
+		}
 		return editApartment;
 	}
 	

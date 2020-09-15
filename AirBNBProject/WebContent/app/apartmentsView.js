@@ -3,11 +3,14 @@ Vue.component('view-apartment', {
         return {
             message : "",
             apartements : {},
+            selectedAmenities : [],
+            backUp : {},
             user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
             disp : !!localStorage.getItem("apartments") ? "inline" : "none",
             disp1 : "inline",
             sort : "desc",
             amenities : {},
+            status : "All",
             selectedAmenities : [],
             typeOf : "All", 
 
@@ -21,12 +24,19 @@ Vue.component('view-apartment', {
 		})
 		.then(response => {
 			this.apartements = response.data;
+			this.backUp = response.data;
 			this.disp = "inline";
 		})
 		.catch(error => {
 			console.log(error);
 			history.back();
 		})
+    	
+    	axios
+        .get('rest/amenityService/getAmenities')
+        .then(response =>
+             {this.amenities = response.data}
+        );
     },
     
     
@@ -49,6 +59,27 @@ Vue.component('view-apartment', {
     				<option value="Apartment" > Apartman </option>
     				<option value="Room" > Soba </option>
     			</select>
+    		</div>
+    		<div>
+    			<select @change="showStatus()" class="browser-default custom-select" id="status" v-model="status">
+    				<option value="All">Prikazi sve</option>
+    				<option value="Active" > Aktivni </option>
+    				<option value="NonActive" > Neaktivni </option>
+    			</select>
+    		</div>
+    		
+    		<div class="dropdown">
+    			<button  class="btn custom-select dropdown-toggle" style="opacity : 1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    				Izaberite dodatke
+    			</button>
+    			 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    				 <div class="form-check" >
+					  	  <div v-for="a in amenities" v-if="a.deleted == false" :value="a" >
+					  	       <input  class="form-check-input"  @change="checked()" style="margin-left : 1%" type="checkbox" value="" id="defaultCheck1" v-model="selectedAmenities" :value="a">
+					    	   <label class="form-check-label" style="font-size : 15px; margin-left : 15%"> {{a.name}} </label>
+					      </div>
+					</div>
+    			</div>
     		</div>
     	</div>
     	</div>
@@ -87,16 +118,38 @@ methods : {
 	},
 	
 	showType : function() {
+		this.apartements = this.backUp;
 		if(this.typeOf == "Apartment"){
-			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
 			this.apartements = this.apartements.filter(obj => {return obj.type == "Apartment"});
 		}else if(this.typeOf == "Room"){
-			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
 			this.apartements = this.apartements.filter(obj => {return obj.type == "Room"});
 		}else {
-			this.apartements = !!localStorage.getItem("apartments") ? JSON.parse(localStorage.getItem("apartments")) : {};
+			this.apartements = this.backUp;
 		}
 		
+	},
+	showStatus : function() {
+		this.apartements = this.backUp;
+		if(this.status == "Active"){
+			this.apartements = this.apartements.filter(obj => {return obj.status == "Active"});
+		}else if(this.status == "NonActive") {
+			this.apartements = this.apartements.filter(obj => {return obj.status == "NonActive"});
+		}else {
+			this.apartements = this.backUp;
+		}
+		
+	},
+	checked : function () {
+		console.log(this.selectedAmenities);
+		this.apartements = this.backUp;
+		this.apartements = this.apartements.filter(obj => {
+			for(var a of this.selectedAmenities){
+				if(!obj.amenities.some(am => am.name === a.name)){
+					return false;
+				}
+			}
+			return true;
+		})
 	}
     
 }
