@@ -54,9 +54,9 @@ Vue.component('view-reservations', {
 									<td  v-if="user.role != 'Guest'"> {{res.guest.username}} </td>
 									<td> {{res.status}} </td>
 									<td> {{res.message}} </td>
-									<td><button class="btn btn-primary" v-if="user.role == 'Guest'" > Otkazi </button>
-									<td><button class="btn btn-primary" v-if="user.role == 'Host'" > Prihvati </button>
-									<td> <button class="btn btn-primary"  v-if="user.role == 'Host'" > Odbij </button>
+									<td><button class="btn btn-primary" v-if="user.role == 'Guest'" > Otkazi </button></td>
+									<td><button class="btn btn-primary" v-if="user.role == 'Host'" > Prihvati </button></td>
+									<td> <button class="btn btn-primary"  v-if="user.role == 'Host'" > Odbij </button></td>
 								</tr>
 								
 							</tbody>

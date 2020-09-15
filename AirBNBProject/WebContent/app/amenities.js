@@ -132,10 +132,17 @@ Vue.component('edit-amenity', {
    	   	        .then((response) => {
    	   	        	
    	   	        	this.amenity=response.data;
+   	   	        	
    	   	        	if(this.amenity==""){
    	    				infoErr.style.display="inline";
    	    				infoSuccess.style.display="none";
    	   	        	}else{
+   	   	        	 axios
+		   	   	        .get('rest/amenityService/getAmenities')
+		   	   	        .then(response =>
+		   	   	             {this.amenities = response.data}
+		   	   	        );	
+   	   	        		
    	    				infoErr.style.display="none";
    	    				infoSuccess.style.display="inline";
    	     	            document.getElementById('amname').disabled = true;
