@@ -83,6 +83,44 @@ public class ReservationService {
 		}
 		
 	}
+	
+	@POST
+	@Path("/acceptReservation")
+	@Secured({UserType.Host})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response edit(Reservation reservation) throws IOException {
+		
+		try {
+			ReservationDAO dao = new ReservationDAO();
+			dao.Edit(reservation);
+		}catch (Exception e) {
+			throw new BadRequestException();
+		}
+		
+		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("/rejectReservation")
+	@Secured({UserType.Guest, UserType.Host})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response reject(Reservation reservation) {
+		try {
+			ReservationDAO dao = new ReservationDAO();
+			ApartmentDAO apDao = new ApartmentDAO();
+			reservation = apDao.rejectReservation(reservation);
+			dao.Edit(reservation);
+			
+			
+		}catch (Exception e) {
+			throw new BadRequestException();
+		}
+		
+		
+		return Response.status(200).build();
+	}
 
 	@POST
 	@Path("/save")
@@ -99,6 +137,7 @@ public class ReservationService {
 			retVal.setApartment(reservation.getApartment());
 			retVal.setGuest(reservation.getGuest());
 			retVal.setStartDate(reservation.getReservationStart());
+			retVal.setEndDate(reservation.getReservationEnd());
 			retVal.setMessage(reservation.getMessage());
 			retVal.setNumberOfGuests(reservation.getGuests());
 			int numbeNights = (int) ((reservation.getReservationEnd().getTime() - reservation.getReservationStart().getTime())/86400000);

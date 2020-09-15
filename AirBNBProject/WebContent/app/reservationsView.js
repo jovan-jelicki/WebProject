@@ -1,3 +1,11 @@
+function updateList(res, List) {
+	for(var r of List){
+		if(r.id == res.id)
+			r = res
+	}
+	return List;
+}
+
 Vue.component('view-reservations', {
 	data : function () {
 		return {
@@ -23,6 +31,8 @@ Vue.component('view-reservations', {
 	template : `
 		<div>
 		</br>
+		<p style="color : green; display : none; margin-left= 20%" id="succ" > Uspesno ste otkazali rezervaciju! </p>
+		<p style="color : red; display : none; margin-left= 20%" id="bad" > Rezervacija nije uspela da se otkaze! </p>
 			<div class="container" >
 			
 				<div class="row">
@@ -53,10 +63,11 @@ Vue.component('view-reservations', {
 									<td> {{res.numberOfGuests}} </td>
 									<td  v-if="user.role != 'Guest'"> {{res.guest.username}} </td>
 									<td> {{res.status}} </td>
-									<td> {{res.message}} </td>
-									<td><button class="btn btn-primary" v-if="user.role == 'Guest'" > Otkazi </button>
-									<td><button class="btn btn-primary" v-if="user.role == 'Host'" > Prihvati </button>
-									<td> <button class="btn btn-primary"  v-if="user.role == 'Host'" > Odbij </button>
+									<td> {{res.message}} </td>		
+									<td><button class="btn btn-primary" v-on:click="quitReservation(res)" v-if="res.startDate > new Date() && user.role == 'Guest' && (res.status == 'Created' || res.status == 'Accepted')" > Otkazi </button> </td>
+									<td><button class="btn btn-primary" v-on:click="acceptReservation(res)" v-if="res.startDate > new Date() && user.role == 'Host' && res.status == 'Created'" > Prihvati </button> </td>
+									<td> <button class="btn btn-primary" v-on:click="rejectReservation(res)" v-if="res.startDate > new Date() && user.role == 'Host' && (res.status == 'Created' || res.status == 'Accepted')" > Odbij </button> </td>
+									<td> <button class="btn btn-primary" v-if="res.endDate <= new Date() && user.role == 'Host' && res.status == 'Accepted'" > Zavrsi </button> </td>
 								</tr>
 								
 							</tbody>
@@ -70,6 +81,52 @@ Vue.component('view-reservations', {
 	
 	`,
 	methods : {
+		acceptReservation : function(res){
+			res.status = "Accepted";
+			axios
+			.post("rest/reservationService/acceptReservation", res , { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+			}
+			})
+			.then(response => {
+				console.log(response.data);
+				this.reservations = updateList(res,this.reservations);
+			})
+		},
+		rejectReservation : function(res){
+			res.status = "Rejected";
+			axios
+			.post("rest/reservationService/rejectReservation", res , { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+			}
+			})
+			.then(response => {
+				console.log(response.data);
+				this.reservations = updateList(res,this.reservations);
+				succ.style.display = "inline";
+			})
+			.catch(error => {
+				bad.style.display = "inline"
+			})
+		},
+		
+		quitReservation : function(res) {
+			res.status = "Quit";
+			axios
+			.post("rest/reservationService/rejectReservation", res , { headers : {
+        	Authorization : 'Bearer ' + localStorage.getItem("token")
+			}
+			})
+			.then(response => {
+				console.log(response.data);
+				this.reservations = updateList(res,this.reservations);
+				succ.style.display = "inline";
+			})
+			.catch(error => {
+				bad.style.display = "inline"
+			})
+		},
+		
 		apartmentDetails : function(apart) {
 			axios
 			.post("rest/apartmentService/getApartment", apart, { headers : {

@@ -31,14 +31,14 @@
       "freePeriods": [
         {
           "dateFrom": 1599775200000,
-          "dateTo": 1600171980000
-        },
-        {
-          "dateFrom": 1600431180000,
           "dateTo": 1600552800000
         },
         {
           "dateFrom": 1602367200000,
+          "dateTo": 1602678360000
+        },
+        {
+          "dateFrom": 1603110360000,
           "dateTo": 1603404000000
         }
       ],
@@ -70,9 +70,10 @@
       "reservations": [],
       "deleted": false
     },
-    "startDate": "Sep 15, 2020 2:13:00 PM",
-    "numberOfNights": 3,
-    "fullPrice": 90.0,
+    "startDate": "Oct 14, 2020 2:26:00 PM",
+    "endDate": "Oct 19, 2020 2:26:00 PM",
+    "numberOfNights": 5,
+    "fullPrice": 150.0,
     "message": "Pozdrav!",
     "guest": {
       "username": "pera.pera",
@@ -86,101 +87,7 @@
       "apartements": [],
       "blocked": false
     },
-    "numberOfGuests": 3,
-    "status": "Created"
-  },
-  {
-    "id": 1,
-    "apartment": {
-      "id": 7,
-      "name": "ffff",
-      "type": "Apartment",
-      "numberOfRooms": 9,
-      "numberOfGuests": 6,
-      "location": {
-        "longitude": 19.8235738,
-        "latitude": 45.29733179999999,
-        "adress": {
-          "country": "Srbija",
-          "street": "Misarska",
-          "numberOfStreet": 32,
-          "city": "Novi Sad",
-          "postNumber": 21000
-        }
-      },
-      "datesForRenting": [
-        {
-          "dateFrom": 1599775200000,
-          "dateTo": 1600552800000
-        },
-        {
-          "dateFrom": 1602367200000,
-          "dateTo": 1603404000000
-        }
-      ],
-      "freePeriods": [
-        {
-          "dateFrom": 1599775200000,
-          "dateTo": 1600171980000
-        },
-        {
-          "dateFrom": 1600431180000,
-          "dateTo": 1600552800000
-        },
-        {
-          "dateFrom": 1602367200000,
-          "dateTo": 1602677640000
-        },
-        {
-          "dateFrom": 1603023240000,
-          "dateTo": 1603404000000
-        }
-      ],
-      "host": {
-        "username": "dane",
-        "password": "d",
-        "name": "Dane",
-        "surname": "Danic",
-        "gender": "Muski",
-        "role": "Host",
-        "rentedApartment": [],
-        "reservations": [],
-        "apartements": [],
-        "blocked": false
-      },
-      "comments": [],
-      "pictures": [],
-      "pricePerNight": 30.0,
-      "checkIn": "3",
-      "checkOut": "3",
-      "status": "Active",
-      "amenities": [
-        {
-          "id": 4,
-          "name": "Topla voda",
-          "deleted": false
-        }
-      ],
-      "reservations": [],
-      "deleted": false
-    },
-    "startDate": "Oct 14, 2020 2:14:00 PM",
-    "numberOfNights": 4,
-    "fullPrice": 120.0,
-    "message": "Postovanje!",
-    "guest": {
-      "username": "pera.pera",
-      "password": "perapera",
-      "name": "Petar",
-      "surname": "Peric",
-      "gender": "Muski",
-      "role": "Guest",
-      "rentedApartment": [],
-      "reservations": [],
-      "apartements": [],
-      "blocked": false
-    },
-    "numberOfGuests": 2,
+    "numberOfGuests": 4,
     "status": "Created"
   }
 ]
