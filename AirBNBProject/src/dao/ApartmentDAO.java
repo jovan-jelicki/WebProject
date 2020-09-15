@@ -137,6 +137,7 @@ public class ApartmentDAO {
 				a.setCheckIn(apartment.getCheckIn());
 				a.setCheckOut(apartment.getCheckOut());
 				a.setStatus(apartment.getStatus());
+				a.setPictures(apartment.getPictures());
 				
 				a.setDatesForRenting(apartment.getDatesForRenting());
 				a.setFreePeriods(apartment.getFreePeriods());
@@ -152,6 +153,7 @@ public class ApartmentDAO {
 				a.setComments(apartment.getComments());
 				a.setAmenities(apartment.getAmenities());
 				a.setReservations(apartment.getReservations());
+				a.setNote(apartment.getNote());
 				break;
 			}
 		}
@@ -204,6 +206,10 @@ public class ApartmentDAO {
 		Save(apartments);
 		return apartment;
 	}
+	
+	
+	
+	
 	//TODO ove dve metode treba proveriti
 	public  void DeleteAmenity(Amenity amenity) throws JsonSyntaxException, IOException {
 		System.out.println("usao sammm \n");

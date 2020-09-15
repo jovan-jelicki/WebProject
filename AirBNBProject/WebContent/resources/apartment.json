@@ -6,8 +6,8 @@
     "numberOfRooms": 2,
     "numberOfGuests": 4,
     "location": {
-      "longitude": 19.8359375,
-      "latitude": 45.2397655,
+      "longitude": 19.8434811,
+      "latitude": 45.2418369,
       "adress": {
         "country": "Srbija",
         "street": "Narodnog fronta",
@@ -44,14 +44,14 @@
         "isApproved": true
       },
       {
-        "id": 0,
+        "id": 1,
         "apartment": 4,
         "text": "he5e5eh54",
         "grade": 5.0,
         "isApproved": true
       },
       {
-        "id": 0,
+        "id": 2,
         "apartment": 4,
         "text": "Uzas",
         "grade": 1.0,
@@ -70,9 +70,26 @@
     "checkIn": "12",
     "checkOut": "12",
     "status": "Active",
-    "amenities": [],
+    "amenities": [
+      {
+        "id": 0,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 1,
+        "name": "Bazen",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      }
+    ],
     "reservations": [],
-    "deleted": false
+    "deleted": false,
+    "note": "Savresena lokacija, sa pogledom na grad. Prijatan komsiluk. "
   },
   {
     "id": 7,
@@ -81,8 +98,8 @@
     "numberOfRooms": 9,
     "numberOfGuests": 6,
     "location": {
-      "longitude": 19.8235738,
-      "latitude": 45.29733179999999,
+      "longitude": 19.823784,
+      "latitude": 45.2982351,
       "adress": {
         "country": "Srbija",
         "street": "Misarska",
@@ -93,12 +110,8 @@
     },
     "datesForRenting": [
       {
-        "dateFrom": 1599775200000,
-        "dateTo": 1600552800000
-      },
-      {
-        "dateFrom": 1602367200000,
-        "dateTo": 1603404000000
+        "dateFrom": 1600898400000,
+        "dateTo": 1601416800000
       }
     ],
     "freePeriods": [
@@ -132,121 +145,36 @@
       }
     ],
     "pictures": [
-      "pictures/slika617.jpg",
       "pictures/slika622.jpg",
       "pictures/slika63.jpg",
       "pictures/slika932.jpg",
       "pictures/slika948.jpg",
       "pictures/slika951.jpg"
     ],
-    "pricePerNight": 3.0,
-    "checkIn": "3",
-    "checkOut": "3",
+    "pricePerNight": 12.0,
+    "checkIn": "12",
+    "checkOut": "12",
     "status": "Active",
     "amenities": [
       {
         "id": 4,
         "name": "Internet",
         "deleted": false
-      }
-    ],
-    "reservations": [],
-    "deleted": false
-  },
-  {
-    "id": 8,
-    "name": "ddd",
-    "type": "Apartment",
-    "numberOfRooms": 9,
-    "numberOfGuests": 16,
-    "location": {
-      "longitude": 19.8235738,
-      "latitude": 45.29733179999999,
-      "adress": {
-        "country": "Srbija",
-        "street": "Misarska",
-        "numberOfStreet": 2,
-        "city": "Novi Sad",
-        "postNumber": 222
-      }
-    },
-    "datesForRenting": [
-      {
-        "dateFrom": 1598997600000,
-        "dateTo": 1600466400000
-      }
-    ],
-    "freePeriods": [],
-    "host": {
-      "username": "dane",
-      "password": "d",
-      "name": "Dane",
-      "surname": "Danic",
-      "gender": "Muski",
-      "role": "Host",
-      "rentedApartment": [],
-      "reservations": [],
-      "apartements": [],
-      "blocked": false
-    },
-    "comments": [
-      {
-        "id": 0,
-        "apartment": 8,
-        "text": "Ljubazno osoblje",
-        "grade": 5.0,
-        "isApproved": true
       },
       {
-        "id": 1,
-        "apartment": 8,
-        "text": "Vrhunska usluga, svaka cast",
-        "grade": 3.0,
-        "isApproved": true
+        "id": 5,
+        "name": "Kablovska",
+        "deleted": false
       },
       {
-        "id": 2,
-        "apartment": 8,
-        "text": "Hrna domacinska, prava!",
-        "grade": 3.0,
-        "isApproved": true
-      },
-      {
-        "id": 3,
-        "apartment": 8,
-        "text": "Sve pohvale!",
-        "grade": 3.0,
-        "isApproved": true
-      },
-      {
-        "id": 4,
-        "apartment": 8,
-        "text": "ggggggg",
-        "grade": 3.0,
-        "isApproved": true
-      }
-    ],
-    "pictures": [
-      "pictures/slika597.jpg",
-      "pictures/slika313.jpg",
-      "pictures/slika126.jpg",
-      "pictures/slika622.jpg",
-      "pictures/slika733.jpg",
-      "pictures/slika63.jpg"
-    ],
-    "pricePerNight": 25.0,
-    "checkIn": "13",
-    "checkOut": "12",
-    "status": "Active",
-    "amenities": [
-      {
-        "id": 6,
-        "name": "Bracni krevet",
+        "id": 7,
+        "name": "Krevetic",
         "deleted": false
       }
     ],
     "reservations": [],
-    "deleted": false
+    "deleted": false,
+    "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
   },
   {
     "id": 9,
@@ -255,8 +183,8 @@
     "numberOfRooms": 7,
     "numberOfGuests": 7,
     "location": {
-      "longitude": 19.8235738,
-      "latitude": 45.29733179999999,
+      "longitude": 19.8235144,
+      "latitude": 45.2961492,
       "adress": {
         "country": "Srbija",
         "street": "Misarska",
@@ -382,84 +310,6 @@
       {
         "id": 3,
         "name": "TV",
-        "deleted": false
-      }
-    ],
-    "reservations": [],
-    "deleted": false,
-    "note": "Proba123"
-  },
-  {
-    "id": 11,
-    "name": "d",
-    "type": "Apartment",
-    "numberOfRooms": 2,
-    "numberOfGuests": 2,
-    "location": {
-      "longitude": 19.8235738,
-      "latitude": 45.29733179999999,
-      "adress": {
-        "country": "Srbija",
-        "street": "Misarska",
-        "numberOfStreet": 2,
-        "city": "Novi Sad",
-        "postNumber": 222
-      }
-    },
-    "datesForRenting": [
-      {
-        "dateFrom": 1600207200000,
-        "dateTo": 1613862000000
-      }
-    ],
-    "freePeriods": [
-      {
-        "dateFrom": 1600207200000,
-        "dateTo": 1613862000000
-      }
-    ],
-    "host": {
-      "username": "dane",
-      "password": "d",
-      "name": "Danee",
-      "surname": "Danic",
-      "gender": "Muski",
-      "role": "Host",
-      "rentedApartment": [],
-      "reservations": [],
-      "apartements": [],
-      "blocked": false
-    },
-    "comments": [],
-    "pictures": [
-      "pictures/slika342.jpg",
-      "pictures/slika616.jpg",
-      "pictures/slika126.jpg",
-      "pictures/slika313.jpg"
-    ],
-    "pricePerNight": 2.0,
-    "checkIn": "19",
-    "checkOut": "11",
-    "status": "NonActive",
-    "amenities": [
-      {
-        "id": 2,
-        "name": "Kuhinja",
-        "deleted": false
-      },
-      {
-        "id": 3,
-        "name": "TV",
-        "deleted": false
-      },
-      {
-        "id": 4,
-        "name": "Internet",
-        "deleted": false
-      },
-      {
-        "id": 5,
-        "name": "Kablovska",
         "deleted": false
       }
     ],
@@ -690,5 +540,85 @@
     "reservations": [],
     "deleted": false,
     "note": "Savresena lokacija, sa pogledom na grad. Prijatan komsiluk. "
+  },
+  {
+    "id": 14,
+    "name": "Delux",
+    "type": "Apartment",
+    "numberOfRooms": 7,
+    "numberOfGuests": 34,
+    "location": {
+      "longitude": 19.8235738,
+      "latitude": 45.29733179999999,
+      "adress": {
+        "country": "Srbija",
+        "street": "Misarska",
+        "numberOfStreet": 3,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600466400000,
+        "dateTo": 1601071200000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1600466400000,
+        "dateTo": 1601071200000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika953.jpg"
+    ],
+    "pricePerNight": 43.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 0,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 1,
+        "name": "Bazen",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 14,
+        "name": "Tus kabina",
+        "deleted": false
+      },
+      {
+        "id": 13,
+        "name": "Djakuzi",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "rq3r34r34"
   }
 ]

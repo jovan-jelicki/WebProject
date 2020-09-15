@@ -118,6 +118,8 @@ public class ApartmentService {
 		return apartment;
 	}
 	
+
+	
 	@GET
 	@Path("/getApartments")
 	@Secured({UserType.Admin, UserType.Host})

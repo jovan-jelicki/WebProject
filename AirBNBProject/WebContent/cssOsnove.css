@@ -1,33 +1,31 @@
-.carousel-fade .carousel-item, .carousel-item img  {
-  max-height: 60vh;
-}
-.col-centered{
-   float: none;
-   margin: 0 auto;
-}
-.card-img-top {
-    max-height: 180px;
-    min-height: 150px;
-    object-fit: cover;
-}
-.card {
-    font-size: 1em;
-    overflow: hidden;
-    padding: 5;
-    border: none;
-    border-radius: .28571429rem;
-    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-    margin-top:20px;
-}
-
-@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");
-
-
-  span.remove-file{
-    color: red;
-    cursor: pointer;
-    float: center;
-  }
+		.carousel-fade .carousel-item, .carousel-item img  {
+		  max-height: 70vh;
+		}
+		.col-centered{
+		   float: none;
+		   margin: 0 auto;
+		}
+		.card-img-top {
+		    max-height: 180px;
+		    min-height: 150px;
+		    object-fit: cover;
+		}
+		.card {
+		    font-size: 1em;
+		    overflow: hidden;
+		    padding: 5;
+		    border: none;
+		    border-radius: .28571429rem;
+		    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+		    margin-top:20px;
+		}
+		
+		
+		  span.remove-file{
+		    color: red;
+		    cursor: pointer;
+		    float: center;
+		  }
 
 
 		.filter-div {

@@ -204,7 +204,11 @@ Vue.component('edit-amenity', {
    			})
    	        .then((response) => { 
    	    	 $('#deleteModal').modal('hide');
-   	    	
+   	    	axios
+	   	        .get('rest/amenityService/getAmenities')
+	   	        .then(response =>
+	   	             {this.amenities = response.data}
+	   	        );	
    	        	console.log(response);
    	        	}
    	        );

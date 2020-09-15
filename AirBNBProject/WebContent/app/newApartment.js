@@ -279,7 +279,7 @@ Vue.component('new-apartment', {
     
     methods:{
     	geocodeAddress: function(){
-    		if(this.adress.numberOfStreet==undefined || this.adress.street==undefined || this.adress.city==undefined || this.adress.country==undefined){
+    		if(this.adress.numberOfStreet=="" || this.adress.street=="" || this.adress.city=="" || this.adress.country==""){
     			infoSuccess.style.display="none";
     			infoErr.style.display="inline";
     			infoErr1.style.display="none";
