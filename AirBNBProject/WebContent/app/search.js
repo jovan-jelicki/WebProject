@@ -37,7 +37,7 @@ Vue.component('search', {
     <h2 class="naslov"> Dobrodošli na AIRBNB!</h2>
     <div class="naslov" >
         <input type="text" id="city" name="location"  placeholder="Unesite grad ili državu">
-        <input type="date" id="startDate" name="search1" v-model="data.startDate" v-on:change="startDateSelected()" placeholder="Odaberite datum">
+        <input type="date" ref="startDate" id="startDate" min="new Date()" v-on:click="setMinForFirst()" name="search1" v-model="data.startDate" v-on:change="startDateSelected()" placeholder="Odaberite datum">
         <input type="date" id="endDate" name="search2" ref="endDate" v-model="data.endDate"  placeholder="Odaberite datum" disabled>
         <input type='number' min="0" onkeydown="return false" id="guests" v-model="data.guests" name="search3" placeholder="Broj gostiju">
         <input type="number" min="0" onkeydown="return false" id="price1" name="search4" ref="min" v-model="data.minPrice" v-on:change="setMin()" placeholder="Minimalna cena po noci">
@@ -96,6 +96,9 @@ Vue.component('search', {
 </div>
 `,
 methods : {
+	setMinForFirst : function() {
+		this.$refs.startDate.min = new Date();
+	},
 	startDateSelected : function() {
 		console.log(this.data.startDate);
 		this.$refs.endDate.min = this.data.startDate;

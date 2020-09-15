@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -176,16 +177,20 @@ public class ApartmentService {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		List<Apartment> retVal =  new ArrayList<Apartment>();
 		retVal = dao.GetAll();
+		if(parameters.getEndDate() == null && parameters.getGuests() == 0 &&
+			parameters.getLocation() == "" && parameters.getMaxPrice() == 0 
+			&& parameters.getMinPrice() == 0 && parameters.getRooms() == 0
+			&& parameters.getStartDate() == null) {
+			throw new BadRequestException();
+		}else if(parameters.getLocation() == "" || parameters.getLocation() == null) {
+			throw new BadRequestException();
+		}
 		//prvo adresa
 		retVal = filterPlace(retVal, parameters);
 		
 		//TODO datumi da se vide, cekam tvoj kod
-		for(Apartment a : retVal) {
-			for(Period p : a.getDatesForRenting()) {
-				Date d = new Date(p.getDateFrom());
-				System.out.println(d.after(new Date()));
-			}
-		}
+		if(parameters.getEndDate() != null || parameters.getStartDate() != null)
+			retVal = filterDates(retVal, parameters);
 		
 		
 		//broj gostiju
@@ -205,6 +210,7 @@ public class ApartmentService {
 		
 		System.out.println(retVal);
 		
+		//Samo aktivni
 		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
 		for(Apartment a : retVal) {
 			if(!a.getDeleted() && a.getStatus() == ApartmentStatus.Active)
@@ -217,6 +223,31 @@ public class ApartmentService {
 	
 
 	//Filteri
+	private ArrayList<Apartment> filterDates(List<Apartment> list, SearchDAO parameters){
+		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+		for(Apartment apartment : list) {
+			for(Period period : apartment.getFreePeriods()) {
+				Date start = new Date(period.getDateFrom());
+				Date end = new Date(period.getDateTo());
+				if(parameters.getEndDate() != null && parameters.getStartDate() != null){
+						if(parameters.getStartDate().getTime() >= start.getTime() && parameters.getEndDate().getTime() <= end.getTime()) {
+							retVal.add(apartment);
+						}
+				}else if(parameters.getEndDate() == null && parameters.getStartDate() != null) {
+						if(parameters.getStartDate().getTime() >= start.getTime()) {
+							retVal.add(apartment);
+						}
+				}else if(parameters.getEndDate() != null && parameters.getStartDate() == null) {
+					if( parameters.getEndDate().getTime() <= end.getTime()) {
+						retVal.add(apartment);
+					}
+				}
+			}
+		}
+		
+		return retVal;
+	}
+	
 	
 	private ArrayList<Apartment> filterRooms(List<Apartment> list, SearchDAO parameters) {
 		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
