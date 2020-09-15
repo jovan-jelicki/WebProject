@@ -32,7 +32,7 @@ Vue.component('apartment-details', {
 		
 		<div style="display : inline">
 			<h3 class="display-4" style="float : left; margin-left : 10%">Smestaj {{apartment.name}}</h3>
-			<button class="btn btn-outline-primary" type="button" v-on:click="backToSearch()" style="float: right; margin-right : 10%" >Povratak na pretragu </button>
+			<button class="btn btn-info" type="button" v-on:click="backToSearch()" style="float: right; margin-right : 10%" >Povratak na pretragu </button>
 		</div>
 		<div>
 		  <template v-if="this.user.name!=undefined">

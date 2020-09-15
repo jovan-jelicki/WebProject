@@ -42,6 +42,20 @@
         "text": "Odlican apartman",
         "grade": 5.0,
         "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 4,
+        "text": "he5e5eh54",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 4,
+        "text": "Uzas",
+        "grade": 1.0,
+        "isApproved": true
       }
     ],
     "pictures": [
@@ -159,7 +173,43 @@
       "apartements": [],
       "blocked": false
     },
-    "comments": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 8,
+        "text": "Ljubazno osoblje",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 1,
+        "apartment": 8,
+        "text": "Vrhunska usluga, svaka cast",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 2,
+        "apartment": 8,
+        "text": "Hrna domacinska, prava!",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 3,
+        "apartment": 8,
+        "text": "Sve pohvale!",
+        "grade": 3.0,
+        "isApproved": true
+      },
+      {
+        "id": 4,
+        "apartment": 8,
+        "text": "ggggggg",
+        "grade": 3.0,
+        "isApproved": true
+      }
+    ],
     "pictures": [
       "pictures/slika597.jpg",
       "pictures/slika313.jpg",

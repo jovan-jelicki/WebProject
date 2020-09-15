@@ -29,6 +29,7 @@ import com.google.gson.stream.JsonReader;
 
 import beans.Amenity;
 import beans.Apartment;
+import beans.Comment;
 import beans.Period;
 
 public class ApartmentDAO {
@@ -104,7 +105,23 @@ public class ApartmentDAO {
 		apartments.add(apartment);
 		Save(apartments);	
 	}
+	
 
+
+	public int getMaxIdForComment(Apartment apartment) {
+		ArrayList<Apartment> apartments=new ArrayList<Apartment>();
+		int maxId=0;
+		
+		for(Comment comment:apartment.getComments()) {
+			if(comment.getId()>maxId) {
+				maxId=comment.getId();
+			}
+		}
+
+		return ++maxId;
+	}
+	
+	
 	public Apartment Edit(Apartment apartment) throws IOException {
 		ArrayList<Apartment> apartments =(ArrayList<Apartment>) GetAll();
 		for(Apartment a: apartments) {
@@ -122,6 +139,15 @@ public class ApartmentDAO {
 				
 				a.setDatesForRenting(apartment.getDatesForRenting());
 				a.setFreePeriods(apartment.getFreePeriods());
+				int br=0;
+				for (Comment com : apartment.getComments()) {
+					if(com.getId()==0) {
+						++br;
+						if(br!=1) {
+							com.setId(getMaxIdForComment(apartment));
+						}
+					}
+				}
 				a.setComments(apartment.getComments());
 				a.setAmenities(apartment.getAmenities());
 				a.setReservations(apartment.getReservations());
