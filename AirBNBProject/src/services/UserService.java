@@ -107,8 +107,17 @@ public class UserService {
 		else {
 			ArrayList<User> users = new ArrayList<User>();
 			for(Reservation res : resDao.GetAll()) {
-				if(res.getApartment().getHost().getUsername().equals(username))
-					users.add(res.getGuest());
+				if(res.getApartment().getHost().getUsername().equals(username)) {
+					int flag = 0;
+					for(User u : users) {
+						if(u.getUsername().equals(res.guest.username)) {
+							flag = 1;
+							break;
+						}
+					}
+					if(flag != 1)
+						users.add(res.getGuest());
+				}
 			}
 			return users;
 		}

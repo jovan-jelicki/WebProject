@@ -10,7 +10,10 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +34,8 @@ import beans.Amenity;
 import beans.Apartment;
 import beans.Comment;
 import beans.Period;
+import beans.Reservation;
+import jdk.nashorn.internal.runtime.ListAdapter;
 
 public class ApartmentDAO {
 
@@ -311,6 +316,90 @@ public class ApartmentDAO {
 		throw new BadRequestException();
 		
 	}
+
+	public Reservation rejectReservation(Reservation reservation) throws IOException {
+		Apartment apartment = reservation.getApartment();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		ArrayList<Period> freePeriods = (ArrayList<Period>) apartment.getFreePeriods();
+		List<Period> help = new ArrayList<Period>();
+		int flag = 0;
+		int index = 0;
+		Period per = new Period();
+		
+		for(Period period : apartment.getFreePeriods()) {
+			
+			if(period == freePeriods.get(0)) {
+				
+				if(formatter.format(period.getDateFrom()).equals(formatter.format(reservation.getEndDate()))) {
+					per.setDateFrom(reservation.getStartDate().getTime());
+					per.setDateTo(period.getDateTo());
+					help.add(per);
+					index = freePeriods.indexOf(period);
+					flag = 1;
+				}else if(formatter.format(period.getDateTo()).equals(formatter.format(reservation.getStartDate()))){
+					for(Period period2 : apartment.getFreePeriods()) {
+						if(formatter.format(period2.getDateFrom()).equals(formatter.format(reservation.getEndDate()))){
+							per.setDateFrom(period.getDateFrom());
+							per.setDateTo(period2.getDateTo());
+							help.add(per);
+							index = freePeriods.indexOf(period2);
+							flag = 1;
+						}
+					}
+					
+				}else {
+					help.add(period);
+				}
+			
+			}else {
+			
+				if(flag != 1 && formatter.format(period.getDateTo()).equals(formatter.format(reservation.getStartDate()))) {
+					for(Period period2 : apartment.getFreePeriods()) {
+						if(formatter.format(period2.getDateFrom()).equals(formatter.format(reservation.getEndDate()))){
+							per.setDateFrom(period.getDateFrom());
+							per.setDateTo(period2.getDateTo());
+							help.add(per);
+							index = freePeriods.indexOf(period2);
+							flag = 1;
+						}
+					}
+					if(flag != 1) {
+						per.setDateFrom(period.getDateFrom());
+						per.setDateTo(reservation.getEndDate().getTime());
+						help.add(per);
+						index = freePeriods.indexOf(period);
+						flag = 1;
+					}
+				
+				}else if(flag != 1 &&formatter.format(period.getDateFrom()).equals(formatter.format(reservation.getEndDate()))) {
+					per.setDateFrom(reservation.getStartDate().getTime());
+					per.setDateTo(period.getDateTo());
+					help.add(per);
+					index = freePeriods.indexOf(period);
+					flag = 1;
+				
+				}else if(index != freePeriods.indexOf(period)) {
+					help.add(period);
+				}
+			}
+		}
+		//ako ga nije nasao!
+		if(flag != 1) {
+			per.setDateFrom(reservation.getStartDate().getTime());
+			per.setDateTo(reservation.getEndDate().getTime());
+			
+			help.add(per);
+		}
+		Collections.sort(help);
+	
+		
+		apartment.setFreePeriods(help);
+		Edit(apartment);
+		reservation.setApartment(apartment);
+		return reservation;
+	}
+	
+
 	
 
 

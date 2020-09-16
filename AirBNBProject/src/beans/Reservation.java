@@ -7,6 +7,7 @@ public class Reservation {
 	public int id;
 	public Apartment apartment;
 	public Date startDate;
+	public Date endDate;
 	public int numberOfNights;
 	public double fullPrice;
 	public String message;
@@ -14,7 +15,7 @@ public class Reservation {
 	public int numberOfGuests;
 	public ReservationStatus status = ReservationStatus.Created;
 
-	public Reservation(int id, Apartment apartment, Date startDate, int numberOfNights, double fullPrice,
+	public Reservation(int id, Apartment apartment, Date startDate,Date endDAte ,int numberOfNights, double fullPrice,
 			String message, User guest, ReservationStatus status, int guests) {
 		super();
 		this.id = id;
@@ -26,7 +27,10 @@ public class Reservation {
 		this.guest = guest;
 		this.status = status;
 		this.numberOfGuests = guests;
+		this.endDate = endDAte;
 	}
+	
+	
 
 	public Reservation() {
 		
@@ -34,6 +38,19 @@ public class Reservation {
 
 	
 	
+	
+	public Date getEndDate() {
+		return endDate;
+	}
+
+
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+
+
 	public int getNumberOfGuests() {
 		return numberOfGuests;
 	}

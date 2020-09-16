@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -27,6 +28,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -40,9 +42,11 @@ import com.google.gson.JsonSyntaxException;
 import beans.Apartment;
 import beans.ApartmentStatus;
 import beans.Period;
+import beans.Reservation;
 import beans.User;
 import beans.UserType;
 import dao.ApartmentDAO;
+import dao.ReservationDAO;
 import dao.SearchDAO;
 import dao.UserDAO;
 
@@ -109,12 +113,20 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/edit")
-	@Secured({UserType.Admin, UserType.Host, UserType.Guest})
+	@Secured({UserType.Admin, UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		Apartment editApartment=dao.Edit(apartment);
+		ReservationDAO resDao = new ReservationDAO();
+		ArrayList<Reservation> reservations = (ArrayList<Reservation>) resDao.GetAll();
+		for(Reservation res : reservations) {
+			if(res.getApartment().getId() == editApartment.getId()) {
+				res.setApartment(editApartment);
+				resDao.Edit(res);
+			}
+		}
 		return editApartment;
 	}
 	
@@ -125,11 +137,47 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment delete(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
+		ReservationDAO resDao = new ReservationDAO();
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == apartment.getId())
+				resDao.Delete(res);
+		}
 		dao.Delete(apartment);
 		return apartment;
 	}
 	
 
+	@POST
+	@Path("/commentApartment")
+	@Secured({UserType.Guest})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Apartment comment(Apartment apartment, @Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, IOException {
+		Principal principal = securityContext.getUserPrincipal();
+		String username = principal.getName();
+		ApartmentDAO dao = new ApartmentDAO();
+		UserDAO userDao = new UserDAO();
+		User user = userDao.getUserByUsername(username);
+		ReservationDAO resDao = new ReservationDAO();
+		int flag = 0;
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == apartment.getId() && res.getGuest().getUsername().equals(username))
+				flag = 1;
+		}
+		if(flag != 1) {
+			throw new BadRequestException();
+		}
+		Apartment retVal = dao.Edit(apartment);
+		
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == retVal.getId()) {
+				res.setApartment(retVal);
+				resDao.Edit(res);
+			}
+		}
+		
+		return retVal;
+	}
 	
 	@GET
 	@Path("/getApartments")
@@ -181,16 +229,20 @@ public class ApartmentService {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
 		List<Apartment> retVal =  new ArrayList<Apartment>();
 		retVal = dao.GetAll();
+		if(parameters.getEndDate() == null && parameters.getGuests() == 0 &&
+			parameters.getLocation() == "" && parameters.getMaxPrice() == 0 
+			&& parameters.getMinPrice() == 0 && parameters.getRooms() == 0
+			&& parameters.getStartDate() == null) {
+			throw new BadRequestException();
+		}else if(parameters.getLocation() == "" || parameters.getLocation() == null) {
+			throw new BadRequestException();
+		}
 		//prvo adresa
 		retVal = filterPlace(retVal, parameters);
 		
 		//TODO datumi da se vide, cekam tvoj kod
-		for(Apartment a : retVal) {
-			for(Period p : a.getDatesForRenting()) {
-				Date d = new Date(p.getDateFrom());
-				System.out.println(d.after(new Date()));
-			}
-		}
+		if(parameters.getEndDate() != null || parameters.getStartDate() != null)
+			retVal = filterDates(retVal, parameters);
 		
 		
 		//broj gostiju
@@ -210,6 +262,7 @@ public class ApartmentService {
 		
 		System.out.println(retVal);
 		
+		//Samo aktivni
 		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
 		for(Apartment a : retVal) {
 			if(!a.getDeleted() && a.getStatus() == ApartmentStatus.Active)
@@ -222,6 +275,31 @@ public class ApartmentService {
 	
 
 	//Filteri
+	private ArrayList<Apartment> filterDates(List<Apartment> list, SearchDAO parameters){
+		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+		for(Apartment apartment : list) {
+			for(Period period : apartment.getFreePeriods()) {
+				Date start = new Date(period.getDateFrom());
+				Date end = new Date(period.getDateTo());
+				if(parameters.getEndDate() != null && parameters.getStartDate() != null){
+						if(parameters.getStartDate().getTime() >= start.getTime() && parameters.getEndDate().getTime() <= end.getTime()) {
+							retVal.add(apartment);
+						}
+				}else if(parameters.getEndDate() == null && parameters.getStartDate() != null) {
+						if(parameters.getStartDate().getTime() >= start.getTime()) {
+							retVal.add(apartment);
+						}
+				}else if(parameters.getEndDate() != null && parameters.getStartDate() == null) {
+					if( parameters.getEndDate().getTime() <= end.getTime()) {
+						retVal.add(apartment);
+					}
+				}
+			}
+		}
+		
+		return retVal;
+	}
+	
 	
 	private ArrayList<Apartment> filterRooms(List<Apartment> list, SearchDAO parameters) {
 		ArrayList<Apartment> retVal = new ArrayList<Apartment>();

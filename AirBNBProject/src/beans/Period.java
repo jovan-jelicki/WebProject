@@ -1,6 +1,6 @@
 package beans;
 
-public class Period {
+public class Period implements Comparable<Period> {
 
 	private long dateFrom;
 	private long dateTo;
@@ -27,6 +27,12 @@ public class Period {
 
 	public void setDateTo(long dateTo) {
 		this.dateTo = dateTo;
+	}
+
+	@Override
+	public int compareTo(Period o) {
+		// TODO Auto-generated method stub
+		return (int) (o.getDateFrom() - this.getDateFrom());
 	}
 	
 	
