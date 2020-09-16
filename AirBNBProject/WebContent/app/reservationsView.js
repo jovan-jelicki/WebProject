@@ -79,7 +79,7 @@ Vue.component('view-reservations', {
 							</thead>
 							<tbody>
 								<tr v-for="res of reservations">
-									<td class="w-25" v-on:click="apartmentDetails(res.apartment)"> <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep"> </td>
+									<td class="w-25" v-on:click="apartmentDetails(res.apartment)"> <img v-bind:src="res.apartment.pictures[0]" class="img-fluid img-thumbnail" alt="Sheep"> </td>
 									<td> {{res.apartment.name}} </td>
 									<td> {{new Date(res.startDate)| dateFormat('DD.MM.YYYY')}} </td>
 									<td> {{res.numberOfNights}} </td>

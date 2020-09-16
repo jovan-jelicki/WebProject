@@ -72,7 +72,26 @@
           },
           "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
           "grade": 5.0,
-          "isApproved": true
+          "isApproved": false
+        },
+        {
+          "id": 1,
+          "apartment": 0,
+          "guest": {
+            "username": "pera.pera",
+            "password": "perapera",
+            "name": "Petar",
+            "surname": "Peric",
+            "gender": "Muski",
+            "role": "Guest",
+            "rentedApartment": [],
+            "reservations": [],
+            "apartements": [],
+            "blocked": false
+          },
+          "text": "Svaka cast!",
+          "grade": 5.0,
+          "isApproved": false
         }
       ],
       "pictures": [

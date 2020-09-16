@@ -70,7 +70,26 @@
         },
         "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
         "grade": 5.0,
-        "isApproved": true
+        "isApproved": false
+      },
+      {
+        "id": 1,
+        "apartment": 0,
+        "guest": {
+          "username": "pera.pera",
+          "password": "perapera",
+          "name": "Petar",
+          "surname": "Peric",
+          "gender": "Muski",
+          "role": "Guest",
+          "rentedApartment": [],
+          "reservations": [],
+          "apartements": [],
+          "blocked": false
+        },
+        "text": "Svaka cast!",
+        "grade": 5.0,
+        "isApproved": false
       }
     ],
     "pictures": [
@@ -730,6 +749,175 @@
       {
         "id": 15,
         "name": "Kada",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Lep deo grada, bazen u izgradnji. "
+  },
+  {
+    "id": 6,
+    "name": "Oktopod",
+    "type": "Apartment",
+    "numberOfRooms": 3,
+    "numberOfGuests": 7,
+    "location": {
+      "longitude": 19.8484674,
+      "latitude": 45.2492722,
+      "adress": {
+        "country": "Srbija",
+        "street": "Strazilovska",
+        "numberOfStreet": 12,
+        "city": "Novi Sad",
+        "postNumber": 21000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1602799200000
+      },
+      {
+        "dateFrom": 1604617200000,
+        "dateTo": 1607727600000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1602799200000
+      },
+      {
+        "dateFrom": 1604617200000,
+        "dateTo": 1607727600000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika294.jpg",
+      "pictures/slika580.jpg",
+      "pictures/slika392.jpg"
+    ],
+    "pricePerNight": 20.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 1,
+        "name": "Bazen",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Internet",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "name": "Kablovska",
+        "deleted": false
+      }
+    ],
+    "reservations": [],
+    "deleted": false,
+    "note": "Pogled na prirodu, svez vazduh, prijatan komsiluk, ljubazni domacini."
+  },
+  {
+    "id": 7,
+    "name": "Skver",
+    "type": "Room",
+    "numberOfRooms": 1,
+    "numberOfGuests": 2,
+    "location": {
+      "longitude": 20.4642453,
+      "latitude": 44.8065302,
+      "adress": {
+        "country": "Srbija",
+        "street": "Masarikova",
+        "numberOfStreet": 12,
+        "city": "Beograd",
+        "postNumber": 11000
+      }
+    },
+    "datesForRenting": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1605308400000
+      }
+    ],
+    "freePeriods": [
+      {
+        "dateFrom": 1600380000000,
+        "dateTo": 1605308400000
+      }
+    ],
+    "host": {
+      "username": "dane",
+      "password": "d",
+      "name": "Danee",
+      "surname": "Danic",
+      "gender": "Muski",
+      "role": "Host",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "comments": [],
+    "pictures": [
+      "pictures/slika635.jpg",
+      "pictures/slika945.jpg",
+      "pictures/slika405.jpg",
+      "pictures/slika568.jpg",
+      "pictures/slika561.jpg"
+    ],
+    "pricePerNight": 12.0,
+    "checkIn": "12",
+    "checkOut": "12",
+    "status": "NonActive",
+    "amenities": [
+      {
+        "id": 0,
+        "name": "Mikrotalasna",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "name": "Kuhinja",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "name": "TV",
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "name": "Internet",
         "deleted": false
       }
     ],

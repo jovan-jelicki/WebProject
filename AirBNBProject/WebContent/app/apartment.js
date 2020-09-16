@@ -23,7 +23,8 @@ Vue.component('apartment-details', {
 			},
 			fullPrice : {},
 			commentAllow : false,
-			text : ""
+			text : "",
+			pom:[]
 		}
 	},
 	mounted() {
@@ -80,7 +81,7 @@ Vue.component('apartment-details', {
 	
 	
 	template: `
-	<div>
+<div>
 		</br>
 		</br>
 		
@@ -99,135 +100,77 @@ Vue.component('apartment-details', {
 		<br>
 
 	<div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel"  style="width: 800px ; margin: 0 auto ">
-	  <!--Indicators-->
-	  <ol class="carousel-indicators">
-	    
-		  <div v-for="a in apartment.pictures" >
-		    <li data-target="#carousel-example-2" data-slide-to=idx class="{ active: idx==0 }" ></li>
+		  <!--Indicators-->
+		  <ol class="carousel-indicators">
+			  <div v-for="a in apartment.pictures" >
+			    <li data-target="#carousel-example-2" data-slide-to=idx class="{ active: idx==0 }" ></li>
+			  </div>
+		  </ol>
+		  <div class="carousel-inner" role="listbox">
+		    <div   v-for="(a,index) in apartment.pictures"  :class="(index === 0 ? 'carousel-item active' : 'carousel-item')">
+		      <!--Mask color-->
+		      <div class="view">
+		        <img class="d-block w-100" v-bind:src="a" >
+		        <div class="mask rgba-black-light"></div>
+		      </div>    
+		    </div>
 		  </div>
-	  </ol>
 	
-	  <div class="carousel-inner" role="listbox">
-	    <div   v-for="(a,index) in apartment.pictures"  :class="(index === 0 ? 'carousel-item active' : 'carousel-item')">
-	      <!--Mask color-->
-	      <div class="view">
-	        <img class="d-block w-100" v-bind:src="a" >
-	        <div class="mask rgba-black-light"></div>
-	      </div>    
-	    </div>
-	  </div>
-
-
-	  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
+	
+		  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
 	</div>
-		
-		
-		
-		<div style="display : flex; height : auto; width : 100%;">
-			<div style="margin-right: 5%; margin-left : 5%">
-				<p v-if="avgGrade"> <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>
-				
-				<p class="card-text" style="font-family: Arial, Helvetica, sans-serif;"> </br> <b> Lokacija : </b> {{apartment.location.adress.street}} {{apartment.location.adress.numberOfStreet}}, {{apartment.location.adress.city}} {{apartment.location.adress.postNumber}} </br>		 	
-	    			<b> Geografska sirina i duzina : </b> {{apartment.location.latitude}} {{apartment.location.longitude}} </br>
-	    		</p>
-	    		
-	    		<!--Opis apartmana-->
-	    		<p 	style="word-wrap: break-word;"> {{apartment.note}}</p>
-			
-			</div>
-		</div>
-		
-		
-		<div class="filter-div" style="background-color : white">
-			<div style="display : inline">
-				<div class="container">
-					<h4> Dodaci </h4>
-					<div style="display : inline" v-for="a in apartment.amenities">
-						 <p style="display : inline"> <b> {{a.name}}  </b>  </p> 
-					</div>
-				</div>
-				
-				<br>
-				<br>
-				<div class="container">
-				  	<h4>Komentari: </h4>
-				  	</br>
-				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved || user.role == 'Admin' || user.role == 'Host'">
-				  			<div class="media" style="display : inline ">
-				  				 <p class="float-right" >Ocena : {{com.grade}} </p>
-				  				<div class="media-body"> 
-				  				<h4 class="media-heading user_name" style="font-size: 15px">{{com.guest.username}}</h4>
-				  					{{com.text}}
-				  				</div>
-				  			</div>
-				  			<hr>
-				  		</div>
-			  	<button id="buttonComment" class="btn btn-primary" v-if="commentAllow" v-on:click="commentForm()"> Ostavi komentar </button>
-					<div class="form-group" v-bind:style="{display : comForm}">
-						<div style="display : inline" >
-							<p style="float : left" > Ocenite smestaj:  </p>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<input v-model="grade" type="radio" id="1" name="grade" value="1">
-										<label style="margin : 5; font-size: 100%" >1</label><br>
-										<input v-model="grade" type="radio" id="2" name="grade" value="2">
-										<label style="margin : 5; font-size: 100%">2</label><br>
-									  	<input v-model="grade" type="radio" id="3" name="grade" value="3">
-										<label style="margin : 5; font-size: 100%">3</label><br>
-										<input v-model="grade"  type="radio" id="4" name="grade" value="4">
-										<label style="margin : 5; font-size: 100%">4</label><br>
-										<input v-model="grade"  type="radio" id="5" name="grade" value="5" checked>
-										<label style="margin : 5; font-size: 100%">5</label><br>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<textarea class="form-control" v-model="text" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
-						<br>
-						<div style="display : flex" >
-							<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
-							<button class="btn btn-primary" style="background-color : gray; margin-left : 5%; border-color : gray" v-on:click="cancel()" > Odustanak </button>
-						</div>
-					</div>
-				</div>
-			</div>
-				
-			<div>
-				<label style="margin-bottom: 10%;"><b>  Domacin smestaja {{apartment.host.name}} {{apartment.host.surname}} </b> </label>
-				
-				</br>
-				<div style="width : 25rem; min-width: max-content" class="card">
-					<h5 class="card-header"> Pogledajte dostupnost </h5>
-					<div class="card-body">
-						<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
-						<hr>
-						<div style="display : flex; margin-left : 3%">
-							<vuejs-datepicker id="date1"  @closed="enableDatePicker()" v-model="reservation.reservationStart" :monday-first="true" :disabled-dates="disabledDatesFirst" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
-							<vuejs-datepicker id="date2" :open-date="reservation.reservationStart" v-bind:disabled="disabledPicker" v-model="reservation.reservationEnd" :monday-first="true" :disabled-dates="disabledDatesSecond" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"></vuejs-datepicker>
-						</div>
-						<hr>
-						<div style="display : flex">
-							<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
-							<input type="number" v-model="reservation.guests"  min="1" v-bind:max="apartment.numberOfGuests" onkeydown="return false" style="width: 20%; margin-left: 5%;" />
-						</div>
-							
-						<button class="btn btn-primary" v-if="user.role == 'Guest' || user.role == undefined" v-on:click="fullPriceM()"> Zakazi </button>
-						<p style="color : red; display : none" id="logInMessage"> Potrebno je prvo da se ulogujete! </p>
-					</div>
-				</div>
-			</div>
-		</div>
+	
 
-		
+	
+	<div class="filter-div" style="background-color : white">
+			<div style="display : inline"><p class="image-text" v-if="avgGrade"> <b> Ocena: </b> {{avgGrade}} ({{apartment.comments.length}})</p>				
+				<p class="image-text" style="font-family: Arial, Helvetica, sans-serif;"> <br> <br> <b>  Domacin smestaja </b>  {{apartment.host.name}} {{apartment.host.surname}} </p>
+				<p class="image-text" style="font-family: Arial, Helvetica, sans-serif;"><b> Lokacija : </b> {{apartment.location.adress.street}} {{apartment.location.adress.numberOfStreet}}, {{apartment.location.adress.city}}</br>		 	
+	    			<b> Geografska sirina i duzina : </b> {{apartment.location.latitude}} {{apartment.location.longitude}}
+	    		</p>	    		
+	    		<p class="image-text" style="font-family: Arial, Helvetica, sans-serif;"> <b> Cena po nocenju: </b> {{apartment.pricePerNight}}  </br></p>
+	    		<p 	class="image-text" style="font-family: Arial, Helvetica, sans-serif;"> <b> Poruka domacina: </b> {{apartment.note}} </p>	
+					
+				<p 	class="image-text" style="font-family: Arial, Helvetica, sans-serif"> <b> Sadrzaji koje apartman poseduje: </b></p>			
+					<div class="image-text" style="font-family: Arial, Helvetica, sans-serif; display : inline" v-for="a in apartment.amenities">
+						 <p class="amenity-text" style="display : inline"> <b> {{a.name }}  </b>  </p> 
+					</div>				
+				<br>
+				<br>				
+			</div>
+			
+			<div>
+				</br>			
+					<div style="width : 25rem; min-width: max-content" class="card">
+						<h5 class="card-header"> Pogledajte dostupnost </h5>
+						<div class="card-body">
+							<p> <b> Cena po noci : </b> {{apartment.pricePerNight}}</p>
+							<hr>
+							<div style="display : flex; margin-left : 3%">
+								<vuejs-datepicker id="date1"  @closed="enableDatePicker()" v-model="reservation.reservationStart" :monday-first="true" :disabled-dates="disabledDatesFirst" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
+								<vuejs-datepicker id="date2" :open-date="reservation.reservationStart" v-bind:disabled="disabledPicker" v-model="reservation.reservationEnd" :monday-first="true" :disabled-dates="disabledDatesSecond" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"></vuejs-datepicker>
+							</div>
+							<hr>
+							<div style="display : flex">
+								<p style="margin-top: 3%;"> <b> Broj gostiju: </b> </p>
+								<input type="number" v-model="reservation.guests"  min="1" v-bind:max="apartment.numberOfGuests" onkeydown="return false" style="width: 20%; margin-left: 5%;" />
+							</div>
+							
+							<button class="btn btn-primary" v-if="user.role == 'Guest' || user.role == undefined" v-on:click="fullPriceM()"> Zakazi </button>
+							<p style="color : red; display : none" id="logInMessage"> Potrebno je prvo da se ulogujete! </p>
+						</div>
+					</div>
+			</div>			
+	</div>
+	
+				
 		<div class="modal" id="success">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -244,6 +187,7 @@ Vue.component('apartment-details', {
         </div>
 		
 		
+	
 		<div class="modal" id="modalReservation">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -263,30 +207,81 @@ Vue.component('apartment-details', {
             </div>
         </div>
 		
+		<!-- Modalni za brisane -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Da li ste sigurni da zelite da obrisete apartman {{apartment.name}}
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Otkazi</button>
+		        <button type="button" class="btn btn-primary" v-on:click="deleteApartment()">Potvrdi brisanje</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+			
 
-<!-- Modalni za brisane -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Da li ste sigurni da zelite da obrisete apartman {{apartment.name}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Otkazi</button>
-        <button type="button" class="btn btn-primary" v-on:click="deleteApartment()">Potvrdi brisanje</button>
-      </div>
-    </div>
-  </div>
-</div>
-	</div>
+
+		<div class="container" >
+		</br>
+		</br>
+			<p class="image-text" style="font-family: Arial, Helvetica, sans-serif;"> <b> Komentari: </b></br><p>
+			<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved || user.role == 'Admin' || user.role == 'Host'">
+				 <div class="media" style="display : inline ">
+				  	<p class="float-right" >Ocena : {{com.grade}} </p>			
+				  	<div class="media-body"> 
+				  		<h4 class="media-heading user_name" style="font-size: 15px">{{com.guest.username}}</h4>
+				  			{{com.text}}
+				  	</div>
+				  	<button type="button" v-if="user.role=='Host' && com.isApproved==true" class="btn btn-secondary btn-sm"	v-on:click="setNonActive(com)"> Obrisi komentar</button>
+					<p class="commNon"  v-if="user.role=='Host' && com.isApproved==false" > Komentar nije odobren </p>			
+
+				  </div>
+				  <hr>
+				  
+				  
+			</div>
+			<button id="buttonComment" class="btn btn-primary" v-if="commentAllow" v-on:click="commentForm()"> Ostavi komentar </button>
+				<div class="form-group" v-bind:style="{display : comForm}">
+					<div style="display : inline" >
+						<p style="float : left" > Ocenite smestaj:  </p>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input v-model="grade" type="radio" id="1" name="grade" value="1">
+									<label style="margin : 5; font-size: 100%" >1</label><br>
+									<input v-model="grade" type="radio" id="2" name="grade" value="2">
+									<label style="margin : 5; font-size: 100%">2</label><br>
+								  	<input v-model="grade" type="radio" id="3" name="grade" value="3">
+									<label style="margin : 5; font-size: 100%">3</label><br>
+									<input v-model="grade"  type="radio" id="4" name="grade" value="4">
+									<label style="margin : 5; font-size: 100%">4</label><br>
+									<input v-model="grade"  type="radio" id="5" name="grade" value="5" checked>
+									<label style="margin : 5; font-size: 100%">5</label><br>									</div>
+								</div>
+							</div>
+						</div>
+						
+					<textarea class="form-control" v-model="text" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
+					<br>
+					<div style="display : flex" >
+						<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
+						<button class="btn btn-primary" style="background-color : gray; margin-left : 5%; border-color : gray" v-on:click="cancel()" > Odustanak </button>
+					</div>
+				</div>
+			</div>
 	
+</div>	
 	`,
+
 	methods : {
 		exit : function (){
 			$('#success').modal('hide');
@@ -397,6 +392,25 @@ Vue.component('apartment-details', {
 				this.disabledDatesSecond["from"] = lastDay;
 				
 			}
+		}, 
+		setNonActive: function(com){
+			for(let a of this.apartment.comments){
+				if(a==com){
+					a.isApproved=false;
+					break;
+				}
+			}
+			axios
+			.post("rest/apartmentService/edit", this.apartment, { headers : {
+   	        	Authorization : 'Bearer ' + localStorage.getItem("token")
+   	        }
+			}).then(response => {
+				this.pom=response.data;
+	    		 this.apartment=this.pom;
+				 Vue.set(this.apartment,this.pom);
+			
+			}
+			);
 		}
 		
 		

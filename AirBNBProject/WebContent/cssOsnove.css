@@ -19,8 +19,25 @@
 		    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
 		    margin-top:20px;
 		}
+		.card-text{
+			color: #8080ff;
+		}
+		.image-text{
+			color: #204060;
+			font-size : 19px;
+		}
+		.amenity-text{
+			color: #9999ff;
+			font-size : 19px;
+		}
 		
-
+		.display-4 {
+		    color: #204060;
+		}
+		.commNon{
+			 color: #ff3333;
+			 font-size : 12px;
+		}
 		.filter-div {
 			background-color : 	lightskyblue;
 			height : auto;

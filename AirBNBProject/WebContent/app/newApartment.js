@@ -60,7 +60,7 @@ Vue.component('new-apartment', {
 			    <span aria-hidden="true">&times;</span>
 			  </button>
 			  
-			</div>
+	</div>
       <hr>
    <div class="col-md-12 personal-info">
 
@@ -92,6 +92,7 @@ Vue.component('new-apartment', {
               <input class="form-control" id="roomNum" type="number" v-model="apartment.numberOfRooms">
 	    </div>
 	  </div>
+	  
 	  <div class="form-group row">
 	    <label  class="col-sm-2 col-form-label ">Broj gostiju</label>
 	    <div class="col-sm-10">
@@ -198,8 +199,7 @@ Vue.component('new-apartment', {
 	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od-do:</label>
 
 	    <div class="col-sm-15">
-	        <label id="dateFrom1" class="col-sm-2 col-form-label" style="float: left; margin-right : 20%"> </label>
-    	    
+	        <label id="dateFrom1" class="col-sm-2 col-form-label" style="float: left; margin-right : 20%"> </label>    
 	    </div>
 	  </div>
 
@@ -219,7 +219,7 @@ Vue.component('new-apartment', {
 	  <br>
 	  
 	 
-	 <div>
+	 
 		<label  class="col-sm-2 col-form-label ">Izaberite slike apartmana:</label>
         <input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
 		 <button class="btn btn-info" type="button" v-on:click="submitFiles()">Potvrdi izbor slika</button>
