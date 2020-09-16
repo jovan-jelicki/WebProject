@@ -159,7 +159,7 @@ Vue.component('apartment-details', {
 				<div class="container">
 				  	<h4>Komentari: </h4>
 				  	</br>
-				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved || user.role == 'Admin'">
+				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved || user.role == 'Admin' || user.role == 'Host'">
 				  			<div class="media" style="display : inline ">
 				  				 <p class="float-right" >Ocena : {{com.grade}} </p>
 				  				<div class="media-body"> 
@@ -212,7 +212,7 @@ Vue.component('apartment-details', {
 						<hr>
 						<div style="display : flex; margin-left : 3%">
 							<vuejs-datepicker id="date1"  @closed="enableDatePicker()" v-model="reservation.reservationStart" :monday-first="true" :disabled-dates="disabledDatesFirst" placeholder="Unesite pocetni datum" format="dd.MM.yyyy"></vuejs-datepicker>
-							<vuejs-datepicker id="date2" v-bind:disabled="disabledPicker" v-model="reservation.reservationEnd" :monday-first="true" :disabled-dates="disabledDatesSecond" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"></vuejs-datepicker>
+							<vuejs-datepicker id="date2" :open-date="reservation.reservationStart" v-bind:disabled="disabledPicker" v-model="reservation.reservationEnd" :monday-first="true" :disabled-dates="disabledDatesSecond" placeholder="Unesite krajnji datum" format="dd.MM.yyyy"></vuejs-datepicker>
 						</div>
 						<hr>
 						<div style="display : flex">

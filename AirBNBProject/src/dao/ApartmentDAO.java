@@ -399,18 +399,91 @@ public class ApartmentDAO {
 		return reservation;
 	}
 	
-
-	
-
-
-
-
-
-
-
-
-
-
-
+	//Filteri
+		public ArrayList<Apartment> filterDates(List<Apartment> list, SearchDAO parameters){
+			ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+			for(Apartment apartment : list) {
+				for(Period period : apartment.getFreePeriods()) {
+					Date start = new Date(period.getDateFrom());
+					Date end = new Date(period.getDateTo());
+					if(parameters.getEndDate() != null && parameters.getStartDate() != null){
+							if(parameters.getStartDate().getTime() >= start.getTime() && parameters.getEndDate().getTime() <= end.getTime()) {
+								retVal.add(apartment);
+							}
+					}else if(parameters.getEndDate() == null && parameters.getStartDate() != null) {
+							if(parameters.getStartDate().getTime() >= start.getTime()) {
+								retVal.add(apartment);
+							}
+					}else if(parameters.getEndDate() != null && parameters.getStartDate() == null) {
+						if( parameters.getEndDate().getTime() <= end.getTime()) {
+							retVal.add(apartment);
+						}
+					}
+				}
+			}
+			
+			return retVal;
+		}
+		
+		
+		public ArrayList<Apartment> filterRooms(List<Apartment> list, SearchDAO parameters) {
+			ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+			for(Apartment apartment : list) {
+				//ovo mi glupo
+				if(apartment.numberOfRooms >= parameters.rooms)
+					retVal.add(apartment);
+			}
+			
+			return retVal;
+		}
+		
+		
+		public ArrayList<Apartment> filterPlace(List<Apartment> list, SearchDAO parameters) {
+			ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+			for(Apartment aparment : list) {
+				/*
+				 * TODO moramo da encodujemo stringove
+				 * String s = new String (aparment.location.adress.street.getBytes(ISO), UTF_8);
+				 * System.out.println(aparment.location.adress.city + s);
+				 * 
+				 * za sad ostavljam samo grad da se pretrazuje
+				 */
+				if(parameters.location.toLowerCase().contains(aparment.location.adress.city.toLowerCase())) {
+					retVal.add(aparment);
+				}
+			}
+			return retVal;
+		}
+		
+		public ArrayList<Apartment> filterGuests(List<Apartment> list, SearchDAO parameters){
+			
+			ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+			for(Apartment apartment : list) {
+				if(apartment.numberOfGuests >= parameters.guests)
+					retVal.add(apartment);
+			}
+			return retVal;
+		}
+		
+		public ArrayList<Apartment> filterPrice(List<Apartment> list, SearchDAO parameters){
+			ArrayList<Apartment> retVal = new ArrayList<Apartment>();
+			if(parameters.maxPrice != 0 && parameters.minPrice != 0) {
+				for(Apartment apartment : list) {
+					if(apartment.pricePerNight >= parameters.minPrice && apartment.pricePerNight <= parameters.maxPrice)
+						retVal.add(apartment);
+				}
+			}else if(parameters.maxPrice != 0 && parameters.minPrice == 0) {
+				for(Apartment apartment : list) {
+					if(apartment.pricePerNight <= parameters.maxPrice)
+						retVal.add(apartment);
+				}
+			}else {
+				for(Apartment apartment : list) {
+					if(apartment.pricePerNight >= parameters.minPrice)
+						retVal.add(apartment);
+				}
+			}
+			return retVal;
+		}
 
 }

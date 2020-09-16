@@ -12,7 +12,7 @@
 		}
 		.card {
 		    font-size: 1em;
-		    overflow: hidden;
+		    
 		    padding: 5;
 		    border: none;
 		    border-radius: .28571429rem;
@@ -20,13 +20,6 @@
 		    margin-top:20px;
 		}
 		
-		
-		  span.remove-file{
-		    color: red;
-		    cursor: pointer;
-		    float: center;
-		  }
-
 
 		.filter-div {
 			background-color : 	lightskyblue;

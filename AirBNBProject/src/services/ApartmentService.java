@@ -238,26 +238,26 @@ public class ApartmentService {
 			throw new BadRequestException();
 		}
 		//prvo adresa
-		retVal = filterPlace(retVal, parameters);
+		retVal = dao.filterPlace(retVal, parameters);
 		
 		//TODO datumi da se vide, cekam tvoj kod
 		if(parameters.getEndDate() != null || parameters.getStartDate() != null)
-			retVal = filterDates(retVal, parameters);
+			retVal = dao.filterDates(retVal, parameters);
 		
 		
 		//broj gostiju
 		if(parameters.guests != 0) {
-			retVal = filterGuests(retVal, parameters);
+			retVal = dao.filterGuests(retVal, parameters);
 		}
 		
 		//cena
 		if((parameters.maxPrice >= 0 && parameters.minPrice >= 0) && (parameters.maxPrice != 0 || parameters.minPrice != 0) && parameters.maxPrice >= parameters.minPrice) {
-			retVal = filterPrice(retVal, parameters);
+			retVal = dao.filterPrice(retVal, parameters);
 		}
 		
 		//broj soba
 		if(parameters.rooms > 0) {
-			retVal = filterRooms(retVal, parameters);
+			retVal = dao.filterRooms(retVal, parameters);
 		}
 		
 		System.out.println(retVal);
@@ -274,92 +274,7 @@ public class ApartmentService {
 	
 	
 
-	//Filteri
-	private ArrayList<Apartment> filterDates(List<Apartment> list, SearchDAO parameters){
-		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
-		for(Apartment apartment : list) {
-			for(Period period : apartment.getFreePeriods()) {
-				Date start = new Date(period.getDateFrom());
-				Date end = new Date(period.getDateTo());
-				if(parameters.getEndDate() != null && parameters.getStartDate() != null){
-						if(parameters.getStartDate().getTime() >= start.getTime() && parameters.getEndDate().getTime() <= end.getTime()) {
-							retVal.add(apartment);
-						}
-				}else if(parameters.getEndDate() == null && parameters.getStartDate() != null) {
-						if(parameters.getStartDate().getTime() >= start.getTime()) {
-							retVal.add(apartment);
-						}
-				}else if(parameters.getEndDate() != null && parameters.getStartDate() == null) {
-					if( parameters.getEndDate().getTime() <= end.getTime()) {
-						retVal.add(apartment);
-					}
-				}
-			}
-		}
-		
-		return retVal;
-	}
 	
-	
-	private ArrayList<Apartment> filterRooms(List<Apartment> list, SearchDAO parameters) {
-		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
-		for(Apartment apartment : list) {
-			//ovo mi glupo
-			if(apartment.numberOfRooms >= parameters.rooms)
-				retVal.add(apartment);
-		}
-		
-		return retVal;
-	}
-	
-	
-	private ArrayList<Apartment> filterPlace(List<Apartment> list, SearchDAO parameters) {
-		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
-		for(Apartment aparment : list) {
-			/*
-			 * TODO moramo da encodujemo stringove
-			 * String s = new String (aparment.location.adress.street.getBytes(ISO), UTF_8);
-			 * System.out.println(aparment.location.adress.city + s);
-			 * 
-			 * za sad ostavljam samo grad da se pretrazuje
-			 */
-			if(parameters.location.toLowerCase().contains(aparment.location.adress.city.toLowerCase())) {
-				retVal.add(aparment);
-			}
-		}
-		return retVal;
-	}
-	
-	private ArrayList<Apartment> filterGuests(List<Apartment> list, SearchDAO parameters){
-		
-		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
-		for(Apartment apartment : list) {
-			if(apartment.numberOfGuests >= parameters.guests)
-				retVal.add(apartment);
-		}
-		return retVal;
-	}
-	
-	private ArrayList<Apartment> filterPrice(List<Apartment> list, SearchDAO parameters){
-		ArrayList<Apartment> retVal = new ArrayList<Apartment>();
-		if(parameters.maxPrice != 0 && parameters.minPrice != 0) {
-			for(Apartment apartment : list) {
-				if(apartment.pricePerNight >= parameters.minPrice && apartment.pricePerNight <= parameters.maxPrice)
-					retVal.add(apartment);
-			}
-		}else if(parameters.maxPrice != 0 && parameters.minPrice == 0) {
-			for(Apartment apartment : list) {
-				if(apartment.pricePerNight <= parameters.maxPrice)
-					retVal.add(apartment);
-			}
-		}else {
-			for(Apartment apartment : list) {
-				if(apartment.pricePerNight >= parameters.minPrice)
-					retVal.add(apartment);
-			}
-		}
-		return retVal;
-	}
 }
 
 

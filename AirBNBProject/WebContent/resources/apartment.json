@@ -29,6 +29,10 @@
     "freePeriods": [
       {
         "dateFrom": 1600380000000,
+        "dateTo": 1600864980000
+      },
+      {
+        "dateFrom": 1601124180000,
         "dateTo": 1605394800000
       },
       {
@@ -48,7 +52,27 @@
       "apartements": [],
       "blocked": false
     },
-    "comments": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 0,
+        "guest": {
+          "username": "pera.pera",
+          "password": "perapera",
+          "name": "Petar",
+          "surname": "Peric",
+          "gender": "Muski",
+          "role": "Guest",
+          "rentedApartment": [],
+          "reservations": [],
+          "apartements": [],
+          "blocked": false
+        },
+        "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
+        "grade": 5.0,
+        "isApproved": true
+      }
+    ],
     "pictures": [
       "pictures/slika793.jpg",
       "pictures/slika953.jpg",
@@ -62,7 +86,7 @@
     "pricePerNight": 25.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 0,
@@ -174,7 +198,7 @@
     "pricePerNight": 10.0,
     "checkIn": "12",
     "checkOut": "12",
-    "status": "NonActive",
+    "status": "Active",
     "amenities": [
       {
         "id": 0,
