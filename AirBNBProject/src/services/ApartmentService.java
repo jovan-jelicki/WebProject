@@ -28,6 +28,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -99,7 +100,7 @@ public class ApartmentService {
 	
 	@POST
 	@Path("/edit")
-	@Secured({UserType.Admin, UserType.Host, UserType.Guest})
+	@Secured({UserType.Admin, UserType.Host})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(Apartment apartment) throws IOException {
@@ -123,8 +124,45 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment delete(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
+		ReservationDAO resDao = new ReservationDAO();
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == apartment.getId())
+				resDao.Delete(res);
+		}
 		dao.Delete(apartment);
 		return apartment;
+	}
+	
+	@POST
+	@Path("/commentApartment")
+	@Secured({UserType.Guest})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Apartment comment(Apartment apartment, @Context SecurityContext securityContext) throws JsonIOException, JsonSyntaxException, IOException {
+		Principal principal = securityContext.getUserPrincipal();
+		String username = principal.getName();
+		ApartmentDAO dao = new ApartmentDAO();
+		UserDAO userDao = new UserDAO();
+		User user = userDao.getUserByUsername(username);
+		ReservationDAO resDao = new ReservationDAO();
+		int flag = 0;
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == apartment.getId() && res.getGuest().getUsername().equals(username))
+				flag = 1;
+		}
+		if(flag != 1) {
+			throw new BadRequestException();
+		}
+		Apartment retVal = dao.Edit(apartment);
+		
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == retVal.getId()) {
+				res.setApartment(retVal);
+				resDao.Edit(res);
+			}
+		}
+		
+		return retVal;
 	}
 	
 	@GET

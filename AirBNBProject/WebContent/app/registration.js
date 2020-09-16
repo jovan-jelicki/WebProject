@@ -1,7 +1,13 @@
 var userJS = new Vue ({
     el :  '#registrationModal',
     data : {
-        user : {},
+        user : {
+        	gender : "Muski",
+        	surname : "",
+        	username : "",
+        	password : "",
+        	name : ""
+        },
         header : "Registracija",
         message : "",
         disabled : "yes"
@@ -13,9 +19,13 @@ var userJS = new Vue ({
             axios
                 .post('rest/guestRegistration/save', this.user)
                 .then(response => {
-                    if(response.data == "Good"){
-                        alert('Uspesno ste registrovali korisnika ' + user.name + ' ' + user.surname);
-                    }
+                       alert('Uspesno ste registrovali korisnika ' + this.user.name + ' ' + this.user.surname);
+                       $('#registrationModal').modal('hide');
+                })
+                .catch(error => {
+                	event.preventDefault();
+                	this.message = "Korisnicko ime je zauzeto!";
+                	pUsername.style.display = "inline";
                 });
             }else if(registeredUser.role == "Admin") {
                 axios
@@ -24,29 +34,52 @@ var userJS = new Vue ({
                 }
                 })
                 .then(response => {
-                    if(response.data == "Good"){
-                        alert('Uspesno ste registrovali korisnika ' + this.user.name + ' ' + this.user.surname);
-                        $('#registrationModal').modal('hide');
-                    }
+                     alert('Uspesno ste registrovali korisnika ' + this.user.name + ' ' + this.user.surname);
+                     $('#registrationModal').modal('hide');
+                })
+                .catch(error => {
+                	event.preventDefault();
+                	this.message = "Korisnicko ime je zauzeto!";
+                	pUsername.style.display = "inline";
                 });
             }
         },
         validation : function(){
-            if(this.user.name == undefined ||
-                this.user.surname == undefined ||
-                this.user.username == undefined ||
-                this.user.password == undefined){
-                    this.disabled = "yes";
-                }
-           else if (this.user.name.length > 0   &&
-                this.user.surname.length  >   0   &&
-                this.user.username.length  >   0   &&
-                this.user.password.length    >   0 &&
+        	if(this.user.name == undefined || this.user.name == "" || this.user.name.length == undefined){
+        		this.disabled = "yes";
+        		pName.style.display = "inline";
+        	}else{
+        		pName.style.display = "none";
+        	}
+        	if(this.user.surname == undefined || this.user.surname == "" || this.user.surname.length == undefined){
+        		this.disabled = "yes";
+        		pSurname.style.display = "inline";
+        	}else {
+        		pSurname.style.display = "none";
+        	} 		
+        	if(this.user.username == undefined || this.user.username == "" || this.user.username.length == undefined){
+        		this.disabled = "yes";
+        		pUsername.style.display = "inline"
+        	}else {
+        		pUsername.style.display = "none";
+        	}
+        	if(this.user.password == undefined || this.user.password == "" || this.user.password.length == undefined){
+        		this.disabled = "yes";
+        		pPassword.style.display = "inline";
+        	}else {
+        		pPassword.style.display = "none";
+        	}
+        	if (this.user.name.length >  0   &&
+                this.user.surname.length  >  0   &&
+                this.user.username.length  >  0   &&
+                this.user.password.length  >  0   &&
                 this.user.password == this.$refs.ConfirmPassword.value) {
+        		pConfirm.style.display = "none";
                 this.disabled = "no";
-        }else {
-            this.disabled = "yes";
-        };
+        	}else {
+        		pConfirm.style.display = "inline";
+        		this.disabled = "yes";
+        	};
     }
     }
         

@@ -322,39 +322,6 @@ public class ApartmentDAO {
 		return reservation;
 	}
 	
-	public List<Period> sortDatesForRenting(ArrayList<Period> datesForRenting){
-		List<Period> retVal=new ArrayList<Period>();
-		Date today=new Date(); 
-		Boolean flag=false;
-		
-		for (Period period : datesForRenting) { //14-18
-		//	System.out.println("pocetni datum"+new Date(period.getDateFrom()));
-		//	System.out.println("danasnji datum"+new Date(today.getTime()));
-
-			if(period.getDateFrom()>=today.getTime()) {
-				int index=0;
-				flag=false;
-				for(Period retPeriod :retVal) {// retval 11.a0 i 23.10 su dodati
-					if(period.getDateFrom()<retPeriod.getDateFrom()) {//20.9< 11.10
-						retVal.add(index,period);
-						flag=true;
-						break;
-					}
-					index++;
-				}
-				
-				if(!flag) {
-					retVal.add(period);  //11-15
-				}
-			}
-			
-		}
-	
-		//for (Period period2 : retVal) {
-		//	System.out.println(new Date(period2.getDateFrom()));
-		//}
-		return retVal;
-	}
 
 	
 

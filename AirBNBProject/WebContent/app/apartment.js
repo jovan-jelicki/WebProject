@@ -21,7 +21,9 @@ Vue.component('apartment-details', {
 			reservation : {
 				message : ""
 			},
-			fullPrice : {}
+			fullPrice : {},
+			commentAllow : false,
+			text : ""
 		}
 	},
 	mounted() {
@@ -54,6 +56,25 @@ Vue.component('apartment-details', {
 		
 		}
 		
+		//Da li sme ili ne sme komentar!
+		if(this.user.role == undefined || this.user.role != 'Guest'){
+			this.commentAllow = false;
+		}else {
+			
+			axios
+			.get("rest/reservationService/getReservations", 	{ headers : {
+	    	Authorization : 'Bearer ' + localStorage.getItem("token")
+			}
+			})
+			.then(response => {
+				for(var res of response.data){
+					if(res.apartment.id == this.apartment.id && res.guest.username == this.user.username)
+						this.commentAllow = true;
+				}
+			})
+			
+		
+		}
 		
 	},
 	
@@ -108,17 +129,17 @@ Vue.component('apartment-details', {
 				<div class="container">
 				  	<h4>Komentari: </h4>
 				  	</br>
-				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved">
+				  		<div class="comments-list" v-for="com in apartment.comments" v-if="com.isApproved || user.role == 'Admin'">
 				  			<div class="media" style="display : inline ">
 				  				 <p class="float-right" >Ocena : {{com.grade}} </p>
 				  				<div class="media-body"> 
-				  				<h4 class="media-heading user_name" style="font-size: 15px">Jovan Jelicki</h4>
+				  				<h4 class="media-heading user_name" style="font-size: 15px">{{com.guest.username}}</h4>
 				  					{{com.text}}
 				  				</div>
 				  			</div>
 				  			<hr>
 				  		</div>
-			  	<button id="buttonComment" class="btn btn-primary" v-on:click="commentForm()"> Ostavi komentar </button>
+			  	<button id="buttonComment" class="btn btn-primary" v-if="commentAllow" v-on:click="commentForm()"> Ostavi komentar </button>
 					<div class="form-group" v-bind:style="{display : comForm}">
 						<div style="display : inline" >
 							<p style="float : left" > Ocenite smestaj:  </p>
@@ -140,7 +161,7 @@ Vue.component('apartment-details', {
 							</div>
 						</div>
 						
-						<textarea class="form-control" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
+						<textarea class="form-control" v-model="text" rows="5" cols="30" placeholder="Ostavite komentar..." id="comment"></textarea>
 						<br>
 						<div style="display : flex" >
 							<button class="btn btn-primary" v-on:click="leaveComment()"> Prosledi komentar </button>
@@ -290,10 +311,11 @@ Vue.component('apartment-details', {
 		leaveComment : function () {
 			this.comForm = "none";
 			buttonComment.style.display = "inline";
-			this.apartment.comments.push({"text" : comment.value, "apartment" : this.apartment.id, "grade" : this.grade});
+			var commentData = {"text" : this.text, "apartment" : this.apartment.id, "grade" : this.grade, "guest" : this.user};
+			this.apartment.comments.push(commentData);
 			console.log(this.grade);
 			axios
-			.post("rest/apartmentService/edit", this.apartment, { headers : {
+			.post("rest/apartmentService/commentApartment", this.apartment, { headers : {
 	        	Authorization : 'Bearer ' + localStorage.getItem("token")
 	        }
 			})
@@ -309,6 +331,7 @@ Vue.component('apartment-details', {
 				this.avgGrade = getAvgGrade(this.apartment.comments);
 			})
 		},
+		
 		editApartment: function(){
 			location.replace('#/ea');
 		},

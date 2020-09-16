@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -44,20 +46,20 @@ public class GuestRegistrationService {
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String saveUser(User user) throws JsonIOException, JsonSyntaxException, IOException  {
+	public Response saveUser(User user) throws JsonIOException, JsonSyntaxException, IOException  {
 		UserDAO dao = (UserDAO) sc.getAttribute("guestDAO");
 		List<User> users;
 		users = dao.GetAll();
 		for (User u : users) {
 			System.out.println(u.name);
 			System.out.println(user.name);
-			if (u.getUsername().equals(user.getUsername()))
-				return "Bad";
+			if (u.getUsername().equals(user.getUsername()) || user.getUsername().equals("") || user.getUsername().equals(null))
+				throw new BadRequestException();
 		}
 		user.setRole(UserType.Guest);
 		user.setBlocked(false);
 		dao.Create(user);
-		return "Good";
+		return Response.status(200).build();
 	}
 	
 	@POST
@@ -65,21 +67,22 @@ public class GuestRegistrationService {
 	@Path("/save-host")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String saveHost(User user) throws JsonIOException, JsonSyntaxException, IOException {
+	public Response saveHost(User user) throws JsonIOException, JsonSyntaxException, IOException {
 		UserDAO dao = (UserDAO) sc.getAttribute("guestDAO");
 		List<User> users;
 		users = dao.GetAll();
 		for (User u : users) {
 			System.out.println(u.name);
 			System.out.println(user.name);
-			if (u.getUsername().equals(user.getUsername()))
-				return "Bad";
+			if (u.getUsername().equals(user.getUsername()) || user.getUsername().equals("") || user.getUsername().equals(null))
+				throw new BadRequestException();
 		}
 		user.setRole(UserType.Host);
 		user.setBlocked(false);
 		dao.Create(user);
-		return "Good";
+		return Response.status(200).build();
 	}
+	
 	
 }
 

@@ -118,7 +118,46 @@
       "apartements": [],
       "blocked": false
     },
-    "comments": [],
+    "comments": [
+      {
+        "id": 0,
+        "apartment": 7,
+        "guest": {
+          "username": "pera.pera",
+          "password": "perapera",
+          "name": "Petar",
+          "surname": "Peric",
+          "gender": "Muski",
+          "role": "Guest",
+          "rentedApartment": [],
+          "reservations": [],
+          "apartements": [],
+          "blocked": false
+        },
+        "text": "Prelep smestaj, uredna higijena...",
+        "grade": 5.0,
+        "isApproved": true
+      },
+      {
+        "id": 0,
+        "apartment": 7,
+        "guest": {
+          "username": "pera.pera",
+          "password": "perapera",
+          "name": "Petar",
+          "surname": "Peric",
+          "gender": "Muski",
+          "role": "Guest",
+          "rentedApartment": [],
+          "reservations": [],
+          "apartements": [],
+          "blocked": false
+        },
+        "text": "Proba1",
+        "grade": 5.0,
+        "isApproved": false
+      }
+    ],
     "pictures": [],
     "pricePerNight": 30.0,
     "checkIn": "3",
