@@ -157,51 +157,21 @@ public class ApartmentDAO {
 			}
 		}
 		Save(apartments);
-		//sortDatesForRenting(apartment.getDatesForRenting());
 		return apartment;
 	}
-	//11-23.10  20-23.9
-	public List<Period> sortDatesForRenting(List<Period> datesForRenting){
-		List<Period> retVal=new ArrayList<Period>();
-		Date today=new Date(); 
-		Boolean flag=false;
-		
-		for (Period period : datesForRenting) { //14-18
-		//	System.out.println("pocetni datum"+new Date(period.getDateFrom()));
-		//	System.out.println("danasnji datum"+new Date(today.getTime()));
-
-			if(period.getDateFrom()>=today.getTime()) {
-				int index=0;
-				flag=false;
-				for(Period retPeriod :retVal) {// retval 11.a0 i 23.10 su dodati
-					if(period.getDateFrom()<retPeriod.getDateFrom()) {//20.9< 11.10
-						retVal.add(index,period);
-						flag=true;
-						break;
-					}
-					index++;
-				}
-				
-				if(!flag) {
-					retVal.add(period);  //11-15
-				}
-			}
-			
-		}
 	
-		//for (Period period2 : retVal) {
-		//	System.out.println(new Date(period2.getDateFrom()));
-		//}
-		return retVal;
-	}
+	
 	public Apartment Delete(Apartment apartment) throws IOException {
 		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
 		for(Apartment a:apartments) {
 			if(a.getId()==apartment.getId()) {
+				deleteAllImagesForApartment(a);
+				a.pictures.clear();
 				a.setDeleted(true);
 				break;
 			}
 		}
+		
 		Save(apartments);
 		return apartment;
 	}
@@ -270,6 +240,21 @@ public class ApartmentDAO {
 			}
 		 }
 		return names;
+	}
+	public void deleteAllImagesForApartment(Apartment apartment) throws IOException {
+		List<String> urls=new ArrayList<String>();
+		urls=apartment.getPictures();
+		for(String url : urls) {
+			String imgName=url.split("/")[1];
+			//.out.println(pom);
+			//String imgName=pom.substring(0, pom.length() - 1);
+			System.out.println(imgName);
+			Path path=Paths.get("webproject\\AirBNBProject\\WebContent\\pictures\\"+imgName);
+			System.out.println(path);
+	        Files.delete(path);
+		}
+		//apartment.pictures=new ArrayList<String>();
+		//apartment.pictures.removeAll(urls);
 	}
 	
 	public void deleteImage(String url) throws IOException {

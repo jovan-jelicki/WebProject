@@ -7,7 +7,7 @@ const apartmentDetails = {template: '<apartment-details></apartment-details>'}
 const editApartment = {template: '<edit-apartment></edit-apartment>'}
 const viewApartments={template: '<view-apartment></view-apartment>'}
 const viewReservations = {template: '<view-reservations></view-reservations>'}
-
+const nonActiveComments={teplate: '<non-comments></non-comments>'}
 const router = new VueRouter({
         mode:'hash',
         routes: [ 
@@ -19,7 +19,8 @@ const router = new VueRouter({
             {path:'/ad', component : apartmentDetails},
             {path:'/ea', component : editApartment},
             {path:'/va', component : viewApartments},
-            {path:'/vr', component : viewReservations}
+            {path:'/vr', component : viewReservations},
+            {path:'/co', component : nonActiveComments}
 
         ]
 });
