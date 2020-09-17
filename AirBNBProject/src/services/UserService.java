@@ -33,9 +33,12 @@ import javax.ws.rs.core.SecurityContext;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import beans.Apartment;
+import beans.Comment;
 import beans.Reservation;
 import beans.User;
 import beans.UserType;
+import dao.ApartmentDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
 
@@ -62,6 +65,61 @@ public class UserService {
 	}
 	
 	@POST
+	@Path("/blockUser")
+	@Secured({UserType.Admin})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User block(User user) throws JsonSyntaxException, IOException {
+		
+		if(user.getBlocked())
+			throw new BadRequestException();
+		
+		UserDAO userDao = new UserDAO();
+		ApartmentDAO apartmentDao = new ApartmentDAO();
+		ReservationDAO reservationDao = new ReservationDAO();
+		if(user.getRole() == UserType.Admin)
+			throw new BadRequestException();
+		else if(user.getRole() == UserType.Guest) {
+			//brisanje rezervacija
+			for(Reservation res : reservationDao.GetAll()) {
+				if(res.getGuest().getUsername().equals(user.getUsername()))
+					//ovde ima i rejectReservation za apartman
+					reservationDao.Delete(res);
+			}
+			
+			//brisanje komentara
+			for(Apartment a : apartmentDao.GetAll()) {
+				ArrayList<Comment> comments = new ArrayList<Comment>();
+				for(Comment c : a.getComments()) {
+					if(c.getGuest().getUsername().equals(user.getUsername())) {
+						c.setIsApproved(false);
+					}
+					comments.add(c);
+				}
+				a.setComments(comments);
+				apartmentDao.Edit(a);
+				for(Reservation res : reservationDao.GetAll()) {
+					if(res.getApartment().getId() == a.getId()) {
+						res.setApartment(a);
+						reservationDao.Edit(res);
+					}
+				}
+			}
+	
+		}else if(user.getRole() == UserType.Host) {
+			for(Apartment apartment : apartmentDao.GetAll()) {
+				if(apartment.getHost().getUsername().equals(user.getUsername())) {
+					apartmentDao.Delete(apartment);
+				}
+			}
+		}
+		
+		user.setBlocked(true);
+		userDao.Edit(user);
+		return user;
+	}
+	
+	@POST
 	@Path("/logIn")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -70,7 +128,7 @@ public class UserService {
 		UserDAO dao=(UserDAO) sc.getAttribute("userDAO");
 		User findUser=dao.LogIn(user.getUsername(), user.getPassword());
 		
-		if(findUser==null) {
+		if(findUser==null || findUser.blocked) {
 			throw new BadRequestException();
 		}
 		String token = generateToken(findUser, Token_Time);

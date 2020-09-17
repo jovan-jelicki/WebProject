@@ -137,11 +137,6 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment delete(Apartment apartment) throws IOException {
 		ApartmentDAO dao=(ApartmentDAO) sc.getAttribute("apartmentDAO");
-		ReservationDAO resDao = new ReservationDAO();
-		for(Reservation res : resDao.GetAll()) {
-			if(res.getApartment().getId() == apartment.getId())
-				resDao.Delete(res);
-		}
 		dao.Delete(apartment);
 		return apartment;
 	}

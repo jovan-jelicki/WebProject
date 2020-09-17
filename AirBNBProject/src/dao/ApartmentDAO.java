@@ -168,6 +168,11 @@ public class ApartmentDAO {
 	
 	public Apartment Delete(Apartment apartment) throws IOException {
 		ArrayList<Apartment> apartments=(ArrayList<Apartment>) GetAll();
+		ReservationDAO resDao = new ReservationDAO();
+		for(Reservation res : resDao.GetAll()) {
+			if(res.getApartment().getId() == apartment.getId())
+				resDao.Delete(res);
+		}
 		for(Apartment a:apartments) {
 			if(a.getId()==apartment.getId()) {
 				deleteAllImagesForApartment(a);

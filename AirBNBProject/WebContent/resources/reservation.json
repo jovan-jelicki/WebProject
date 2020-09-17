@@ -31,10 +31,10 @@
       "freePeriods": [
         {
           "dateFrom": 1600380000000,
-          "dateTo": 1600864980000
+          "dateTo": 1600871220000
         },
         {
-          "dateFrom": 1601124180000,
+          "dateFrom": 1601476020000,
           "dateTo": 1605394800000
         },
         {
@@ -72,7 +72,7 @@
           },
           "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
           "grade": 5.0,
-          "isApproved": true
+          "isApproved": false
         }
       ],
       "pictures": [
@@ -150,10 +150,185 @@
       "deleted": false,
       "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
     },
-    "startDate": "Sep 23, 2020 2:43:00 PM",
-    "endDate": "Sep 26, 2020 2:43:00 PM",
-    "numberOfNights": 3,
-    "fullPrice": 75.0,
+    "startDate": "Sep 23, 2020 4:27:00 PM",
+    "endDate": "Sep 30, 2020 4:27:00 PM",
+    "numberOfNights": 7,
+    "fullPrice": 175.0,
+    "message": "Pozdrav!",
+    "guest": {
+      "username": "pera.pera",
+      "password": "perapera",
+      "name": "Petar",
+      "surname": "Peric",
+      "gender": "Muski",
+      "role": "Guest",
+      "rentedApartment": [],
+      "reservations": [],
+      "apartements": [],
+      "blocked": false
+    },
+    "numberOfGuests": 4,
+    "status": "Created"
+  },
+  {
+    "id": 1,
+    "apartment": {
+      "id": 0,
+      "name": "Exclusive",
+      "type": "Apartment",
+      "numberOfRooms": 6,
+      "numberOfGuests": 15,
+      "location": {
+        "longitude": 19.8484674,
+        "latitude": 45.2492722,
+        "adress": {
+          "country": "Srbija",
+          "street": "Strazilovska",
+          "numberOfStreet": 14,
+          "city": "Novi Sad",
+          "postNumber": 21000
+        }
+      },
+      "datesForRenting": [
+        {
+          "dateFrom": 1600380000000,
+          "dateTo": 1605394800000
+        },
+        {
+          "dateFrom": 1607554800000,
+          "dateTo": 1611442800000
+        }
+      ],
+      "freePeriods": [
+        {
+          "dateFrom": 1600380000000,
+          "dateTo": 1600871220000
+        },
+        {
+          "dateFrom": 1601476020000,
+          "dateTo": 1602687060000
+        },
+        {
+          "dateFrom": 1603032660000,
+          "dateTo": 1605394800000
+        },
+        {
+          "dateFrom": 1607554800000,
+          "dateTo": 1611442800000
+        }
+      ],
+      "host": {
+        "username": "dane",
+        "password": "d",
+        "name": "Danee",
+        "surname": "Danic",
+        "gender": "Muski",
+        "role": "Host",
+        "rentedApartment": [],
+        "reservations": [],
+        "apartements": [],
+        "blocked": false
+      },
+      "comments": [
+        {
+          "id": 0,
+          "apartment": 0,
+          "guest": {
+            "username": "pera.pera",
+            "password": "perapera",
+            "name": "Petar",
+            "surname": "Peric",
+            "gender": "Muski",
+            "role": "Guest",
+            "rentedApartment": [],
+            "reservations": [],
+            "apartements": [],
+            "blocked": false
+          },
+          "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
+          "grade": 5.0,
+          "isApproved": false
+        }
+      ],
+      "pictures": [
+        "pictures/slika793.jpg",
+        "pictures/slika953.jpg",
+        "pictures/slika498.jpg",
+        "pictures/slika515.jpg",
+        "pictures/slika960.jpg",
+        "pictures/slika755.jpg",
+        "pictures/slika694.jpg",
+        "pictures/slika301.jpg"
+      ],
+      "pricePerNight": 25.0,
+      "checkIn": "12",
+      "checkOut": "12",
+      "status": "Active",
+      "amenities": [
+        {
+          "id": 0,
+          "name": "Mikrotalasna",
+          "deleted": false
+        },
+        {
+          "id": 2,
+          "name": "Kuhinja",
+          "deleted": false
+        },
+        {
+          "id": 3,
+          "name": "TV",
+          "deleted": false
+        },
+        {
+          "id": 4,
+          "name": "Internet",
+          "deleted": false
+        },
+        {
+          "id": 5,
+          "name": "Kablovska",
+          "deleted": false
+        },
+        {
+          "id": 8,
+          "name": "Topla voda",
+          "deleted": false
+        },
+        {
+          "id": 10,
+          "name": "Zamrzivac",
+          "deleted": false
+        },
+        {
+          "id": 11,
+          "name": "Frizider",
+          "deleted": false
+        },
+        {
+          "id": 12,
+          "name": "Sporet",
+          "deleted": false
+        },
+        {
+          "id": 13,
+          "name": "Djakuzi",
+          "deleted": false
+        },
+        {
+          "id": 14,
+          "name": "Tus kabina",
+          "deleted": false
+        }
+      ],
+      "reservations": [],
+      "deleted": false,
+      "note": "Sam centar grada, sve je u blizini, u krugu od 100m. Prijatan komsiluk, pogled na grad."
+    },
+    "startDate": "Oct 14, 2020 4:51:00 PM",
+    "endDate": "Oct 18, 2020 4:51:00 PM",
+    "numberOfNights": 4,
+    "fullPrice": 100.0,
     "message": "Pozdrav!",
     "guest": {
       "username": "pera.pera",

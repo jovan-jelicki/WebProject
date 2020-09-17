@@ -29,10 +29,14 @@
     "freePeriods": [
       {
         "dateFrom": 1600380000000,
-        "dateTo": 1600864980000
+        "dateTo": 1600871220000
       },
       {
-        "dateFrom": 1601124180000,
+        "dateFrom": 1601476020000,
+        "dateTo": 1602687060000
+      },
+      {
+        "dateFrom": 1603032660000,
         "dateTo": 1605394800000
       },
       {
@@ -70,7 +74,7 @@
         },
         "text": "Prelep apartman, uredna higijena i gostoprimljiv domacin!",
         "grade": 5.0,
-        "isApproved": true
+        "isApproved": false
       }
     ],
     "pictures": [
