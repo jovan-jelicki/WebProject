@@ -69,7 +69,7 @@ Vue.component('apartment-details', {
 			})
 			.then(response => {
 				for(var res of response.data){
-					if(res.apartment.id == this.apartment.id && res.guest.username == this.user.username)
+					if(res.apartment.id == this.apartment.id && res.guest.username == this.user.username && (res.status == 'Rejected' || res.status == 'Done') )
 						this.commentAllow = true;
 				}
 			})
