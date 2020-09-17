@@ -408,7 +408,7 @@ Vue.component('apartment-details', {
 				this.pom=response.data;
 	    		 this.apartment=this.pom;
 				 Vue.set(this.apartment,this.pom);
-			
+				  localStorage.setItem("apartment", JSON.stringify(this.apartment));
 			}
 			);
 		}

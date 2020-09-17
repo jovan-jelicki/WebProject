@@ -9,6 +9,7 @@ Vue.component('user-settings', {
         }
     },
     mounted() {
+    	
     	if(this.user.username == undefined)
     		history.back();
     },
@@ -126,7 +127,10 @@ methods:{
         	Authorization : 'Bearer ' + localStorage.getItem("token")
         }
 		})
-        .then((response) => this.user=response.data );
+        .then((response) =>{
+        	this.user=response.data;
+        	localStorage.setItem("user", JSON.stringify( this.user));
+        });
 	}, 
 	cancel: function(){
 		this.user.username= this.backup[0];
@@ -157,10 +161,15 @@ methods:{
 		        	Authorization : 'Bearer ' + localStorage.getItem("token")
 		        }
 				})
-		        .then((response) => this.user=response.data );
+		        .then((response) => {
+		        	this.user=response.data ;
+		        	localStorage.setItem("user", JSON.stringify( this.user));
+
+		        	});
+		        }
 		}
 		
 	}
-}
+
 
 })

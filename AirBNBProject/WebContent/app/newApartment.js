@@ -178,7 +178,7 @@ Vue.component('new-apartment', {
 	    <label class="col-sm-2 col-form-label ">Datum za izdavanje do:</label>
 	    <div class="col-sm-10" >
 			<vuejs-datepicker id="date2" :open-date="new Date()" :monday-first="true" :disabled-dates="disabledDates"  placeholder="Unesite krajnji datum" format="dd.MM.yyyy" v-model="dateTo" ></vuejs-datepicker>
-	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj novi period</button>
+	 	    <button id="newPeriod" type="button" class="btn btn-outline-primary"   v-on:click="addNewPeriod()" >Dodaj period</button>
 			<br>
 			<div id="uputstvo" class="alert alert-warning alert-dismissible fade show" role="alert">
 			  Potvrdite dodavanje perioda pritiskom na dugme "Dodaj period". Mozete dodavati vise perioda jedan za drugim.
@@ -194,8 +194,7 @@ Vue.component('new-apartment', {
    	 <div id="dateErr1" class="alert alert-warning" role="alert" style = "display: none" > Datum pocetka izdavanja mora biti pre krajnjeg datuma izdavanja.</div>
   <br>
 	
-		
-	  <div id="dodatiDatumi" class="form-group row" style="display:none">
+	  <div class="alert alert-success" role="alert" id="dodatiDatumi"  style="display:none">
 	    <label class="col-sm-2 col-form-label ">Uneti datumi dostupnosti apartmana od-do:</label>
 
 	    <div class="col-sm-15">
@@ -293,7 +292,7 @@ Vue.component('new-apartment', {
     		dateErr.style.display="none";
     		dateErr1.style.display="none";
     		uputstvo.style.display="none";
-
+    		dodatiDatumi.style.display="none";
     		
     		  		
     		
@@ -307,9 +306,10 @@ Vue.component('new-apartment', {
 				let period1={dateFrom:dateFrom1, dateTo:dateTo1}
 				this.pom.push(period1);
 				this.apartment.datesForRenting=this.pom;
-				
-				document.getElementById('dodatiDatumi').innerHTML = 'Uspesno ste dodali period od'+ this.dateFrom.getDate()+'.'+this.dateFrom.getMonth()+'.'+this.dateFrom.getFullYear()
-																    +'do'+this.dateTo.getDate()+'.'+this.dateTo.getMonth()+'.'+this.dateTo.getFullYear();
+				let month=this.dateFrom.getMonth()+1;
+				let month1=this.dateTo.getMonth()+1;
+				document.getElementById('dodatiDatumi').innerHTML = 'Uspesno ste dodali period od '+ this.dateFrom.getDate()+'.'+month+'.'+this.dateFrom.getFullYear()
+																    +' do '+this.dateTo.getDate()+'.'+month1+'.'+this.dateTo.getFullYear();
 				
 				console.log(this.apartment.datesForRenting[0].dateFrom)
 	    		dodatiDatumi.style.display="inline"
@@ -463,12 +463,12 @@ Vue.component('new-apartment', {
 	    	}
          },
        focus: function() {
-             var self = this;
+             //var self = this;
              
              
-             this.$nextTick(_ => {
-               this.$refs.picker.picker.date = new Date()
-             })
+            // this.$nextTick(_ => {
+            //   this.$refs.picker.picker.date = new Date()
+            // })
              
            }
      	
