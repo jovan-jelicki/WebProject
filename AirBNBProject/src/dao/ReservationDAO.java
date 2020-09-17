@@ -87,9 +87,12 @@ public class ReservationDAO {
 	 public Reservation Delete(Reservation reservation) throws IOException {
 		 ArrayList<Reservation> reservations = (ArrayList<Reservation>) GetAll();
 		 ArrayList<Reservation> retVal = new ArrayList<Reservation>();
+		 ApartmentDAO dao = new ApartmentDAO();
 		 for(Reservation a : reservations) {
 			 if(a.getId() != reservation.getId()) {
 				 retVal.add(a);
+			 }else {
+				 dao.rejectReservation(reservation);
 			 }
 		}
 		 Save(retVal); 

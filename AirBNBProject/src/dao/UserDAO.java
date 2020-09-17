@@ -84,6 +84,7 @@ public class UserDAO {
 				u.setSurname(user.getSurname());
 				u.setGender(user.getGender());
 				u.setPassword(user.getPassword());
+				u.setBlocked(user.getBlocked());
 				break;
 			}
 		}

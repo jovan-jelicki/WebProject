@@ -13,6 +13,7 @@ Vue.component('view-reservations', {
 			backUp : {},
 			sort : "desc",
 			status : "All",
+			text : "",
 			user : !!localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
 		}
 	},
@@ -43,6 +44,12 @@ Vue.component('view-reservations', {
     				Sortiraj
     			</button>
     		</div>
+    		
+    		<div>
+    		 <input type="text" v-model="text">
+			 <button type="button" class="btn btn-primary" v-on:click="search()" > Pretrazi </button>
+    		</div>
+    		
     		<div v-if="user.role != 'Guest'">
     			<select @change="showStatus()" class="browser-default custom-select" id="status" v-model="status">
     				<option value="All">Prikazi sve</option>
@@ -106,6 +113,22 @@ Vue.component('view-reservations', {
 	
 	`,
 	methods : {
+		search : function () {
+    		if(this.text == '' || this.text == {}){
+    			this.reservations = this.backUp;
+    		}else {
+    			var help = [];
+    			for (let u of this.backUp){
+    				if(u.guest.username == this.text){
+    					help.push(u);
+    				}
+    					
+    			}
+    			if(help != []){
+    				this.reservations = help;
+    			}
+    		}
+    	},
 		sortCall : function(){
 			if(this.sort == "desc"){
 				this.reservations.sort((a,b) => (a.fullPrice > b.fullPrice) ? -1 : 1);
